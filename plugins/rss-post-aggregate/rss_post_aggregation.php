@@ -59,6 +59,7 @@ class RSS_Post_Aggregation {
 	 */
 	public function __construct() {
 		$this->rsscpt = new RSS_Post_Aggregation_CPT();
+		$this->modal  = new RSS_Post_Aggregation_Modal( $this->rsscpt );
 	}
 
 	public function hooks() {
@@ -68,6 +69,7 @@ class RSS_Post_Aggregation {
 		add_action( 'admin_init', array( $this, 'admin_hooks' ) );
 
 		$this->rsscpt->hooks();
+		$this->modal->hooks();
 	}
 
 	/**
@@ -76,6 +78,7 @@ class RSS_Post_Aggregation {
 	function _activate() {
 		// Make sure any rewrite functionality has been loaded
 		flush_rewrite_rules();
+		add_option( 'msnc_saved_feed_urls', array(), '', 'no' );
 	}
 
 	/**

@@ -52,7 +52,7 @@ module.exports = function( grunt ) {
 					exports : true,
 					module  : false
 				},
-				predef  :['document','window']
+				predef  :['document','window','wp','_']
 			}
 		},
 
@@ -74,7 +74,7 @@ module.exports = function( grunt ) {
 			files: ['assets/js/test/**/*.js']
 		},
 
-		
+
 		sass:   {
 			all: {
 				files: {
@@ -83,24 +83,24 @@ module.exports = function( grunt ) {
 			}
 		},
 
-		
+
 		cssmin: {
 			options: {
 				banner: bannerTemplate
 			},
 			minify: {
 				expand: true,
-				
+
 				cwd: 'assets/css/',
 				src: ['rss_post_aggregation.css'],
-				
+
 				dest: 'assets/css/',
 				ext: '.min.css'
 			}
 		},
 
 		watch:  {
-			
+
 			sass: {
 				files: ['assets/css/sass/*.scss'],
 				tasks: ['sass', 'cssmin'],
@@ -108,7 +108,7 @@ module.exports = function( grunt ) {
 					debounceDelay: 500
 				}
 			},
-			
+
 			scripts: {
 				files: ['assets/js/src/**/*.js', 'assets/js/vendor/**/*.js'],
 				tasks: ['jshint', 'concat', 'uglify'],
@@ -125,15 +125,15 @@ module.exports = function( grunt ) {
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
-	
+
 	grunt.loadNpmTasks('grunt-contrib-sass');
-	
+
 	grunt.loadNpmTasks('grunt-contrib-watch');
 
 	// Default task.
-	
+
 	grunt.registerTask( 'default', ['jshint', 'concat', 'uglify', 'sass', 'cssmin'] );
-	
+
 
 	grunt.util.linefeed = '\n';
 };
