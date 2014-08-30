@@ -10,7 +10,10 @@
 	width: 80px;
 }
 #source {
-	width: 200px;
+	width: 280px;
+}
+#taxonomy-rss-category {
+	width: 120px;
 }
 #rss-save-feed-input {
 	width: 79%;
@@ -20,13 +23,34 @@
 }
 #select-feed {
 	float: left;
-	width: 50%;
-	margin-right: 1%;
+	width: 48%;
 }
 #find-posts-input {
-	width: 36%;
-	margin-right: 1%;
+	width: 49%;
+	float: right;
 }
-#find-posts-search {
-	width: 11%;
+
+.spinner-row {
+	.spinner {
+		float: none !important;
+		margin: 0 auto;
+	}
+	// &.error p {
+	// 	color: red;
+	// }
+}
+
+.rss-search-modal {
+
+	a.button-secondary {
+		margin-right: 5px;
+	}
+
+	.find-box-buttons .spinner {
+		float: none;
+		display: block;
+		position: absolute;
+		bottom: .9em;
+		right: 10.5em;
+	}
 }

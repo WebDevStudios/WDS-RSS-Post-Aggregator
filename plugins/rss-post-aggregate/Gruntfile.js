@@ -52,7 +52,7 @@ module.exports = function( grunt ) {
 					exports : true,
 					module  : false
 				},
-				predef  :['document','window','wp','_']
+				predef  :['document','window','ajaxurl','wp','_']
 			}
 		},
 

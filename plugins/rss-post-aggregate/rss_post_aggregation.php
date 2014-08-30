@@ -52,14 +52,27 @@ spl_autoload_register( 'rss_post_aggregation_autoload_classes' );
 class RSS_Post_Aggregation {
 
 	const VERSION = '0.1.0';
+	private $cpt_slug = 'rss-posts';
+	private $tax_slug = 'rss-feed-links';
+	private $rss_category_slug = 'rss-category';
 
 	/**
 	 * Sets up our plugin
 	 * @since  0.1.0
 	 */
 	public function __construct() {
-		$this->rsscpt = new RSS_Post_Aggregation_CPT();
-		$this->modal  = new RSS_Post_Aggregation_Modal( $this->rsscpt );
+		$this->rsscpt   = new RSS_Post_Aggregation_CPT( $this->cpt_slug, $this->tax_slug );
+		$this->taxonomy = new RSS_Post_Aggregation_Taxonomy( $this->tax_slug, $this->rsscpt );
+		$this->rss      = new RSS_Post_Aggregation_Feeds();
+		$this->modal    = new RSS_Post_Aggregation_Modal( $this->rss, $this->rsscpt, $this->taxonomy );
+		// Handles frontend modification for aggregate site
+		$this->frontend = new RSS_Post_Aggregation_Frontend( $this->rsscpt );
+
+		$this->rss_category = register_via_taxonomy_core( array(
+			__( 'RSS Category', 'rss_post_aggregation' ),
+			__( 'RSS Categories', 'rss_post_aggregation' ),
+			$this->rss_category_slug,
+		), array(), array( $this->cpt_slug ) );
 	}
 
 	public function hooks() {
@@ -69,7 +82,9 @@ class RSS_Post_Aggregation {
 		add_action( 'admin_init', array( $this, 'admin_hooks' ) );
 
 		$this->rsscpt->hooks();
+		$this->taxonomy->hooks();
 		$this->modal->hooks();
+		$this->frontend->hooks();
 	}
 
 	/**
@@ -155,9 +170,10 @@ class RSS_Post_Aggregation {
 	 */
 	public function __get( $field ) {
 		switch ( $field ) {
-			case 'url':
-			case 'path':
-				return self::$field;
+			case 'cpt_slug':
+			case 'tax_slug':
+			case 'rss_category_slug':
+				return $this->{$field};
 			default:
 				throw new Exception( 'Invalid '. __CLASS__ .' property: ' . $field );
 		}
