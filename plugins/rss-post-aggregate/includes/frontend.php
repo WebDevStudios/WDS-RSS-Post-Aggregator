@@ -15,7 +15,7 @@ class RSS_Post_Aggregation_Frontend {
 	function post_link( $link ) {
 		global $post;
 
-		if ( $post->post_type != $this->cpt->post_type() ) {
+		if ( ! isset( $post->post_type ) || $post->post_type != $this->cpt->post_type() ) {
 			return $link;
 		}
 
