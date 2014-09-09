@@ -7,14 +7,22 @@ class RSS_Post_Aggregation_Frontend {
 	}
 
 	public function hooks() {
-		add_filter( 'post_link', array( $this, 'post_link' ) );
-		add_filter( 'post_type_link', array( $this, 'post_link' ) );
-		add_filter( 'the_permalink', array( $this, 'post_link' ) );
+		add_filter( 'post_link', array( $this, 'post_link' ), 10, 2 );
+		add_filter( 'post_type_link', array( $this, 'post_link' ), 10, 2 );
+		add_filter( 'the_permalink', array( $this, 'get_post_and_post_link' ) );
 	}
 
 
-	function post_link( $link ) {
-		global $post;
+	public function get_post_and_post_link( $link ) {
+		$post = get_post();
+		if ( empty( $post ) ) {
+			return $link;
+		}
+
+		return $this->post_link( $link, $post );
+	}
+
+	function post_link( $link, $post ) {
 
 		if ( ! isset( $post->post_type ) || $post->post_type != $this->cpt->post_type() ) {
 			return $link;
