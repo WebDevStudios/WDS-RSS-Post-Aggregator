@@ -1,5 +1,5 @@
 /**
- * RSS Post Aggregation - v0.1.0 - 2014-08-29
+ * RSS Post Aggregation - v0.1.0 - 2014-09-08
  * http://webdevstudios.com
  *
  * Copyright (c) 2014;
@@ -224,6 +224,7 @@ window.RSS_Post_Aggregation = (function(window, document, $, undefined){
 				return;
 			}
 
+			this.feed_id = feed_id;
 			app.feeds[ feed_id ] = feed_url;
 			log( 'append feed', app.feeds );
 
@@ -292,16 +293,19 @@ window.RSS_Post_Aggregation = (function(window, document, $, undefined){
 
 		importPosts: function( posts ) {
 			this.$( '.find-box-buttons .spinner' ).show();
+			var data = {
+				'action'   : 'rss_save_posts',
+				'to_add'   : posts,
+				'feed_url' : this.feed_url,
+				'feed_id'  : this.feed_id
+			};
+			log( 'data', data );
+
 			$.ajax({
 				type     : 'post',
 				dataType : 'json',
 				url      : ajaxurl,
-				data     : {
-					'action'   : 'rss_save_posts',
-					'to_add'   : posts,
-					'feed_url' : this.feed_url,
-					'feed_id'  : this.feed_id
-				},
+				data     : data,
 				success: function( response ) {
 					log( 'response', response );
 
