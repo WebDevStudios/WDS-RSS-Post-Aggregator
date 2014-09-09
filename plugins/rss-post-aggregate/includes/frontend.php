@@ -7,7 +7,8 @@ class RSS_Post_Aggregation_Frontend {
 	}
 
 	public function hooks() {
-		add_filter( 'post_link', array( $this, 'post_link' ), 10, 2 );
+		add_filter( 'post_link', array( $this, 'post_link' ) );
+		add_filter( 'post_type_link', array( $this, 'post_link' ) );
 		add_filter( 'the_permalink', array( $this, 'post_link' ) );
 	}
 
