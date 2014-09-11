@@ -24,6 +24,11 @@ class RSS_Post_Aggregation_Frontend {
 
 	function post_link( $link, $post ) {
 
+		// Don't mess w/ the permalink for attachments
+		if ( isset( $GLOBALS['post'], $GLOBALS['post']->post_type ) && 'attachment' === $GLOBALS['post']->post_type ) {
+			return $link;
+		}
+
 		if ( ! isset( $post->post_type ) || $post->post_type != $this->cpt->post_type() ) {
 			return $link;
 		}
