@@ -2,6 +2,9 @@
 
 class RSS_Post_Aggregation_Feeds {
 
+	/**
+	 * Replaces wp_widget_rss_output
+	 */
 	function get_items( $rss_link, $args ) {
 
 		$args = wp_parse_args( $args, array(
