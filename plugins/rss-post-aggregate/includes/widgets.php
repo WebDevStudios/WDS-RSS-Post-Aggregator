@@ -135,7 +135,7 @@ class RSS_Post_Aggregation_Category_Featured_Images extends WP_Widget {
 
 	public function __construct() {
 		parent::__construct(
-			'rss_post_aggregation_category_headlines',
+			'rss_post_aggregation_category_featured_images',
 			__( 'RSS Category Featured Image' ),
 			array( 'description' => __( 'Displays the featured as the headline' ) )
 		);
