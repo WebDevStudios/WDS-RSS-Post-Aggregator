@@ -195,7 +195,8 @@ class RSS_Post_Aggregation_Category_Featured_Images extends WP_Widget {
 	
 				echo get_the_post_thumbnail( $p->ID, 'thumbnail', array( 'class' => 'alignleft' ) );
 
-				$content = str_replace( 'Read more »', '', $p->post_content );
+				$content = str_replace( '»', '', $p->post_content );
+				$content = str_replace( 'Read more', '', $content );
 				echo $content;
 				
 
