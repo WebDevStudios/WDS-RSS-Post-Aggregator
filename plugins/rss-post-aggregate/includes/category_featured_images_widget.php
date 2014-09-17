@@ -121,25 +121,20 @@ class RSS_Post_Aggregation_Category_Featured_Images_Widget extends WP_Widget {
 		if( ! empty( $posts ) ) {
 			echo '<ul class="rss-feed-posts">';
 			foreach( $posts as $p ) {
-				echo '<li class="rss-feed-post">';
+				echo '<li">';
 
-				echo '<div class="rss-feed-post-title">';
-				echo '<a href="' . esc_url( $p['link'] ) . '"/>';
+				echo '<a class="post-title" href="' . esc_url( $p['link'] ) . '"/>';
 				echo $p['title'];
 				echo '</a>';
-				echo '</div>';
 
 				if( !empty( $p['image'] ) ) {
-					echo '<img class="rss-feed-post-image" src="' . esc_attr( $p['image'] ) . '" />';
+					echo '<img class="rss-feed-post-image featured-post-thumb alignleft" src="' . esc_attr( $p['image'] ) . '" />';
 				}
 
 				$content = str_replace( '»', '', $p['summary'] );
 				$content = str_replace( 'Read more', '', $content );
 
-				echo '<div class="rss-feed-post-content">';
 				echo wpautop( $content );
-				echo '</div>';
-
 
 				if ( isset( $instance['read_more_text'] ) && trim( $instance['read_more_text'] ) ) {
 					echo ' <a href="'. esc_url( $p['link'] ) .'">'. esc_html( $instance['read_more_text'] ) .'</a>';
