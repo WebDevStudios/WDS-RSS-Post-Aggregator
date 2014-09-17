@@ -25,6 +25,26 @@ function rss_post_aggregation_category_dropdown( $name, $term_slug = '') {
 	return $s;
 }
 
+function rss_post_aggregation_feed_links_dropdown( $name, $term_name ) {
+	$s = '<select name="' . esc_attr( $name ) . '" class="widefat">';
+
+	$terms = get_terms( 'rss-feed-links', array( 'hide_empty' => false ) );
+	if ( !empty( $terms ) && !is_wp_error( $terms ) ) {
+		foreach( $terms as $term ) {
+			$s .= '<option name="' . esc_attr( $term->slug ) . '"';
+			$s .= selected( $term_name, $term->slug, false );
+			$s .= '>';
+			$s .= $term->name;
+			$s .= '</option>';
+		}
+	}
+
+	$s .= '</select>';
+
+	return $s;
+
+}
+
 
 /*
  * Simple widget that displays the headline as a title
@@ -129,7 +149,7 @@ class RSS_Post_Aggregation_Category_Featured_Images extends WP_Widget {
 	 **/
 	private $defaults = array( 
 			'title'	 	=> '',
-			'category' 	=> '',
+			'feed_url'	=> '',
 			'count'		=> 5
 		);
 
@@ -150,8 +170,8 @@ class RSS_Post_Aggregation_Category_Featured_Images extends WP_Widget {
 		<p>
 			<?php echo __( 'Title' ); ?>
 			<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $instance['title'] ); ?>" />
-			<?php echo __( 'Category' ); ?>
-			<?php echo rss_post_aggregation_category_dropdown( $this->get_field_name( 'category' ), $instance['category'] ); ?>
+			<?php echo __( 'Feed' ); ?>
+			<?php echo rss_post_aggregation_feed_links_dropdown( $this->get_field_name( 'feed_url' ), $instance['feed_url'] ); ?>
 
 			<?php echo __( 'Number to show' ); ?>
 			<input class="widefat" id="<?php echo $this->get_field_id( 'count' ); ?>" name="<?php echo $this->get_field_name( 'count' ); ?>" type="text" value="<?php echo esc_attr( $instance['count'] ); ?>" />
@@ -168,7 +188,7 @@ class RSS_Post_Aggregation_Category_Featured_Images extends WP_Widget {
 		echo $instance['title'];
 		echo $args['after_title'];
 		
-		$posts = get_posts(array(
+		/*$posts = get_posts(array(
 								'post_type' => 'rss-posts',
 								'tax_query' => array(
 										array(
@@ -179,23 +199,33 @@ class RSS_Post_Aggregation_Category_Featured_Images extends WP_Widget {
 		                    		),
 								'showposts'	=> $instance['count']
 					  )
+		);*/
+		$rss = new RSS_Post_Aggregation_Feeds();
+		$args = array (
+			'show_author'	=> 1,
+			'show_date'		=> 1,
+			'show_summary'	=> 1,
+			'show_image' 	=> 1,
+			'items'			=> 5
 		);
+		$posts = $rss->get_items( $instance['feed_url'], $args );
 
 		if( !empty( $posts ) ) {
 			echo '<ul>';
 			foreach( $posts AS $p ) {
-				//var_dump( get_post_meta( $p->ID ));
 				echo '<li>';
 				
 				echo '<div class="post-title" style="clear:both;">';
-				echo '<a href="' . get_permalink( $p->ID ) . '"/>';
-				echo $p->post_title;
+				echo '<a href="' . esc_attr( $p['link'] ) . '"/>';
+				echo $p['title'];
 				echo '</a>';
 				echo '</div>';
 	
-				echo get_the_post_thumbnail( $p->ID, 'thumbnail', array( 'class' => 'alignleft' ) );
+				if( !empty( $p['image'] ) ) {
+					echo '<img src="' . esc_attr( $p['image'] ) . '" />';
+				}
 
-				$content = str_replace( '»', '', $p->post_content );
+				$content = str_replace( '»', '', $p['summary'] );
 				$content = str_replace( 'Read more', '', $content );
 				echo $content;
 				
