@@ -41,7 +41,7 @@ class RSS_Post_Aggregation_Feeds {
 		if ( is_wp_error( $rss ) ) {
 			// if ( is_admin() || current_user_can( 'manage_options' ) )
 			return array(
-				'error' => sprintf( __( 'RSS Error: %s' ), $rss->get_error_message() ),
+				'error' => sprintf( __( 'RSS Error: %s', 'rss_post_aggregation' ), $rss->get_error_message() ),
 			);
 		}
 
@@ -50,7 +50,7 @@ class RSS_Post_Aggregation_Feeds {
 			$rss->__destruct();
 			unset( $rss );
 			return array(
-				'error' => __( 'An error has occurred, which probably means the feed is down. Try again later.' ),
+				'error' => __( 'An error has occurred, which probably means the feed is down. Try again later.', 'rss_post_aggregation' ),
 			);
 		}
 
@@ -103,7 +103,7 @@ class RSS_Post_Aggregation_Feeds {
 	public function get_title() {
 		$title = esc_html( trim( strip_tags( $this->item->get_title() ) ) );
 		if ( empty( $title ) ) {
-			$title = __( 'Untitled' );
+			$title = __( 'Untitled', 'rss_post_aggregation' );
 		}
 
 		return apply_filters( 'rss_post_aggregation_feed_title', $title, $this->rss_link, $this );
