@@ -7,6 +7,10 @@ class RSS_Post_Aggregation_Feeds {
 	 */
 	function get_items( $rss_link, $args ) {
 
+		$this->rss_link = $rss_link;
+
+		$args = apply_filters( 'rss_post_aggregation_feed_args', $args, $this->rss_link, $this );
+
 		$args = wp_parse_args( $args, array(
 			'show_author'  => 0,
 			'show_date'    => 0,
@@ -17,7 +21,7 @@ class RSS_Post_Aggregation_Feeds {
 		) );
 		$cache_time = (int) $args['cache_time'];
 
-		$transient_id = md5( serialize( array_merge( array( 'rss_link'  => $rss_link ), $args ) ) );
+		$transient_id = md5( serialize( array_merge( array( 'rss_link'  => $this->rss_link ), $args ) ) );
 
 		if ( ! isset( $_GET['delete-trans'] ) && $cache_time && $rss_items = get_transient( $transient_id ) ) {
 			return $rss_items;
@@ -32,7 +36,7 @@ class RSS_Post_Aggregation_Feeds {
 		$show_date     = (int) $args['show_date'];
 
 
-		$rss = fetch_feed( $rss_link );
+		$rss = fetch_feed( $this->rss_link );
 
 		if ( is_wp_error( $rss ) ) {
 			// if ( is_admin() || current_user_can( 'manage_options' ) )
@@ -50,8 +54,8 @@ class RSS_Post_Aggregation_Feeds {
 			);
 		}
 
-		$parse  = parse_url( $rss_link );
-		$source = isset( $parse['host'] ) ? $parse['host'] : $rss_link;
+		$parse  = parse_url( $this->rss_link );
+		$source = isset( $parse['host'] ) ? $parse['host'] : $this->rss_link;
 
 		$rss_items = array();
 
@@ -80,7 +84,7 @@ class RSS_Post_Aggregation_Feeds {
 			}
 
 			$rss_item['source']   = $source;
-			$rss_item['rss_link'] = $rss_link;
+			$rss_item['rss_link'] = $this->rss_link;
 			$rss_item['index']    = $index;
 
 			$rss_items[ $index ]  = $rss_item;
@@ -93,7 +97,7 @@ class RSS_Post_Aggregation_Feeds {
 			set_transient( $transient_id, $rss_items, $cache_time );
 		}
 
-		return $rss_items;
+		return apply_filters( 'rss_post_aggregation_feed_items', $rss_items, $this->rss_link, $this );
 	}
 
 	public function get_title() {
@@ -101,7 +105,8 @@ class RSS_Post_Aggregation_Feeds {
 		if ( empty( $title ) ) {
 			$title = __( 'Untitled' );
 		}
-		return $title;
+
+		return apply_filters( 'rss_post_aggregation_feed_title', $title, $this->rss_link, $this );
 	}
 
 	public function get_link() {
@@ -110,19 +115,26 @@ class RSS_Post_Aggregation_Feeds {
 		while ( stristr( $link, 'http' ) != $link ) {
 			$link = substr( $link, 1 );
 		}
-		return esc_url( strip_tags( trim( $link ) ) );
+
+		$link = esc_url( strip_tags( trim( $link ) ) );
+
+		return apply_filters( 'rss_post_aggregation_feed_link', $link, $this->rss_link, $this );
 	}
 
 	public function get_date() {
-		return ( $get_date = $this->item->get_date( 'U' ) )
+		$date = ( $get_date = $this->item->get_date( 'U' ) )
 			? date_i18n( get_option( 'date_format' ), $get_date )
 			: '';
+
+		return apply_filters( 'rss_post_aggregation_feed_date', $date, $this->rss_link, $this );
 	}
 
 	public function get_author() {
-		return ( ( $author = $this->item->get_author() ) && is_object( $author ) )
+		$author = ( ( $author = $this->item->get_author() ) && is_object( $author ) )
 			? esc_html( strip_tags( $author->get_name() ) )
 			: '';
+
+		return apply_filters( 'rss_post_aggregation_feed_author', $author, $this->rss_link, $this );
 	}
 
 	public function get_summary() {
@@ -134,7 +146,7 @@ class RSS_Post_Aggregation_Feeds {
 			$summary = substr( $summary, 0, -5 ) . '[&hellip;]';
 		}
 
-		return esc_html( $summary );
+		return apply_filters( 'rss_post_aggregation_feed_summary', $summary, $this->rss_link, $this );
 	}
 
 	public function get_image() {
@@ -142,12 +154,14 @@ class RSS_Post_Aggregation_Feeds {
 
 		@$this->dom()->loadHTML( $content );
 
+		$src = '';
 		foreach ( $this->dom()->getElementsByTagName( 'img' ) as $img ) {
 			if ( $src = $img->getAttribute('src') ) {
-				return $src;
+				break;
 			}
 		}
-		return '';
+
+		return apply_filters( 'rss_post_aggregation_feed_image_src', $src, $this->rss_link, $this );
 	}
 
 	public function dom() {
