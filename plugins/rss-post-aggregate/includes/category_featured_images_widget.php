@@ -135,7 +135,11 @@ class RSS_Post_Aggregation_Category_Featured_Images_Widget extends WP_Widget {
 
 				$content = str_replace( '»', '', $p['summary'] );
 				$content = str_replace( 'Read more', '', $content );
-				echo $content;
+
+				echo '<div class="rss-feed-post-content">';
+				echo wpautop( $content );
+				echo '</div>';
+
 
 				if ( isset( $instance['read_more_text'] ) && trim( $instance['read_more_text'] ) ) {
 					echo ' <a href="'. esc_url( $p['link'] ) .'">'. esc_html( $instance['read_more_text'] ) .'</a>';
