@@ -29,7 +29,6 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
-RSS_Post_Aggregation::include_file( 'widgets' );
 
 /**
  * Autoloads files with classes when needed
@@ -68,6 +67,7 @@ class RSS_Post_Aggregation {
 		$this->modal    = new RSS_Post_Aggregation_Modal( $this->rss, $this->rsscpt, $this->taxonomy );
 		// Handles frontend modification for aggregate site
 		$this->frontend = new RSS_Post_Aggregation_Frontend( $this->rsscpt );
+		$this->widgets = new RSS_Post_Aggregation_Widgets();
 
 		$this->rss_category = register_via_taxonomy_core( array(
 			__( 'RSS Category', 'rss_post_aggregation' ),
@@ -86,6 +86,7 @@ class RSS_Post_Aggregation {
 		$this->taxonomy->hooks();
 		$this->modal->hooks();
 		$this->frontend->hooks();
+		$this->widgets->hooks();
 	}
 
 	/**

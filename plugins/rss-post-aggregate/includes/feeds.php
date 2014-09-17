@@ -11,19 +11,9 @@ class RSS_Post_Aggregation_Feeds {
 
 		$args = apply_filters( 'rss_post_aggregation_feed_args', $args, $this->rss_link, $this );
 
-		$args = wp_parse_args( $args, array(
-			'show_author'  => 0,
-			'show_date'    => 0,
-			'show_summary' => 0,
-			'show_image'   => 0,
-			'items'        => 0,
-			'cache_time'   => DAY_IN_SECONDS
-		) );
-		$cache_time = (int) $args['cache_time'];
+		$args = $this->process_args( $args );
 
-		$transient_id = md5( serialize( array_merge( array( 'rss_link'  => $this->rss_link ), $args ) ) );
-
-		if ( ! isset( $_GET['delete-trans'] ) && $cache_time && $rss_items = get_transient( $transient_id ) ) {
+		if ( ! isset( $_GET['delete-trans'] ) && $this->cache_time && $rss_items = get_transient( $this->transient_id ) ) {
 			return $rss_items;
 		}
 
@@ -93,11 +83,28 @@ class RSS_Post_Aggregation_Feeds {
 		$rss->__destruct();
 		unset($rss);
 
-		if ( $cache_time ) {
-			set_transient( $transient_id, $rss_items, $cache_time );
+		if ( $this->cache_time ) {
+			set_transient( $this->transient_id, $rss_items, $this->cache_time );
 		}
 
 		return apply_filters( 'rss_post_aggregation_feed_items', $rss_items, $this->rss_link, $this );
+	}
+
+	public function process_args( $args ) {
+		$args = apply_filters( 'rss_post_aggregation_feed_args', $args, $this->rss_link, $this );
+
+		$args = wp_parse_args( $args, array(
+			'show_author'  => 0,
+			'show_date'    => 0,
+			'show_summary' => 0,
+			'show_image'   => 0,
+			'items'        => 0,
+			'cache_time'   => DAY_IN_SECONDS
+		) );
+		$this->cache_time = (int) $args['cache_time'];
+
+		$this->transient_id = md5( serialize( array_merge( array( 'rss_link'  => $this->rss_link ), $args ) ) );
+		return $args;
 	}
 
 	public function get_title() {
@@ -139,7 +146,10 @@ class RSS_Post_Aggregation_Feeds {
 
 	public function get_summary() {
 		$summary = @html_entity_decode( $this->item->get_description(), ENT_QUOTES, get_option( 'blog_charset' ) );
-		$summary = esc_attr( wp_trim_words( $summary, 100, ' [&hellip;]' ) );
+
+		$length = (int) apply_filters( 'rss_post_aggregation_feed_summary_length', 100, $this->rss_link, $this );
+
+		$summary = esc_attr( wp_trim_words( $summary, $length, ' [&hellip;]' ) );
 
 		// Change existing [...] to [&hellip;].
 		if ( '[...]' == substr( $summary, -5 ) ) {
