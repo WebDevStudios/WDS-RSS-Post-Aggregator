@@ -66,7 +66,7 @@ class RSS_Post_Aggregation_Category_Headlines extends WP_Widget {
 		parent::__construct(
 			'rss_post_aggregation_category_headlines',
 			__( 'RSS Category Headlines' ),
-			array( 'description' => __( 'Displays the title as the headline' ) )
+			array( 'description' => __( 'Displays the title as the headline for imported RSS feed items.' ) )
 		);
 	}
 
@@ -157,7 +157,7 @@ class RSS_Post_Aggregation_Category_Featured_Images extends WP_Widget {
 		parent::__construct(
 			'rss_post_aggregation_category_featured_images',
 			__( 'RSS Category Featured Image' ),
-			array( 'description' => __( 'Displays the featured as the headline' ) )
+			array( 'description' => __( 'Reads and displays a supplied RSS feed with featured images.' ) )
 		);
 	}
 
