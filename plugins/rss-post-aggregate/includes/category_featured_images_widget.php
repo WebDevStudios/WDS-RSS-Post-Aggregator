@@ -128,7 +128,7 @@ class RSS_Post_Aggregation_Category_Featured_Images_Widget extends WP_Widget {
 				echo '</a>';
 
 				if( !empty( $p['image'] ) ) {
-					echo '<img class="rss-feed-post-image featured-post-thumb alignleft" src="' . esc_attr( $p['image'] ) . '" />';
+					echo '<div class="rss-feed-post-image"><img class="featured-post-thumb alignleft" src="' . esc_attr( $p['image'] ) . '" /></div>';
 				}
 
 				$content = str_replace( '»', '', $p['summary'] );
