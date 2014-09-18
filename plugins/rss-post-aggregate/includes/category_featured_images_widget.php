@@ -121,7 +121,7 @@ class RSS_Post_Aggregation_Category_Featured_Images_Widget extends WP_Widget {
 		if( ! empty( $posts ) ) {
 			echo '<ul class="rss-feed-posts">';
 			foreach( $posts as $p ) {
-				echo '<li">';
+				echo '<li>';
 
 				echo '<a class="post-title" href="' . esc_url( $p['link'] ) . '"/>';
 				echo $p['title'];
