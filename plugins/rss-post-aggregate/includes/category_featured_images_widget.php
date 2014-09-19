@@ -95,6 +95,10 @@ class RSS_Post_Aggregation_Category_Featured_Images_Widget extends WP_Widget {
 		return $instance;
 	}
 
+	public function rss_excerpt_more( $more ) {
+		return '...';
+	}
+
 	public function widget( $args, $instance ) {
 
 		echo $args['before_widget'];
@@ -118,6 +122,8 @@ class RSS_Post_Aggregation_Category_Featured_Images_Widget extends WP_Widget {
 			remove_filter( 'rss_post_aggregation_feed_summary_length', array( $this, 'filter_excerpt_length' ) );
 		}
 
+		add_filter( 'excerpt_more', array( $this, 'rss_excerpt_more' ) );
+
 		if( ! empty( $posts ) ) {
 			echo '<ul class="rss-feed-posts">';
 			foreach( $posts as $p ) {
@@ -130,6 +136,7 @@ class RSS_Post_Aggregation_Category_Featured_Images_Widget extends WP_Widget {
 				if( !empty( $p['image'] ) ) {
 					echo '<div class="rss-feed-post-image"><img class="featured-post-thumb alignleft" src="' . esc_attr( $p['image'] ) . '" /></div>';
 				}
+
 
 				$content = str_replace( '»', '', $p['summary'] );
 				$content = str_replace( 'Read more', '', $content );
@@ -146,7 +153,7 @@ class RSS_Post_Aggregation_Category_Featured_Images_Widget extends WP_Widget {
 		} else {
 			echo __( 'Nothing yet! Check again later', 'rss_post_aggregation' );
 		}
-
+		remove_filter( 'excerpt_more', array( $this, 'rss_excerpt_more' ) );
 		echo $args['after_widget'];
 	}
 
