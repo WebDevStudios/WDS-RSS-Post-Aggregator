@@ -135,6 +135,7 @@ class RSS_Post_Aggregation_Category_Featured_Images_Widget extends WP_Widget {
 				$content = str_replace( 'Read more', '', $content );
 				$content = str_replace( '[...]', '', $content );
 				$content = str_replace( '&hellip;', '', htmlentities( $content ) );
+				$content = str_replace( '[&hellip;]', '', $content );
 				//$content = substr( $content, 0, -5 );
 				
 				echo wpautop( $content );
