@@ -132,11 +132,10 @@ class RSS_Post_Aggregation_Category_Featured_Images_Widget extends WP_Widget {
 				}
 
 				$content = str_replace( '»', '', $p['summary'] );
-				$content = str_replace( '[&hellip;]', '&hellip;', $content );
 				$content = str_replace( 'Read more', '', $content );
 				$content = str_replace( '[]', '', $content );
 				$content = htmlentities( $content, ENT_QUOTES, 'UTF-8' );
-				$content = str_replace( '&hellip;', '…', $content );
+				$content = str_replace( array( '[&amp;hellip;]', '&amp;hellip;' ), '&hellip;', $content );
 
 				echo wpautop( $content );
 
