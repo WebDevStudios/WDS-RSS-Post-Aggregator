@@ -97,8 +97,7 @@ class RSS_Post_Aggregation_Category_Headlines_Widget extends WP_Widget {
 				echo '</div>';
 
 				echo date( 'M j, Y', strtotime( $p->post_date ) );
-				echo rss_post_get_feed_source();
-			
+
 				echo '</li>';
 			}
 			echo '</ul>';
