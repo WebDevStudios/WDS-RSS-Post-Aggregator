@@ -98,6 +98,9 @@ class RSS_Post_Aggregation_Category_Headlines_Widget extends WP_Widget {
 
 				echo date( 'M j, Y', strtotime( $p->post_date ) );
 
+				$url = parse_url( get_permalink( $p->ID ) );
+				echo ' ' . $url['host'];
+
 				echo '</li>';
 			}
 			echo '</ul>';
