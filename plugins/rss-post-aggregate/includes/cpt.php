@@ -213,7 +213,7 @@ class RSS_Post_Aggregation_CPT extends CPT_Core {
 
 }
 
-function rss_post_get_feed_url( $post = false ) {
+function rss_post_get_feed_object( $post = false ) {
 	global $RSS_Post_Aggregation;
 
 	if ( ! $post ) {
@@ -228,13 +228,27 @@ function rss_post_get_feed_url( $post = false ) {
 
 	$links = get_the_terms( $post->ID, $RSS_Post_Aggregation->tax_slug );
 	$post->source_link = ( $links && is_array( $links ) )
-		? array_shift( $links )->name
+		? array_shift( $links )
 		: '';
 
 	return $post->source_link;
 }
 
+function rss_post_get_feed_url( $post = false ) {
+	$feed = rss_post_get_feed_object( $post );
+
+	if ( $feed && isset( $feed->name ) ) {
+		return $feed->name;
+	}
+}
+
 function rss_post_get_feed_source( $post = false ) {
+	if ( $feed = rss_post_get_feed_object( $post ) ) {
+		if ( isset( $feed->description ) && $feed->description ) {
+			return esc_html( $feed->description );
+		}
+	}
+
 	if ( $url = rss_post_get_feed_url( $post ) ) {
 		$parts = parse_url( $url );
 		return isset( $parts['host'] ) ? $parts['host'] : '';
