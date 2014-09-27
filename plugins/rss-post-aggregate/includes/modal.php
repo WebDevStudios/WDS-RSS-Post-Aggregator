@@ -116,29 +116,6 @@ class RSS_Post_Aggregation_Modal {
 
 		add_action( 'admin_footer', array( $this, 'js_modal_template' ) );
 
-		if ( ! isset( $_GET['test_import'] ) ) {
-			return;
-		}
-		// $this->get_feeds();
-		$posts = get_option( 'lblblblblbb' );
-		$posts[] = array(
-			'link' => 'http://blogs.microsoft.com/firehose/2014/08/28/sci-fi-fans-can-now-channel-doctor-who-in-minecraft-xbox-360-edition/',
-			'source' => 'blogs.windows.com',
-			'title' => 'Sci-fi fans can now channel ‘Doctor Who’ in ‘Minecraft: Xbox 360 Edition’',
-			'date' => 'August 28, 2014',
-			'image' => 'http://mscorp.blob.core.windows.net/mscorpmedia/2014/08/FH_Dr-Who-Minecraft-640x360.jpg',
-			'summary' => 'Are you a fan of “Doctor Who” – the sci-fi staple that’s been on since 1963 – and also of “Minecraft: Xbox 360 Edition”? Now you can have both, thanks to a recently announced deal from Microsoft Studios, Mojang and the BBC.
-
-“Minecraft” players will be able to use characters from the “Doctor Who” series in new skin packs that will launch in September. Six Doctors are included in each skin pack, starting with the 11th Doctor and five other Doctors, their companions, their biggest adversaries and the Doctors’ archenemy, the Daleks.',
-			'author' => 'Athima Chansanchai',
-			'rss_link' => 'http://blogs.windows.com/feed/',
-			'index' => '3',
-			'checked' => 'true',
-		);
-		if ( $posts ) {
-			$updated = $this->save_posts( $posts, 968 );
-			wp_die( '<xmp>$updated: '. print_r( $updated, true ) .'</xmp>' );
-		}
 	}
 
 	public function get_feed_links() {
@@ -159,32 +136,6 @@ class RSS_Post_Aggregation_Modal {
 
 	public function js_modal_template() {
 		include_once 'modal-markup.php';
-	}
-
-	public function get_feeds() {
-		// add_option( 'msnc_saved_feed_urls', array(
-		// 	'http://blogs.office.com/feed/',
-		// 	'http://blogs.microsoft.com/firehose/feed/',
-		// ), '', 'no' );
-
-		$feeds = get_option( 'msnc_saved_feed_urls' );
-
-		$feed_data = array();
-		foreach ( $feeds as $feed_url ) {
-			$feed_data = array_merge( $feed_data, $this->rss->get_items( $feed_url ) );
-			// $feed_data[ $feed_url ] = $this->rss->get_items( $feed_url );
-		}
-
-		// Comparison function
-		// uasort( $feed_data, array( $this, 'sort_by_title' ) );
-		// ksort( $feed_data );
-
-		wp_die( '<xmp>: '. print_r(
-			// array(
-			// 	array_values( $feed_data ),
-				$feed_data,
-			// ),
-			true ) .'</xmp>' );
 	}
 
 }
