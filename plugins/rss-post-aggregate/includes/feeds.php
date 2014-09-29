@@ -9,8 +9,6 @@ class RSS_Post_Aggregation_Feeds {
 
 		$this->rss_link = $rss_link;
 
-		$args = apply_filters( 'rss_post_aggregation_feed_args', $args, $this->rss_link, $this );
-
 		$args = $this->process_args( $args );
 
 		if ( ! isset( $_GET['delete-trans'] ) && $this->cache_time && $rss_items = get_transient( $this->transient_id ) ) {
