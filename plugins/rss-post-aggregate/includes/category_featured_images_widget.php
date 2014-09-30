@@ -100,7 +100,7 @@ class RSS_Post_Aggregation_Category_Featured_Images_Widget extends WP_Widget {
 		echo $args['before_widget'];
 
 		echo $args['before_title'];
-		echo $instance['title'];
+		echo apply_filters( 'widget_title', $instance['title'] );
 		echo $args['after_title'];
 
 		if ( isset( $instance['excerpt_length'] ) && ( $length = absint( $instance['excerpt_length'] ) ) ) {
