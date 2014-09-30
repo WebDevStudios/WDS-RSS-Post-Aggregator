@@ -6,7 +6,7 @@ class RSS_Post_Aggregation_Feeds {
 	 * Replaces wp_widget_rss_output
 	 */
 	function get_items( $rss_link, $args ) {
-		$this->rss_link = apply_filters( 'rss_post_aggregation_feed_link', $rss_link, $args, $this );
+		$this->rss_link = apply_filters( 'rss_post_aggregation_feed_location', $rss_link, $args, $this );
 
 		$args = $this->process_args( $args );
 
