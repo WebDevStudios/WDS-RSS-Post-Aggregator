@@ -69,7 +69,7 @@ class RSS_Post_Aggregation_Category_Headlines_Widget extends WP_Widget {
 		echo $args['before_widget'];
 
 		echo $args['before_title'];
-		echo $instance['title'];
+		echo apply_filters( 'widget_title', $instance['title'], $instance, $this->id_base );
 		echo $args['after_title'];
 
 		$posts = get_posts( array(
