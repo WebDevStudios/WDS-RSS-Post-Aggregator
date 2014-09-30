@@ -112,7 +112,9 @@ class RSS_Post_Aggregation_Category_Featured_Images_Widget extends WP_Widget {
 		$rss_args = $this->rss_args;
 		$rss_args['items'] = isset( $instance['items'] ) ? absint( $instance['items'] ) : $rss_args['items'];
 
-		$posts = $rss->get_items( $instance['feed_url'], $rss_args );
+		$feed_url = apply_filters( 'rss_post_aggregation_feed_location', $instance['feed_url'], $rss_args, $this->id_base );
+
+		$posts = $rss->get_items( $feed_url, $rss_args );
 
 		if ( isset( $this->excerpt_length ) ) {
 			remove_filter( 'rss_post_aggregation_feed_summary_length', array( $this, 'filter_excerpt_length' ) );
