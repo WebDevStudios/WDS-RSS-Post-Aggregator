@@ -111,7 +111,7 @@ class RSS_Post_Aggregation_Category_Featured_Images_Widget extends WP_Widget {
 
 		if ( isset( $instance['excerpt_length'] ) && ( $length = absint( $instance['excerpt_length'] ) ) ) {
 			$this->excerpt_length = $length;
-			add_filter( 'rss_post_aggregation_feed_summary_length', array( $this, 'filter_excerpt_length' ) );
+			add_filter( 'rss_post_aggregation_feed_summary_length', array( $this, 'filter_excerpt_length' ), 10 );
 		}
 
 		$rss = new RSS_Post_Aggregation_Feeds();
