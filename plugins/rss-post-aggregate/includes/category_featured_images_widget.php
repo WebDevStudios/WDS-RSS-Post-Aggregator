@@ -97,6 +97,12 @@ class RSS_Post_Aggregation_Category_Featured_Images_Widget extends WP_Widget {
 
 	public function widget( $args, $instance ) {
 
+		$should_show = apply_filters( 'rss_post_aggregation_images_widget_visibility', 'off' );
+		if( 'on' != $should_show ) {
+			echo '';
+			return;
+		}
+
 		echo $args['before_widget'];
 
 		echo $args['before_title'];
