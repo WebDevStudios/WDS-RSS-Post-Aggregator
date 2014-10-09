@@ -101,6 +101,7 @@ class RSS_Post_Aggregation_Category_Headlines_Widget extends WP_Widget {
 				$url = parse_url( get_permalink( $p->ID ) );
 				echo ' ' . $url['host'];
 
+				echo '<p>' . the_excerpt(); . '</p>';
 				echo '</li>';
 			}
 			echo '</ul>';
