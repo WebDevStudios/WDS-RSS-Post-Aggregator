@@ -18,8 +18,8 @@ class RSS_Post_Aggregation_Category_Headlines_Widget extends WP_Widget {
 	public function __construct() {
 		parent::__construct(
 			'rss_post_aggregation_category_headlines',
-			__( 'RSS Category Headlines', 'rss_post_aggregation' ),
-			array( 'description' => __( 'Displays the title as the headline for imported RSS feed items.', 'rss_post_aggregation' ) )
+			__( 'RSS Category Headlines', 'wds-rss-post-aggregation' ),
+			array( 'description' => __( 'Displays the title as the headline for imported RSS feed items.', 'wds-rss-post-aggregation' ) )
 		);
 	}
 
@@ -30,12 +30,12 @@ class RSS_Post_Aggregation_Category_Headlines_Widget extends WP_Widget {
 
 		?>
 		<p>
-			<?php echo __( 'Title', 'rss_post_aggregation' ); ?>
+			<?php echo __( 'Title', 'wds-rss-post-aggregation' ); ?>
 			<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $instance['title'] ); ?>" />
-			<?php echo __( 'Category', 'rss_post_aggregation' ); ?>
+			<?php echo __( 'Category', 'wds-rss-post-aggregation' ); ?>
 			<?php echo $this->category_dropdown( $this->get_field_name( 'category' ), $instance['category'] ); ?>
 
-			<?php echo __( 'Number to show', 'rss_post_aggregation' ); ?>
+			<?php echo __( 'Number to show', 'wds-rss-post-aggregation' ); ?>
 			<input class="widefat" id="<?php echo $this->get_field_id( 'count' ); ?>" name="<?php echo $this->get_field_name( 'count' ); ?>" type="text" value="<?php echo esc_attr( $instance['count'] ); ?>" />
 		</p>
 		<?php
@@ -105,7 +105,7 @@ class RSS_Post_Aggregation_Category_Headlines_Widget extends WP_Widget {
 			}
 			echo '</ul>';
 		} else {
-			echo __( 'Nothing yet! Check again later', 'rss_post_aggregation' );
+			echo __( 'Nothing yet! Check again later', 'wds-rss-post-aggregation' );
 		}
 
 		echo $args['after_widget'];

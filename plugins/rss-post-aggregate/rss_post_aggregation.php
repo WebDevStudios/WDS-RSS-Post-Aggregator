@@ -8,7 +8,7 @@
  * Author URI:  http://webdevstudios.com
  * Donate link: http://webdevstudios.com
  * License:     GPLv2+
- * Text Domain: rss_post_aggregation
+ * Text Domain: wds-rss-post-aggregation
  * Domain Path: /languages
  */
 
@@ -70,8 +70,8 @@ class RSS_Post_Aggregation {
 		$this->widgets = new RSS_Post_Aggregation_Widgets();
 
 		$this->rss_category = register_via_taxonomy_core( array(
-			__( 'RSS Category', 'rss_post_aggregation' ),
-			__( 'RSS Categories', 'rss_post_aggregation' ),
+			__( 'RSS Category', 'wds-rss-post-aggregation' ),
+			__( 'RSS Categories', 'wds-rss-post-aggregation' ),
 			$this->rss_category_slug,
 		), array(), array( $this->cpt_slug ) );
 	}
@@ -112,9 +112,9 @@ class RSS_Post_Aggregation {
 	 * @return null
 	 */
 	public function init() {
-		$locale = apply_filters( 'plugin_locale', get_locale(), 'rss_post_aggregation' );
-		load_textdomain( 'rss_post_aggregation', WP_LANG_DIR . '/rss_post_aggregation/rss_post_aggregation-' . $locale . '.mo' );
-		load_plugin_textdomain( 'rss_post_aggregation', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+		$locale = apply_filters( 'plugin_locale', get_locale(), 'wds-rss-post-aggregation' );
+		load_textdomain( 'wds-rss-post-aggregation', WP_LANG_DIR . '/rss_post_aggregation/rss_post_aggregation-' . $locale . '.mo' );
+		load_plugin_textdomain( 'wds-rss-post-aggregation', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 	}
 
 	/**

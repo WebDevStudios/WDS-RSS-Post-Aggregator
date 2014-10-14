@@ -5,7 +5,7 @@
  * @todo    Fix cpt_icons method
  * @author  Justin Sternberg
  *
- * Text Domain: cpt-core
+ * Text Domain: wds-rss-post-aggregation
  * Domain Path: /languages
  */
 class CPT_Core {
@@ -61,15 +61,15 @@ class CPT_Core {
 	public function __construct( array $cpt, $arg_overrides = array() ) {
 
 		if ( ! is_array( $cpt ) ) {
-			wp_die( __( 'It is required to pass a single, plural and slug string to CPT_Core', 'cpt-core' ) );
+			wp_die( __( 'It is required to pass a single, plural and slug string to CPT_Core', 'wds-rss-post-aggregation' ) );
 		}
 
 		if ( ! isset( $cpt[0], $cpt[1], $cpt[2] ) ) {
-			wp_die( __( 'It is required to pass a single, plural and slug string to CPT_Core', 'cpt-core' ) );
+			wp_die( __( 'It is required to pass a single, plural and slug string to CPT_Core', 'wds-rss-post-aggregation' ) );
 		}
 
 		if ( ! is_string( $cpt[0] ) || ! is_string( $cpt[1] ) || ! is_string( $cpt[2] ) ) {
-			wp_die( __( 'It is required to pass a single, plural and slug string to CPT_Core', 'cpt-core' ) );
+			wp_die( __( 'It is required to pass a single, plural and slug string to CPT_Core', 'wds-rss-post-aggregation' ) );
 		}
 
 		$this->singular  = $cpt[0];
@@ -102,16 +102,16 @@ class CPT_Core {
 		$labels = array(
 			'name'               => $this->plural,
 			'singular_name'      => $this->singular,
-			'add_new'            => sprintf( __( 'Add New %s', 'cpt-core' ), $this->singular ),
-			'add_new_item'       => sprintf( __( 'Add New %s', 'cpt-core' ), $this->singular ),
-			'edit_item'          => sprintf( __( 'Edit %s', 'cpt-core' ), $this->singular ),
-			'new_item'           => sprintf( __( 'New %s', 'cpt-core' ), $this->singular ),
-			'all_items'          => sprintf( __( 'All %s', 'cpt-core' ), $this->plural ),
-			'view_item'          => sprintf( __( 'View %s', 'cpt-core' ), $this->singular ),
-			'search_items'       => sprintf( __( 'Search %s', 'cpt-core' ), $this->plural ),
-			'not_found'          => sprintf( __( 'No %s', 'cpt-core' ), $this->plural ),
-			'not_found_in_trash' => sprintf( __( 'No %s found in Trash', 'cpt-core' ), $this->plural ),
-			'parent_item_colon'  => isset( $this->arg_overrides['hierarchical'] ) && $this->arg_overrides['hierarchical'] ? sprintf( __( 'Parent %s:', 'cpt-core' ), $this->singular ) : null,
+			'add_new'            => sprintf( __( 'Add New %s', 'wds-rss-post-aggregation' ), $this->singular ),
+			'add_new_item'       => sprintf( __( 'Add New %s', 'wds-rss-post-aggregation' ), $this->singular ),
+			'edit_item'          => sprintf( __( 'Edit %s', 'wds-rss-post-aggregation' ), $this->singular ),
+			'new_item'           => sprintf( __( 'New %s', 'wds-rss-post-aggregation' ), $this->singular ),
+			'all_items'          => sprintf( __( 'All %s', 'wds-rss-post-aggregation' ), $this->plural ),
+			'view_item'          => sprintf( __( 'View %s', 'wds-rss-post-aggregation' ), $this->singular ),
+			'search_items'       => sprintf( __( 'Search %s', 'wds-rss-post-aggregation' ), $this->plural ),
+			'not_found'          => sprintf( __( 'No %s', 'wds-rss-post-aggregation' ), $this->plural ),
+			'not_found_in_trash' => sprintf( __( 'No %s found in Trash', 'wds-rss-post-aggregation' ), $this->plural ),
+			'parent_item_colon'  => isset( $this->arg_overrides['hierarchical'] ) && $this->arg_overrides['hierarchical'] ? sprintf( __( 'Parent %s:', 'wds-rss-post-aggregation' ), $this->singular ) : null,
 			'menu_name'          => $this->plural,
 		);
 
@@ -159,19 +159,19 @@ class CPT_Core {
 
 		$messages[$this->singular] = array(
 			0 => '', // Unused. Messages start at index 1.
-			1 => sprintf( __( '%1$s updated. <a href="%2$s">View %1$s</a>', 'cpt-core' ), $this->singular, esc_url( get_permalink( $post_ID ) ) ),
+			1 => sprintf( __( '%1$s updated. <a href="%2$s">View %1$s</a>', 'wds-rss-post-aggregation' ), $this->singular, esc_url( get_permalink( $post_ID ) ) ),
 			2 => __( 'Custom field updated.' ),
 			3 => __( 'Custom field deleted.' ),
-			4 => sprintf( __( '%1$s updated.', 'cpt-core' ), $this->singular ),
+			4 => sprintf( __( '%1$s updated.', 'wds-rss-post-aggregation' ), $this->singular ),
 			/* translators: %s: date and time of the revision */
-			5 => isset( $_GET['revision'] ) ? sprintf( __( '%1$s restored to revision from %2$s', 'cpt-core' ), $this->singular , wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
-			6 => sprintf( __( '%1$s published. <a href="%2$s">View %1$s</a>', 'cpt-core' ), $this->singular, esc_url( get_permalink( $post_ID ) ) ),
-			7 => sprintf( __( '%1$s saved.', 'cpt-core' ), $this->singular ),
-			8 => sprintf( __( '%1$s submitted. <a target="_blank" href="%2$s">Preview %1$s</a>', 'cpt-core' ), $this->singular, esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_ID ) ) ) ),
-			9 => sprintf( __( '%1$s scheduled for: <strong>%2$s</strong>. <a target="_blank" href="%3$s">Preview %1$s</a>', 'cpt-core' ), $this->singular,
+			5 => isset( $_GET['revision'] ) ? sprintf( __( '%1$s restored to revision from %2$s', 'wds-rss-post-aggregation' ), $this->singular , wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
+			6 => sprintf( __( '%1$s published. <a href="%2$s">View %1$s</a>', 'wds-rss-post-aggregation' ), $this->singular, esc_url( get_permalink( $post_ID ) ) ),
+			7 => sprintf( __( '%1$s saved.', 'wds-rss-post-aggregation' ), $this->singular ),
+			8 => sprintf( __( '%1$s submitted. <a target="_blank" href="%2$s">Preview %1$s</a>', 'wds-rss-post-aggregation' ), $this->singular, esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_ID ) ) ) ),
+			9 => sprintf( __( '%1$s scheduled for: <strong>%2$s</strong>. <a target="_blank" href="%3$s">Preview %1$s</a>', 'wds-rss-post-aggregation' ), $this->singular,
 					// translators: Publish box date format, see http://php.net/date
 					date_i18n( __( 'M j, Y @ G:i' ), strtotime( $post->post_date ) ), esc_url( get_permalink( $post_ID ) ) ),
-			10 => sprintf( __( '%1$s draft updated. <a target="_blank" href="%2$s">Preview %1$s</a>', 'cpt-core' ), $this->singular, esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_ID ) ) ) ),
+			10 => sprintf( __( '%1$s draft updated. <a target="_blank" href="%2$s">Preview %1$s</a>', 'wds-rss-post-aggregation' ), $this->singular, esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_ID ) ) ) ),
 		);
 		return $messages;
 
@@ -207,7 +207,7 @@ class CPT_Core {
 
 		$screen = get_current_screen();
 		if ( isset( $screen->post_type ) && $screen->post_type == $this->post_type )
-			return sprintf( __( '%s Title', 'cpt-core' ), $this->singular );
+			return sprintf( __( '%s Title', 'wds-rss-post-aggregation' ), $this->singular );
 
 		return $title;
 	}
@@ -305,9 +305,9 @@ class CPT_Core {
 		if ( self::$l10n_done ) {
 			return;
 		}
-		$locale = apply_filters( 'plugin_locale', get_locale(), 'cpt-core' );
-		load_textdomain( 'cpt-core', WP_LANG_DIR . '/cpt-core/cpt-core-' . $locale . '.mo' );
-		load_plugin_textdomain( 'cpt-core', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+		$locale = apply_filters( 'plugin_locale', get_locale(), 'wds-rss-post-aggregation' );
+		load_textdomain( 'wds-rss-post-aggregation', WP_LANG_DIR . '/wds-rss-post-aggregation/wds-rss-post-aggregation-' . $locale . '.mo' );
+		load_plugin_textdomain( 'wds-rss-post-aggregation', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 	}
 
 }

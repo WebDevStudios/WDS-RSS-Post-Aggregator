@@ -20,7 +20,7 @@ class RSS_Post_Aggregation_CPT extends CPT_Core {
 
 		// Register this cpt
 		parent::__construct(
-			array( __( 'RSS Post', 'rss_post_aggregation' ), __( 'RSS Posts', 'rss_post_aggregation' ), $cpt_slug ),
+			array( __( 'RSS Post', 'wds-rss-post-aggregation' ), __( 'RSS Posts', 'wds-rss-post-aggregation' ), $cpt_slug ),
 			array(
 				'supports'  => array( 'title', 'editor', 'excerpt', 'thumbnail', 'page-attributes' ),
 				'menu_icon' => 'dashicons-rss',
@@ -34,7 +34,7 @@ class RSS_Post_Aggregation_CPT extends CPT_Core {
 	}
 
 	public function pseudo_menu_item() {
-		add_submenu_page( 'edit.php?post_type='. $this->post_type(), '', __( 'Find RSS Post', 'rss_post_aggregation' ), 'edit_posts', $this->slug_to_redirect, '__return_empty_string' );
+		add_submenu_page( 'edit.php?post_type='. $this->post_type(), '', __( 'Find RSS Post', 'wds-rss-post-aggregation' ), 'edit_posts', $this->slug_to_redirect, '__return_empty_string' );
 
 		if ( ! isset( $_GET['page'] ) || $this->slug_to_redirect != $_GET['page'] ) {
 			return;
@@ -67,10 +67,10 @@ class RSS_Post_Aggregation_CPT extends CPT_Core {
 	 */
 	public function columns( $columns ) {
 		$columns = array(
-			'thumbnail'             => __( 'Thumbnail', 'rss_post_aggregation' ),
+			'thumbnail'             => __( 'Thumbnail', 'wds-rss-post-aggregation' ),
 			'cb'                    => $columns['cb'],
 			'title'                 => $columns['title'],
-			'source'                => __( 'Source', 'rss_post_aggregation' ),
+			'source'                => __( 'Source', 'wds-rss-post-aggregation' ),
 			'taxonomy-rss-category' => $columns['taxonomy-rss-category'],
 			'date'                  => $columns['date'],
 		);
@@ -105,13 +105,13 @@ class RSS_Post_Aggregation_CPT extends CPT_Core {
 
 		$meta_boxes['rsslink_mb'] = array(
 			'id'           => 'rsslink_mb',
-			'title'        => __( 'RSS Item Info', 'rss_post_aggregation' ),
+			'title'        => __( 'RSS Item Info', 'wds-rss-post-aggregation' ),
 			'object_types' => array( $this->post_type() ),
 			// 'context'      => 'side',
 			'show_names'   => false,
 			'fields'       => array(
 				array(
-					'name'       => __( 'Original URL', 'rss_post_aggregation' ),
+					'name'       => __( 'Original URL', 'wds-rss-post-aggregation' ),
 					'id'         => $this->prefix . 'original_url',
 					'type'       => 'text_url',
 					'attributes' => array(
@@ -119,7 +119,7 @@ class RSS_Post_Aggregation_CPT extends CPT_Core {
 					),
 				),
 				// array(
-				// 	'name' => __( 'Image', 'rss_post_aggregation' ),
+				// 	'name' => __( 'Image', 'wds-rss-post-aggregation' ),
 				// 	'id'   => $this->prefix . 'img_src',
 				// 	'type' => 'file',
 				// ),

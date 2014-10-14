@@ -70,7 +70,7 @@ class Taxonomy_Core {
 			$this->taxonomy = !isset( $taxonomy[2] ) || !is_string( $taxonomy[2] ) ? sanitize_title( $this->plural ) : $taxonomy[2];
 		} else {
 			// Something went wrong.
-			wp_die( 'There was an error with the taxonomy in Taxonomy_Core.' );
+			wp_die( 'There was an error with the taxonomy in Taxonomy_Core.', 'wds-rss-post-aggregation' );
 		}
 
 		$this->arg_overrides = (array) $arg_overrides;
@@ -91,23 +91,23 @@ class Taxonomy_Core {
 		$labels = array(
 			'name'              => $this->plural,
 			'singular_name'     => $this->singular,
-			'search_items'      => sprintf( __( 'Search %s' ), $this->plural ),
-			'all_items'         => sprintf( __( 'All %s' ), $this->plural ),
+			'search_items'      => sprintf( __( 'Search %s', 'wds-rss-post-aggregation' ), $this->plural ),
+			'all_items'         => sprintf( __( 'All %s', 'wds-rss-post-aggregation' ), $this->plural ),
 			'parent_item'       => isset( $this->arg_overrides['hierarchical'] ) && $this->arg_overrides['hierarchical'] ? sprintf( __( 'Parent %s' ), $this->singular ) : null,
 			'parent_item_colon' => isset( $this->arg_overrides['hierarchical'] ) && $this->arg_overrides['hierarchical'] ? sprintf( __( 'Parent %s:' ), $this->singular ) : null,
-			'edit_item'         => sprintf( __( 'Edit %s' ), $this->singular ),
-			'edit_item'         => sprintf( __( 'Update %s' ), $this->singular ),
-			'add_new_item'      => sprintf( __( 'Add New %s' ), $this->singular ),
-			'add_new_item'      => sprintf( __( 'New %s Name' ), $this->singular ),
+			'edit_item'         => sprintf( __( 'Edit %s', 'wds-rss-post-aggregation' ), $this->singular ),
+			'edit_item'         => sprintf( __( 'Update %s', 'wds-rss-post-aggregation' ), $this->singular ),
+			'add_new_item'      => sprintf( __( 'Add New %s', 'wds-rss-post-aggregation' ), $this->singular ),
+			'add_new_item'      => sprintf( __( 'New %s Name', 'wds-rss-post-aggregation' ), $this->singular ),
 		);
 
 		$hierarchical = true;
 
 		if ( isset( $args['hierarchical'] ) && $args['hierarchical'] == false ) {
-			$labels['popular_items']              = sprintf( __( 'Popular %s' ), $this->plural );
-			$labels['separate_items_with_commas'] = sprintf( __( 'Separate %s with commas' ), $this->plural );
-			$labels['add_or_remove_items']        = sprintf( __( 'Add or remove %s' ), $this->plural );
-			$labels['choose_from_most_used']      = sprintf( __( 'Choose from the most used %s' ), $this->plural );
+			$labels['popular_items']              = sprintf( __( 'Popular %s', 'wds-rss-post-aggregation' ), $this->plural );
+			$labels['separate_items_with_commas'] = sprintf( __( 'Separate %s with commas', 'wds-rss-post-aggregation' ), $this->plural );
+			$labels['add_or_remove_items']        = sprintf( __( 'Add or remove %s', 'wds-rss-post-aggregation' ), $this->plural );
+			$labels['choose_from_most_used']      = sprintf( __( 'Choose from the most used %s', 'wds-rss-post-aggregation' ), $this->plural );
 			$hierarchical = false;
 		}
 

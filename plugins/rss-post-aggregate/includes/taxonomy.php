@@ -16,7 +16,7 @@ class RSS_Post_Aggregation_Taxonomy extends Taxonomy_Core {
 
 		// Register this cpt
 		parent::__construct(
-			array( __( 'RSS Feed Link', 'rss_post_aggregation' ), __( 'RSS Feed Links', 'rss_feed_link' ), $tax_slug ),
+			array( __( 'RSS Feed Link', 'wds-rss-post-aggregation' ), __( 'RSS Feed Links', 'wds-rss-post-aggregation' ), $tax_slug ),
 			array( 'show_admin_column' => false ),
 			array( $cpt->post_type() )
 		);

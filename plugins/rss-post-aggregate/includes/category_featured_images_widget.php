@@ -29,8 +29,8 @@ class RSS_Post_Aggregation_Category_Featured_Images_Widget extends WP_Widget {
 	public function __construct() {
 		parent::__construct(
 			'rss_post_aggregation_category_featured_images',
-			__( 'RSS Feed with Images', 'rss_post_aggregation' ),
-			array( 'description' => __( 'Reads and displays a supplied RSS feed with featured images.', 'rss_post_aggregation' ) )
+			__( 'RSS Feed with Images', 'wds-rss-post-aggregation' ),
+			array( 'description' => __( 'Reads and displays a supplied RSS feed with featured images.', 'wds-rss-post-aggregation' ) )
 		);
 	}
 
@@ -41,22 +41,22 @@ class RSS_Post_Aggregation_Category_Featured_Images_Widget extends WP_Widget {
 
 		?>
 		<p>
-			<?php echo __( 'Title', 'rss_post_aggregation' ); ?>
+			<?php echo __( 'Title', 'wds-rss-post-aggregation' ); ?>
 			<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $instance['title'] ); ?>" />
-			<?php echo __( 'Feed', 'rss_post_aggregation' ); ?>
+			<?php echo __( 'Feed', 'wds-rss-post-aggregation' ); ?>
 			<?php echo $this->feed_links_dropdown( $this->get_field_name( 'feed_url' ), $instance['feed_url'] ); ?>
 
 		</p>
 		<p>
-			<?php echo __( 'Number to show', 'rss_post_aggregation' ); ?>
+			<?php echo __( 'Number to show', 'wds-rss-post-aggregation' ); ?>
 			<input class="widefat" id="<?php echo $this->get_field_id( 'items' ); ?>" name="<?php echo $this->get_field_name( 'items' ); ?>" type="text" value="<?php echo esc_attr( $instance['items'] ); ?>" />
 		</p>
 		<p>
-			<?php echo __( 'Excerpt Length', 'rss_post_aggregation' ); ?>
+			<?php echo __( 'Excerpt Length', 'wds-rss-post-aggregation' ); ?>
 			<input class="widefat" id="<?php echo $this->get_field_id( 'excerpt_length' ); ?>" name="<?php echo $this->get_field_name( 'excerpt_length' ); ?>" type="text" value="<?php echo esc_attr( $instance['excerpt_length'] ); ?>" />
 		</p>
 		<p>
-			<?php echo __( '"Read More" text', 'rss_post_aggregation' ); ?>
+			<?php echo __( '"Read More" text', 'wds-rss-post-aggregation' ); ?>
 			<input class="widefat" id="<?php echo $this->get_field_id( 'read_more_text' ); ?>" name="<?php echo $this->get_field_name( 'read_more_text' ); ?>" type="text" value="<?php echo esc_attr( $instance['read_more_text'] ); ?>" />
 		</p>
 
@@ -155,7 +155,7 @@ class RSS_Post_Aggregation_Category_Featured_Images_Widget extends WP_Widget {
 			}
 			echo '</ul>';
 		} else {
-			echo __( 'Nothing yet! Check again later', 'rss_post_aggregation' );
+			echo __( 'Nothing yet! Check again later', 'wds-rss-post-aggregation' );
 		}
 
 		echo $args['after_widget'];
