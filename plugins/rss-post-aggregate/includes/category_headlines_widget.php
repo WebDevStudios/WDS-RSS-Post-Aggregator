@@ -72,7 +72,7 @@ class RSS_Post_Aggregation_Category_Headlines_Widget extends WP_Widget {
 		echo apply_filters( 'widget_title', $instance['title'], $instance, $this->id_base );
 		echo $args['after_title'];
 
-		$posts = get_posts( array(
+		$args = array(
 			'post_type' => 'rss-posts',
 			'showposts' => $instance['count'],
 			'tax_query' => array(
@@ -82,7 +82,13 @@ class RSS_Post_Aggregation_Category_Headlines_Widget extends WP_Widget {
 					'terms'    => $instance['category'],
 				),
 			),
-		) );
+		);
+
+		if ( function_exists( 'msft_cache_get_posts' ) ) {
+			$posts = msft_cache_get_posts( $args );
+		} else {
+			$posts = get_posts( $args );
+		}
 
 		if( !empty( $posts ) ) {
 			echo '<ul>';

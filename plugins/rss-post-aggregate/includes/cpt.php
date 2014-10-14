@@ -162,17 +162,12 @@ class RSS_Post_Aggregation_CPT extends CPT_Core {
 	public function post_exists( $url, $feed_id ) {
 		$args = array(
 			'posts_per_page' => 1,
-			'post_status' => array( 'publish', 'pending', 'draft', 'future'),
-			'post_type'  => $this->post_type(),
-			'meta_key'   => $this->prefix . 'original_url',
-			'meta_value' => esc_url_raw( $url ),
-			// 'fields'     => 'ids',
-			// 'tax_query'  => array( array(
-			// 	'taxonomy' => $this->tax_slug,
-			// 	'terms'    => array( absint( $feed_id ) ),
-			// ) ),
+			'post_status'    => array( 'publish', 'pending', 'draft', 'future'),
+			'post_type'      => $this->post_type(),
+			'meta_key'       => $this->prefix . 'original_url',
+			'meta_value'     => esc_url_raw( $url ),
 		);
-		$posts = get_posts( $args );
+		$posts = msft_cache_get_posts( $args );
 		return $posts && is_array( $posts ) ? $posts[0] : false;
 	}
 
