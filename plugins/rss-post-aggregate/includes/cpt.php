@@ -169,6 +169,7 @@ class RSS_Post_Aggregation_CPT extends CPT_Core {
 		);
 		if ( function_exists( 'msft_cache_get_posts' ) ) {
 			$posts = msft_cache_get_posts( $args );
+			$posts = is_array( $posts ) ? $posts : array();
 		} else {
 			$posts = get_posts( $args );
 		}

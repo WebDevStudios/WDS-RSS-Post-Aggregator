@@ -86,6 +86,7 @@ class RSS_Post_Aggregation_Category_Headlines_Widget extends WP_Widget {
 
 		if ( function_exists( 'msft_cache_get_posts' ) ) {
 			$posts = msft_cache_get_posts( $args );
+			$posts = is_array( $posts ) ? $posts : array();
 		} else {
 			$posts = get_posts( $args );
 		}
