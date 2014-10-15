@@ -66,11 +66,11 @@ class RSS_Post_Aggregation_Category_Headlines_Widget extends WP_Widget {
 
 	public function widget( $args, $instance ) {
 
-		echo $args['before_widget'];
+		echo isset( $args['before_widget'] ) ? $args['before_widget'] : '';
 
-		echo $args['before_title'];
+		echo isset( $args['before_title'] ) ? $args['before_title'] : '';
 		echo apply_filters( 'widget_title', $instance['title'], $instance, $this->id_base );
-		echo $args['after_title'];
+		echo isset( $args['after_title'] ) ? $args['after_title'] : '';
 
 		$args = array(
 			'post_type' => 'rss-posts',
@@ -114,7 +114,7 @@ class RSS_Post_Aggregation_Category_Headlines_Widget extends WP_Widget {
 			echo __( 'Nothing yet! Check again later', 'wds-rss-post-aggregation' );
 		}
 
-		echo $args['after_widget'];
+		echo isset( $args['after_widget'] ) ? $args['after_widget'] : '';
 	}
 
 	/**
