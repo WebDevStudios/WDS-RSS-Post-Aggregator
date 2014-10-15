@@ -167,7 +167,11 @@ class RSS_Post_Aggregation_CPT extends CPT_Core {
 			'meta_key'       => $this->prefix . 'original_url',
 			'meta_value'     => esc_url_raw( $url ),
 		);
-		$posts = msft_cache_get_posts( $args );
+		if ( function_exists( 'msft_cache_get_posts' ) ) {
+			$posts = msft_cache_get_posts( $args );
+		} else {
+			$posts = get_posts( $args );
+		}
 		return $posts && is_array( $posts ) ? $posts[0] : false;
 	}
 
