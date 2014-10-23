@@ -84,7 +84,7 @@ class RSS_Post_Aggregation_Category_Headlines_Widget extends WP_Widget {
 
 		if ( isset( $instance['excerpt_length'] ) && ( $length = absint( $instance['excerpt_length'] ) ) ) {
 			$this->excerpt_length = $length;
-			add_filter( 'rss_post_aggregation_feed_summary_length', array( $this, 'filter_excerpt_length' ), 10 );
+			add_filter( 'excerpt_length', array( $this, 'filter_excerpt_length' ), 10 );
 		}
 
 		$posts = get_posts( array(
@@ -116,31 +116,14 @@ class RSS_Post_Aggregation_Category_Headlines_Widget extends WP_Widget {
 				echo '</a>';
 
 				// display the date
-				echo '<p>';
-				echo '<span class="date">';
+				echo '<p class="date">';
 				echo date( 'M j, Y', strtotime( $p->post_date ) );
-				echo '</span>';
-
-				// display the post source link
-				$url = parse_url( get_permalink( $p->ID ) );
-				echo '<span class="source-link">';
-				echo ' ' . $url['host'];
-				echo '</span>';
 				echo '</p>';
 
 				// display the excerpt if available
 				if( !empty( $p->post_excerpt ) ) {
-		            echo '<p>';
-		            echo wp_trim_words($p->post_excerpt);
-		            echo '</p>';
-
-				// if excerpt isnt available dislay the content instead
-		        } else {
-
-		        	echo '<p>';
-		            echo wp_trim_words($p->post_content);
-		    	    echo '</p>';
-		    	}
+		            echo apply_filters('the_excerpt', $p->post_excerpt);
+		        }
 
 				// display the custom read more text if it exists and link to post
 				if ( isset( $instance['read_more_text'] ) && trim( $instance['read_more_text'] ) ) {
