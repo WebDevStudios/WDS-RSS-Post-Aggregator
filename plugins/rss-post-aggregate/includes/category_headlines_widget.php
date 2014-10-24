@@ -28,7 +28,7 @@ class RSS_Post_Aggregation_Category_Headlines_Widget extends WP_Widget {
 
 	public function form( $instance ) {
 
-		$instance 		= wp_parse_args( $instance, $this->defaults );
+		$instance = wp_parse_args( $instance, $this->defaults );
 		?>
 
 		<p>
