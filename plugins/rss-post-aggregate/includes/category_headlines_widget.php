@@ -13,7 +13,8 @@ class RSS_Post_Aggregation_Category_Headlines_Widget extends WP_Widget {
 		'title'	 	=> '',
 		'category' 	=> '',
 		'count'		=> 5,
-		'excerpt_length' => 15,
+		'excerpt' 	=> 0,
+		'excerpt_length' => '15',
 		'read_more_text' => '',
 	);
 
@@ -27,24 +28,30 @@ class RSS_Post_Aggregation_Category_Headlines_Widget extends WP_Widget {
 
 	public function form( $instance ) {
 
-		$instance = wp_parse_args( $instance, $this->defaults );
-
+		$instance 		= wp_parse_args( $instance, $this->defaults );
 		?>
-		<p>
-			<?php echo __( 'Title', 'wds-rss-post-aggregation' ); ?>
-			<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $instance['title'] ); ?>" />
-			<?php echo __( 'Category', 'wds-rss-post-aggregation' ); ?>
-			<?php echo $this->category_dropdown( $this->get_field_name( 'category' ), $instance['category'] ); ?>
 
-			<?php echo __( 'Number to show', 'wds-rss-post-aggregation' ); ?>
+		<p>
+			<label for="<?php echo $this->get_field_id('title'); ?>"><?php echo __( 'Title', 'rss_post_aggregation' ); ?></label>
+			<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $instance['title'] ); ?>" />
+		</p>
+		<p>
+			<label for="<?php echo $this->get_field_id( 'category' )?>"><?php echo __( 'Category', 'rss_post_aggregation' ); ?></label>
+			<?php echo $this->category_dropdown( $this->get_field_name( 'category' ), $instance['category'] ); ?>
+		<p>
+			<label for="<?php echo $this->get_field_id( 'count' )?>"><?php echo __( 'Number to show', 'rss_post_aggregation' ); ?></label>
 			<input class="widefat" id="<?php echo $this->get_field_id( 'count' ); ?>" name="<?php echo $this->get_field_name( 'count' ); ?>" type="text" value="<?php echo esc_attr( $instance['count'] ); ?>" />
 		</p>
 		<p>
-			<?php echo __( 'Excerpt Length', 'rss_post_aggregation' ); ?>
-			<input class="widefat" id="<?php echo $this->get_field_id( 'excerpt_length' ); ?>" name="<?php echo $this->get_field_name( 'excerpt_length' ); ?>" type="text" value="<?php echo esc_attr( $instance['excerpt_length'] ); ?>" />
+        	<label for="<?php echo $this->get_field_id( 'excerpt' )?>"><?php echo __( 'Display Post Excerpt?', 'rss_post_aggregation' ); ?></label>
+        	<input id="<?php echo $this->get_field_id('excerpt'); ?>" name="<?php echo $this->get_field_name('excerpt'); ?>" type="checkbox" value="1" <?php checked( '1', esc_attr( $instance['excerpt'] ) ); ?> />
+        </p>
+		<p>
+			<label for="<?php echo $this->get_field_id( 'excerpt_length' )?>"><?php echo __( 'Excerpt Length', 'rss_post_aggregation' ); ?></label>
+			<input class="widefat" id="<?php echo $this->get_field_id( 'excerpt_length' ); ?>" name="<?php echo $this->get_field_name( 'excerpt_length' ); ?>" type="text" value="<?php echo esc_attr($instance['excerpt_length']); ?>" />
 		</p>
 		<p>
-			<?php echo __( '"Read More" text', 'rss_post_aggregation' ); ?>
+			<label for="<?php echo $this->get_field_id( 'read_more_text' )?>"><?php echo __( '"Read More" text', 'rss_post_aggregation' ); ?></label>
 			<input class="widefat" id="<?php echo $this->get_field_id( 'read_more_text' ); ?>" name="<?php echo $this->get_field_name( 'read_more_text' ); ?>" type="text" value="<?php echo esc_attr( $instance['read_more_text'] ); ?>" />
 		</p>
 		<?php
@@ -64,6 +71,9 @@ class RSS_Post_Aggregation_Category_Headlines_Widget extends WP_Widget {
 	public function update( $new_instance, $old_instance ) {
 
 		$instance = array();
+		$instance['excerpt'] 		= strip_tags($new_instance['excerpt']);
+		$instance['excerpt_length'] = strip_tags($new_instance['excerpt_length']);
+
 
 		// Sanitize options
 		foreach ( $this->defaults as $key => $default_value ) {
@@ -82,12 +92,7 @@ class RSS_Post_Aggregation_Category_Headlines_Widget extends WP_Widget {
 		echo apply_filters( 'widget_title', $instance['title'], $instance, $this->id_base );
 		echo isset( $args['after_title'] ) ? $args['after_title'] : '';
 
-		if ( isset( $instance['excerpt_length'] ) && ( $length = absint( $instance['excerpt_length'] ) ) ) {
-			$this->excerpt_length = $length;
-			add_filter( 'excerpt_length', array( $this, 'filter_excerpt_length' ), 10 );
-		}
-
-		$posts = get_posts( array(
+		$args = array(
 			'post_type' => 'rss-posts',
 			'showposts' => $instance['count'],
 			'tax_query' => array(
@@ -99,8 +104,15 @@ class RSS_Post_Aggregation_Category_Headlines_Widget extends WP_Widget {
 			),
 		);
 
-		if ( isset( $this->excerpt_length ) ) {
-			remove_filter( 'rss_post_aggregation_feed_summary_length', array( $this, 'filter_excerpt_length' ) );
+        $excerpt		= strip_tags($instance['excerpt']);
+        $excerpt_length	= strip_tags($instance['excerpt_length']);
+
+
+		if ( function_exists( 'msft_cache_get_posts' ) ) {
+			$posts = msft_cache_get_posts( $args );
+			$posts = is_array( $posts ) ? $posts : array();
+		} else {
+			$posts = get_posts( $args );
 		}
 
 
@@ -120,19 +132,30 @@ class RSS_Post_Aggregation_Category_Headlines_Widget extends WP_Widget {
 				echo date( 'M j, Y', strtotime( $p->post_date ) );
 				echo '</p>';
 
-				// display the excerpt if available
-				if( !empty( $p->post_excerpt ) ) {
-		            echo apply_filters('the_excerpt', $p->post_excerpt);
-		        }
+				// display the excerpt or post content
+				if( $excerpt ) {
+					$content_excerpt = $p->post_excerpt;
+					if( empty( $content_excerpt ) ) {
+						$content_excerpt = $p->post_content;
+					}
+					$content_excerpt = strip_shortcodes( wp_strip_all_tags( $content_excerpt ) );
+					if ( ! isset( $excerpt_length ) ) {
+						$excerpt_length = 10;
+					}
+					$content_excerpt = preg_split( '/\b/', $content_excerpt, $excerpt_length * 2 + 1 );
+					$body_excerpt_waste = array_pop( $content_excerpt );
+					$content_excerpt = implode( $content_excerpt );
+					echo wpautop( $content_excerpt );
+				}
 
 				// display the custom read more text if it exists and link to post
 				if ( isset( $instance['read_more_text'] ) && trim( $instance['read_more_text'] ) ) {
 				 	echo ' <a class="read-more" href="'. get_permalink( $p->ID ) .'">'. esc_html( $instance['read_more_text'] ) .'</a>';
 				}
-
 				echo '</li>';
 			}
 			echo '</ul>';
+
 		} else {
 			echo __( 'Nothing yet! Check again later', 'wds-rss-post-aggregation' );
 		}
@@ -164,14 +187,6 @@ class RSS_Post_Aggregation_Category_Headlines_Widget extends WP_Widget {
 		$s .= '</select>';
 
 		return $s;
-	}
-
-	public function filter_excerpt_length( $length ) {
-		if ( isset( $this->excerpt_length ) ) {
-			$length = (int) $this->excerpt_length;
-		}
-
-		return $length;
 	}
 
 } // end class
