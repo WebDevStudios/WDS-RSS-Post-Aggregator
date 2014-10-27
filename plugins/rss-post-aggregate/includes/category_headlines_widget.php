@@ -163,7 +163,7 @@ class RSS_Post_Aggregation_Category_Headlines_Widget extends WP_Widget {
 			if( ! empty( $instance['cat_link'] ) ){
 				$cat_data = get_term_by( 'slug', $instance['category'], 'rss-category' );
 				if( ! empty( $cat_data ) ) {
-					echo '<p><a href="' . get_term_link( $cat_data->term_id, 'rss-category' ) . '" title="' . $cat_data->name . '" class="rss_cat_link">' . sprintf( __( 'More from %s '), $cat_data->name ) . ' &raquo;</a></p>';
+					echo '<p><a href="' . get_term_link( $cat_data->term_id, 'rss-category' ) . '" title="' . sprintf( __( 'More from %s', 'rss_post_aggregation' ), $cat_data->name ) . '" class="rss_cat_link">' . sprintf( __( 'More from %s', 'rss_post_aggregation' ), $cat_data->name ) . ' &raquo;</a></p>';
 				}
 			}
 
