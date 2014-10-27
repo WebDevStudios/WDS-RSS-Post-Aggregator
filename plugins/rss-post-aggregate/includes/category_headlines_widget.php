@@ -10,12 +10,13 @@ class RSS_Post_Aggregation_Category_Headlines_Widget extends WP_Widget {
 	 * @var array
 	 **/
 	private $defaults = array(
-		'title'	 	=> '',
-		'category' 	=> '',
-		'count'		=> 5,
-		'excerpt' 	=> 0,
+		'title'	 	     => '',
+		'category' 	     => '',
+		'count'		     => 5,
+		'excerpt' 	     => 0,
 		'excerpt_length' => '15',
 		'read_more_text' => '',
+		'cat_link'       => '',
 	);
 
 	public function __construct() {
@@ -43,8 +44,12 @@ class RSS_Post_Aggregation_Category_Headlines_Widget extends WP_Widget {
 			<input class="widefat" id="<?php echo $this->get_field_id( 'count' ); ?>" name="<?php echo $this->get_field_name( 'count' ); ?>" type="text" value="<?php echo esc_attr( $instance['count'] ); ?>" />
 		</p>
 		<p>
-        	<label for="<?php echo $this->get_field_id( 'excerpt' )?>"><?php echo __( 'Display Post Excerpt?', 'rss_post_aggregation' ); ?></label>
         	<input id="<?php echo $this->get_field_id('excerpt'); ?>" name="<?php echo $this->get_field_name('excerpt'); ?>" type="checkbox" value="1" <?php checked( '1', esc_attr( $instance['excerpt'] ) ); ?> />
+        	<label for="<?php echo $this->get_field_id( 'excerpt' )?>"><?php echo __( 'Display Post Excerpt', 'rss_post_aggregation' ); ?></label>
+        </p>
+		<p>
+        	<input id="<?php echo $this->get_field_id('cat_link'); ?>" name="<?php echo $this->get_field_name('cat_link'); ?>" type="checkbox" value="1" <?php checked( '1', esc_attr( $instance['cat_link'] ) ); ?> />
+        	<label for="<?php echo $this->get_field_id( 'cat_link' )?>"><?php echo __( 'Display Category Link', 'rss_post_aggregation' ); ?></label>
         </p>
 		<p>
 			<label for="<?php echo $this->get_field_id( 'excerpt_length' )?>"><?php echo __( 'Excerpt Length', 'rss_post_aggregation' ); ?></label>
@@ -119,7 +124,6 @@ class RSS_Post_Aggregation_Category_Headlines_Widget extends WP_Widget {
 		if( !empty( $posts ) ) {
 			echo '<ul>';
 			foreach( $posts as $p ) {
-				//var_dump( get_post_meta( $p->ID ));
 				echo '<li>';
 
 				//display the linked post title
@@ -155,6 +159,13 @@ class RSS_Post_Aggregation_Category_Headlines_Widget extends WP_Widget {
 				echo '</li>';
 			}
 			echo '</ul>';
+
+			if( ! empty( $instance['cat_link'] ) ){
+				$cat_data = get_category_by_slug( $instance['category'] );
+				if( ! empty( $cat_data ) ) {
+					echo '<p><a href="' . get_category_link( $cat_data->term_id ) . '" title="' . $cat_data->name . '" class="rss_cat_link">' . sprintf( __( 'More from %s '), $cat_data->name ) . ' &raquo;</a></p>';
+				}
+			}
 
 		} else {
 			echo __( 'Nothing yet! Check again later', 'wds-rss-post-aggregation' );
