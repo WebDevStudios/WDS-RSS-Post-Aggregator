@@ -97,7 +97,7 @@ class RSS_Post_Aggregation_Category_Headlines_Widget extends WP_Widget {
 		echo apply_filters( 'widget_title', $instance['title'], $instance, $this->id_base );
 		echo isset( $args['after_title'] ) ? $args['after_title'] : '';
 
-		$args = array(
+		$query_args = array(
 			'post_type' => 'rss-posts',
 			'showposts' => $instance['count'],
 			'tax_query' => array(
@@ -114,10 +114,10 @@ class RSS_Post_Aggregation_Category_Headlines_Widget extends WP_Widget {
 
 
 		if ( function_exists( 'msft_cache_get_posts' ) ) {
-			$posts = msft_cache_get_posts( $args );
+			$posts = msft_cache_get_posts( $query_args );
 			$posts = is_array( $posts ) ? $posts : array();
 		} else {
-			$posts = get_posts( $args );
+			$posts = get_posts( $query_args );
 		}
 
 
