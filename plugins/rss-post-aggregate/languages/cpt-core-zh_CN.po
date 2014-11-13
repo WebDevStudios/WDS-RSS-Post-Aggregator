@@ -1,0 +1,447 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: RSS Post Aggregation v0.1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2014-11-13 00:02:13+0000\n"
+"Last-Translator: lswilson <lisa@webdevstudios.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=1;\n"
+"X-Generator: CSL v1.x\n"
+"X-Poedit-Language: Chinese\n"
+"X-Poedit-Country: PEOPLE'S REPUBLIC OF CHINA\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;\n"
+"X-Poedit-Basepath: ../\n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes"
+
+#: includes/category_featured_images_widget.php:32
+#@ rss_post_aggregation
+msgid "RSS Feed with Images"
+msgstr "RSS图像流"
+
+#: includes/category_featured_images_widget.php:33
+#@ rss_post_aggregation
+msgid "Reads and displays a supplied RSS feed with featured images."
+msgstr "读取和显示RSS特色图像流"
+
+#: includes/category_featured_images_widget.php:44
+#: includes/category_headlines_widget.php:36
+#: includes/modal-markup.php:24
+#@ rss_post_aggregation
+msgid "Title"
+msgstr "标题"
+
+#: includes/category_featured_images_widget.php:46
+#@ rss_post_aggregation
+msgid "Feed"
+msgstr "信息流"
+
+#: includes/category_featured_images_widget.php:51
+#: includes/category_headlines_widget.php:43
+#@ rss_post_aggregation
+msgid "Number to show"
+msgstr "数字显示"
+
+#: includes/category_featured_images_widget.php:55
+#: includes/category_headlines_widget.php:55
+#@ rss_post_aggregation
+msgid "Excerpt Length"
+msgstr "摘要长度"
+
+#: includes/category_featured_images_widget.php:59
+#: includes/category_headlines_widget.php:59
+#@ rss_post_aggregation
+msgid "\"Read More\" text"
+msgstr "阅读更多文本"
+
+#: includes/category_featured_images_widget.php:158
+#: includes/category_headlines_widget.php:167
+#@ rss_post_aggregation
+msgid "Nothing yet! Check again later"
+msgstr "还没有！请稍后再检查"
+
+#: includes/category_headlines_widget.php:25
+#@ rss_post_aggregation
+msgid "RSS Category Headlines"
+msgstr "RSS 类别标题"
+
+#: includes/category_headlines_widget.php:26
+#@ rss_post_aggregation
+msgid "Displays the title as the headline for imported RSS feed items."
+msgstr "显示标题作为导入的RSS信息源标题"
+
+#: includes/category_headlines_widget.php:40
+#@ rss_post_aggregation
+msgid "Category"
+msgstr "类别"
+
+#: includes/category_headlines_widget.php:48
+#@ rss_post_aggregation
+msgid "Display Post Excerpt"
+msgstr ""
+
+#: includes/category_headlines_widget.php:52
+#@ rss_post_aggregation
+msgid "Display Category Link"
+msgstr ""
+
+#: includes/category_headlines_widget.php:162
+#, php-format
+#@ rss_post_aggregation
+msgid "More from %s"
+msgstr ""
+
+#: includes/cpt.php:23
+#@ rss_post_aggregation
+msgid "RSS Post"
+msgstr ""
+
+#: includes/cpt.php:23
+#@ rss_post_aggregation
+msgid "RSS Posts"
+msgstr "RSS发布"
+
+#: includes/cpt.php:37
+#@ rss_post_aggregation
+msgid "Find RSS Post"
+msgstr "查找RSS发布"
+
+#: includes/cpt.php:70
+#@ rss_post_aggregation
+msgid "Thumbnail"
+msgstr "缩略图"
+
+#: includes/cpt.php:73
+#: includes/modal-markup.php:24
+#@ rss_post_aggregation
+msgid "Source"
+msgstr "来源"
+
+#: includes/cpt.php:108
+#@ rss_post_aggregation
+msgid "RSS Item Info"
+msgstr "RSS项目信息"
+
+#: includes/cpt.php:114
+#@ rss_post_aggregation
+msgid "Original URL"
+msgstr "原始网站链接"
+
+#: includes/feeds.php:31
+#, php-format
+#@ rss_post_aggregation
+msgid "RSS Error: %s"
+msgstr "RSS错误 %s"
+
+#: includes/feeds.php:40
+#@ rss_post_aggregation
+msgid "An error has occurred, which probably means the feed is down. Try again later."
+msgstr "发生了错误，可能意味着信息已关闭。请稍候重试。"
+
+#: includes/feeds.php:110
+#@ rss_post_aggregation
+msgid "Untitled"
+msgstr "无题"
+
+#: includes/libraries/CPT_Core/CPT_Core.php:64
+#: includes/libraries/CPT_Core/CPT_Core.php:68
+#: includes/libraries/CPT_Core/CPT_Core.php:72
+#@ cpt-core
+msgid "It is required to pass a single, plural and slug string to CPT_Core"
+msgstr ""
+
+#: includes/libraries/CPT_Core/CPT_Core.php:105
+#: includes/libraries/CPT_Core/CPT_Core.php:106
+#: includes/libraries/Taxonomy_Core/Taxonomy_Core.php:100
+#, php-format
+#@ cpt-core
+#@ default
+msgid "Add New %s"
+msgstr "添加新闻 %s"
+
+#: includes/libraries/CPT_Core/CPT_Core.php:107
+#: includes/libraries/Taxonomy_Core/Taxonomy_Core.php:98
+#, php-format
+#@ cpt-core
+#@ default
+msgid "Edit %s"
+msgstr "编辑 %S"
+
+#: includes/libraries/CPT_Core/CPT_Core.php:108
+#, php-format
+#@ cpt-core
+msgid "New %s"
+msgstr ""
+
+#: includes/libraries/CPT_Core/CPT_Core.php:109
+#: includes/libraries/Taxonomy_Core/Taxonomy_Core.php:95
+#, php-format
+#@ cpt-core
+#@ default
+msgid "All %s"
+msgstr "所有 %s"
+
+#: includes/libraries/CPT_Core/CPT_Core.php:110
+#, php-format
+#@ cpt-core
+msgid "View %s"
+msgstr ""
+
+#: includes/libraries/CPT_Core/CPT_Core.php:111
+#: includes/libraries/Taxonomy_Core/Taxonomy_Core.php:94
+#, php-format
+#@ cpt-core
+#@ default
+msgid "Search %s"
+msgstr "搜索 %s"
+
+#: includes/libraries/CPT_Core/CPT_Core.php:112
+#, php-format
+#@ cpt-core
+msgid "No %s"
+msgstr ""
+
+#: includes/libraries/CPT_Core/CPT_Core.php:113
+#, php-format
+#@ cpt-core
+msgid "No %s found in Trash"
+msgstr ""
+
+#: includes/libraries/CPT_Core/CPT_Core.php:114
+#: includes/libraries/Taxonomy_Core/Taxonomy_Core.php:97
+#, php-format
+#@ cpt-core
+#@ default
+msgid "Parent %s:"
+msgstr "上级目录 %s"
+
+#: includes/libraries/CPT_Core/CPT_Core.php:162
+#, php-format
+#@ cpt-core
+msgid "%1$s updated. <a href=\"%2$s\">View %1$s</a>"
+msgstr ""
+
+#: includes/libraries/CPT_Core/CPT_Core.php:163
+#@ default
+msgid "Custom field updated."
+msgstr ""
+
+#: includes/libraries/CPT_Core/CPT_Core.php:164
+#@ default
+msgid "Custom field deleted."
+msgstr ""
+
+#: includes/libraries/CPT_Core/CPT_Core.php:165
+#, php-format
+#@ cpt-core
+msgid "%1$s updated."
+msgstr ""
+
+#. translators: %s: date and time of the revision
+#: includes/libraries/CPT_Core/CPT_Core.php:167
+#, php-format
+#@ cpt-core
+msgid "%1$s restored to revision from %2$s"
+msgstr ""
+
+#: includes/libraries/CPT_Core/CPT_Core.php:168
+#, php-format
+#@ cpt-core
+msgid "%1$s published. <a href=\"%2$s\">View %1$s</a>"
+msgstr ""
+
+#: includes/libraries/CPT_Core/CPT_Core.php:169
+#, php-format
+#@ cpt-core
+msgid "%1$s saved."
+msgstr ""
+
+#: includes/libraries/CPT_Core/CPT_Core.php:170
+#, php-format
+#@ cpt-core
+msgid "%1$s submitted. <a target=\"_blank\" href=\"%2$s\">Preview %1$s</a>"
+msgstr ""
+
+#: includes/libraries/CPT_Core/CPT_Core.php:171
+#, php-format
+#@ cpt-core
+msgid "%1$s scheduled for: <strong>%2$s</strong>. <a target=\"_blank\" href=\"%3$s\">Preview %1$s</a>"
+msgstr ""
+
+#: includes/libraries/CPT_Core/CPT_Core.php:173
+#@ default
+msgid "M j, Y @ G:i"
+msgstr ""
+
+#: includes/libraries/CPT_Core/CPT_Core.php:174
+#, php-format
+#@ cpt-core
+msgid "%1$s draft updated. <a target=\"_blank\" href=\"%2$s\">Preview %1$s</a>"
+msgstr ""
+
+#: includes/libraries/CPT_Core/CPT_Core.php:210
+#, php-format
+#@ cpt-core
+msgid "%s Title"
+msgstr ""
+
+#: includes/libraries/Taxonomy_Core/Taxonomy_Core.php:96
+#, php-format
+#@ default
+msgid "Parent %s"
+msgstr "上级目录 %s"
+
+#: includes/libraries/Taxonomy_Core/Taxonomy_Core.php:99
+#, php-format
+#@ default
+msgid "Update %s"
+msgstr "更新 %s"
+
+#: includes/libraries/Taxonomy_Core/Taxonomy_Core.php:101
+#, php-format
+#@ default
+msgid "New %s Name"
+msgstr "新闻 %s"
+
+#: includes/libraries/Taxonomy_Core/Taxonomy_Core.php:107
+#, php-format
+#@ default
+msgid "Popular %s"
+msgstr "流行 %S"
+
+#: includes/libraries/Taxonomy_Core/Taxonomy_Core.php:108
+#, php-format
+#@ default
+msgid "Separate %s with commas"
+msgstr "逗 %s 号分隔"
+
+#: includes/libraries/Taxonomy_Core/Taxonomy_Core.php:109
+#, php-format
+#@ default
+msgid "Add or remove %s"
+msgstr "添加或删除 %s"
+
+#: includes/libraries/Taxonomy_Core/Taxonomy_Core.php:110
+#, php-format
+#@ default
+msgid "Choose from the most used %s"
+msgstr "从最常用的选择 %s"
+
+#: includes/modal-markup.php:3
+#@ rss_post_aggregation
+msgid "Select RSS Feed"
+msgstr "选择RSS订阅"
+
+#: includes/modal-markup.php:9
+#@ rss_post_aggregation
+msgid "Add RSS Feed"
+msgstr "添加RSS订阅"
+
+#: includes/modal-markup.php:10
+#@ default
+msgid "enter feed url"
+msgstr ""
+
+#: includes/modal-markup.php:11
+#@ rss_post_aggregation
+msgid "Add Feed"
+msgstr "添加订阅"
+
+#: includes/modal-markup.php:19
+#@ default
+msgid "Search"
+msgstr "搜索"
+
+#: includes/modal-markup.php:20
+#@ default
+msgid "start typing to filter results"
+msgstr ""
+
+#: includes/modal-markup.php:26
+#: includes/modal.php:108
+#@ rss_post_aggregation
+msgid "No feed data found"
+msgstr "未找到订阅数据"
+
+#: includes/modal-markup.php:31
+#@ rss_post_aggregation
+msgid "Manage RSS Feeds"
+msgstr "管理RSS订阅"
+
+#: includes/modal-markup.php:32
+#@ rss_post_aggregation
+msgid "Add Post Manually"
+msgstr "手动添加"
+
+#: includes/modal-markup.php:34
+#@ rss_post_aggregation
+msgid "Select to Import"
+msgstr "选择要导入的"
+
+#: includes/modal.php:69
+#@ rss_post_aggregation
+msgid "There was an error with the RSS feed link creation."
+msgstr "发生了错误，可能意味着信息已关闭。请稍候重试。"
+
+#: includes/modal.php:109
+#@ rss_post_aggregation
+msgid "You didn't select any posts. Do you want to close the search?"
+msgstr ""
+
+#: includes/taxonomy.php:19
+#@ rss_post_aggregation
+msgid "RSS Feed Link"
+msgstr "RSS订阅链接"
+
+#: includes/taxonomy.php:19
+#@ rss_feed_link
+msgid "RSS Feed Links"
+msgstr "RSS订阅链接"
+
+#. translators: plugin header field 'Name'
+#: rss_post_aggregation.php:0
+#@ cpt-core
+msgid "RSS Post Aggregation"
+msgstr ""
+
+#. translators: plugin header field 'PluginURI'
+#. translators: plugin header field 'AuthorURI'
+#: rss_post_aggregation.php:0
+#@ cpt-core
+msgid "http://webdevstudios.com"
+msgstr ""
+
+#. translators: plugin header field 'Description'
+#: rss_post_aggregation.php:0
+#@ cpt-core
+msgid "Aggregate posts from RSS Feeds"
+msgstr ""
+
+#. translators: plugin header field 'Author'
+#: rss_post_aggregation.php:0
+#@ cpt-core
+msgid "WebDevStudios, Justin Sternberg"
+msgstr ""
+
+#. translators: plugin header field 'Version'
+#: rss_post_aggregation.php:0
+#@ cpt-core
+msgid "0.1.0"
+msgstr ""
+
+#: rss_post_aggregation.php:73
+#@ rss_post_aggregation
+msgid "RSS Category"
+msgstr "RSS类别"
+
+#: rss_post_aggregation.php:74
+#@ rss_post_aggregation
+msgid "RSS Categories"
+msgstr "RSS类别"
+
