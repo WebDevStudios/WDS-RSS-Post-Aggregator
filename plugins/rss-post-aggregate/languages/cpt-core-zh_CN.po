@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: RSS Post Aggregation v0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2014-11-13 00:02:13+0000\n"
+"PO-Revision-Date: 2014-11-13 00:37:59+0000\n"
 "Last-Translator: lswilson <lisa@webdevstudios.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -243,7 +243,7 @@ msgstr ""
 msgid "%1$s updated."
 msgstr ""
 
-#. translators: %s: date and time of the revision
+#. translators: %s: date and time of the revision 
 #: includes/libraries/CPT_Core/CPT_Core.php:167
 #, php-format
 #@ cpt-core

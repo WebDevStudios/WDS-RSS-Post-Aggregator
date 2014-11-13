@@ -305,9 +305,8 @@ class CPT_Core {
 		if ( self::$l10n_done ) {
 			return;
 		}
-		$locale = apply_filters( 'plugin_locale', get_locale(), 'wds-rss-post-aggregation' );
-		load_textdomain( 'wds-rss-post-aggregation', WP_LANG_DIR . '/wds-rss-post-aggregation/wds-rss-post-aggregation-' . $locale . '.mo' );
-		load_plugin_textdomain( 'wds-rss-post-aggregation', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+		$locale = apply_filters( 'plugin_locale', get_locale(), 'cpt-core' );
+		load_plugin_textdomain( 'cpt-core', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 	}
 
 }
