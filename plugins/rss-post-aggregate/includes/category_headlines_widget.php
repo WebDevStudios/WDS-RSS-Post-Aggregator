@@ -123,7 +123,7 @@ class RSS_Post_Aggregation_Category_Headlines_Widget extends WP_Widget {
 				echo '<li>';
 
 				// display the linked post title
-				echo '<a class="post-title" href="' . get_permalink( $p->ID ) . '"/>';
+				echo '<a class="post-title" href="' . get_permalink( $p->ID ) . '" target="blank">';
 				echo $p->post_title;
 				echo '</a>';
 
@@ -150,7 +150,7 @@ class RSS_Post_Aggregation_Category_Headlines_Widget extends WP_Widget {
 
 				// display the custom read more text if it exists and link to post
 				if ( isset( $instance['read_more_text'] ) && trim( $instance['read_more_text'] ) ) {
-					echo ' <a class="read-more" href="'. get_permalink( $p->ID ) .'">'. esc_html( $instance['read_more_text'] ) .'</a>';
+					echo ' <a class="read-more" href="'. get_permalink( $p->ID ) .'" target="blank">'. esc_html( $instance['read_more_text'] ) .'</a>';
 				}
 				echo '</li>';
 			}
