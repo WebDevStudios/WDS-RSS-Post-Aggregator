@@ -82,7 +82,7 @@ class RSS_Post_Aggregation_CPT extends CPT_Core {
 	 * @since  0.1.0
 	 * @param  array  $column Array of registered column names
 	 */
-	public function columns_display( $column ) {
+	public function columns_display( $column, $post_id ) {
 		global $post;
 
 		switch ( $column ) {

@@ -33,30 +33,30 @@ class RSS_Post_Aggregation_Category_Headlines_Widget extends WP_Widget {
 		?>
 
 		<p>
-			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php echo __( 'Title', 'rss_post_aggregation' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php echo __( 'Title', 'wds-rss-post-aggregation' ); ?></label>
 			<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $instance['title'] ); ?>" />
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'category' )?>"><?php echo __( 'Category', 'rss_post_aggregation' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'category' )?>"><?php echo __( 'Category', 'wds-rss-post-aggregation' ); ?></label>
 			<?php echo $this->category_dropdown( $this->get_field_name( 'category' ), $instance['category'] ); ?>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'count' )?>"><?php echo __( 'Number to show', 'rss_post_aggregation' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'count' )?>"><?php echo __( 'Number to show', 'wds-rss-post-aggregation' ); ?></label>
 			<input class="widefat" id="<?php echo $this->get_field_id( 'count' ); ?>" name="<?php echo $this->get_field_name( 'count' ); ?>" type="text" value="<?php echo esc_attr( $instance['count'] ); ?>" />
 		</p>
 		<p>
         	<input id="<?php echo $this->get_field_id( 'excerpt' ); ?>" name="<?php echo $this->get_field_name( 'excerpt' ); ?>" type="checkbox" value="1" <?php checked( '1', esc_attr( $instance['excerpt'] ) ); ?> />
-        	<label for="<?php echo $this->get_field_id( 'excerpt' )?>"><?php echo __( 'Display Post Excerpt', 'rss_post_aggregation' ); ?></label>
+        	<label for="<?php echo $this->get_field_id( 'excerpt' )?>"><?php echo __( 'Display Post Excerpt', 'wds-rss-post-aggregation' ); ?></label>
         </p>
 		<p>
         	<input id="<?php echo $this->get_field_id( 'cat_link' ); ?>" name="<?php echo $this->get_field_name( 'cat_link' ); ?>" type="checkbox" value="1" <?php checked( '1', esc_attr( $instance['cat_link'] ) ); ?> />
-        	<label for="<?php echo $this->get_field_id( 'cat_link' )?>"><?php echo __( 'Display Category Link', 'rss_post_aggregation' ); ?></label>
+        	<label for="<?php echo $this->get_field_id( 'cat_link' )?>"><?php echo __( 'Display Category Link', 'wds-rss-post-aggregation' ); ?></label>
         </p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'excerpt_length' )?>"><?php echo __( 'Excerpt Length', 'rss_post_aggregation' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'excerpt_length' )?>"><?php echo __( 'Excerpt Length', 'wds-rss-post-aggregation' ); ?></label>
 			<input class="widefat" id="<?php echo $this->get_field_id( 'excerpt_length' ); ?>" name="<?php echo $this->get_field_name( 'excerpt_length' ); ?>" type="text" value="<?php echo esc_attr( $instance['excerpt_length'] ); ?>" />
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'read_more_text' )?>"><?php echo __( '"Read More" text', 'rss_post_aggregation' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'read_more_text' )?>"><?php echo __( '"Read More" text', 'wds-rss-post-aggregation' ); ?></label>
 			<input class="widefat" id="<?php echo $this->get_field_id( 'read_more_text' ); ?>" name="<?php echo $this->get_field_name( 'read_more_text' ); ?>" type="text" value="<?php echo esc_attr( $instance['read_more_text'] ); ?>" />
 		</p>
 		<?php
@@ -159,7 +159,7 @@ class RSS_Post_Aggregation_Category_Headlines_Widget extends WP_Widget {
 			if ( ! empty( $instance['cat_link'] ) ){
 				$cat_data = get_term_by( 'slug', $instance['category'], 'rss-category' );
 				if ( ! empty( $cat_data ) ) {
-					echo '<p><a href="' . get_term_link( $cat_data->term_id, 'rss-category' ) . '" title="' . sprintf( __( 'More from %s', 'rss_post_aggregation' ), $cat_data->name ) . '" class="rss_cat_link">' . sprintf( __( 'More from %s', 'rss_post_aggregation' ), $cat_data->name ) . ' &raquo;</a></p>';
+					echo '<p><a href="' . get_term_link( $cat_data->term_id, 'rss-category' ) . '" title="' . sprintf( __( 'More from %s', 'wds-rss-post-aggregation' ), $cat_data->name ) . '" class="rss_cat_link">' . sprintf( __( 'More from %s', 'wds-rss-post-aggregation' ), $cat_data->name ) . ' &raquo;</a></p>';
 				}
 			}
 

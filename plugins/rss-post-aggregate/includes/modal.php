@@ -66,7 +66,7 @@ class RSS_Post_Aggregation_Modal {
 		}
 
 		if ( ! $feed_id ) {
-			wp_send_json_error( __( 'There was an error with the RSS feed link creation.', 'rss_post_aggregation' ) );
+			wp_send_json_error( __( 'There was an error with the RSS feed link creation.', 'wds-rss-post-aggregation' ) );
 		}
 
 		$feed_items = $this->rss->get_items( esc_url( $_REQUEST['feed_url'] ), array(
@@ -105,8 +105,8 @@ class RSS_Post_Aggregation_Modal {
 			'feeds'           => $this->get_feed_links(),
 			'cpt'             => $this->cpt->post_type(),
 			'show_modal'      => isset( $_GET[ $this->cpt->slug_to_redirect ] ),
-			'no_data'         => __( 'No feed data found', 'rss_post_aggregation' ),
-			'nothing_checked' => __( "You didn't select any posts. Do you want to close the search?", 'rss_post_aggregation' ),
+			'no_data'         => __( 'No feed data found', 'wds-rss-post-aggregation' ),
+			'nothing_checked' => __( "You didn't select any posts. Do you want to close the search?", 'wds-rss-post-aggregation' ),
 		) );
 
 		delete_option( 'msnc_saved_feed_urls' );
