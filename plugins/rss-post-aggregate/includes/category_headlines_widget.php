@@ -107,8 +107,10 @@ class RSS_Post_Aggregation_Category_Headlines_Widget extends WP_Widget {
 			),
 		);
 
-		$excerpt		= strip_tags( $instance['excerpt'] );
-		$excerpt_length	= strip_tags( $instance['excerpt_length'] );
+		$excerpt        = isset( $instance['excerpt'] ) ? strip_tags( $instance['excerpt'] ) : '';
+		$excerpt_length = isset( $instance['excerpt_length'] ) && absint( $instance['excerpt_length'] )
+			? absint( $instance['excerpt_length'] )
+			: 10;
 
 		if ( function_exists( 'msft_cache_get_posts' ) ) {
 			$posts = msft_cache_get_posts( $query_args );
@@ -139,9 +141,6 @@ class RSS_Post_Aggregation_Category_Headlines_Widget extends WP_Widget {
 						: $p->post_excerpt;
 
 					$content_excerpt = strip_shortcodes( wp_strip_all_tags( $content_excerpt ) );
-					if ( ! isset( $excerpt_length ) ) {
-						$excerpt_length = 10;
-					}
 					$content_excerpt = preg_split( '/\b/', $content_excerpt, $excerpt_length * 2 + 1 );
 					$body_excerpt_waste = array_pop( $content_excerpt );
 					$content_excerpt = implode( $content_excerpt );
