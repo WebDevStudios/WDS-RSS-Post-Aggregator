@@ -131,7 +131,7 @@ class RSS_Post_Aggregation_Category_Headlines_Widget extends WP_Widget {
 
 				// display the date
 				echo '<p class="date">';
-				echo date( _x( 'M j, Y', 'Headlines widget date format', 'rss_post_aggregation' ), strtotime( $p->post_date ) );
+				echo date( _x( 'M j, Y', 'Headlines widget date format', 'wds-rss-post-aggregation' ), strtotime( $p->post_date ) );
 				echo '</p>';
 
 				// display the excerpt or post content
