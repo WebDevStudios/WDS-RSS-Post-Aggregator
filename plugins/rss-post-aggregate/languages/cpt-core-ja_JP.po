@@ -1,0 +1,473 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: RSS Post Aggregation v0.1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2015-01-15 15:40:33+0000\n"
+"Last-Translator: lswilson <lisa@webdevstudios.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: CSL v1.x\n"
+"X-Poedit-Language: Japanese\n"
+"X-Poedit-Country: JAPAN\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;\n"
+"X-Poedit-Basepath: ../\n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes"
+
+#: includes/category_featured_images_widget.php:32
+#@ wds-rss-post-aggregation
+msgid "RSS Feed with Images"
+msgstr ""
+
+#: includes/category_featured_images_widget.php:33
+#@ wds-rss-post-aggregation
+msgid "Reads and displays a supplied RSS feed with featured images."
+msgstr ""
+
+#: includes/category_featured_images_widget.php:44
+#: includes/category_headlines_widget.php:36
+#: includes/modal-markup.php:24
+#@ wds-rss-post-aggregation
+msgid "Title"
+msgstr ""
+
+#: includes/category_featured_images_widget.php:46
+#@ wds-rss-post-aggregation
+msgid "Feed"
+msgstr ""
+
+#: includes/category_featured_images_widget.php:51
+#: includes/category_headlines_widget.php:43
+#@ wds-rss-post-aggregation
+msgid "Number to show"
+msgstr ""
+
+#: includes/category_featured_images_widget.php:55
+#: includes/category_headlines_widget.php:55
+#@ wds-rss-post-aggregation
+msgid "Excerpt Length"
+msgstr ""
+
+#: includes/category_featured_images_widget.php:59
+#: includes/category_headlines_widget.php:59
+#@ wds-rss-post-aggregation
+msgid "\"Read More\" text"
+msgstr ""
+
+#: includes/category_featured_images_widget.php:158
+#: includes/category_headlines_widget.php:166
+#@ wds-rss-post-aggregation
+msgid "Nothing yet! Check again later"
+msgstr ""
+
+#: includes/category_headlines_widget.php:25
+#@ wds-rss-post-aggregation
+msgid "RSS Category Headlines"
+msgstr ""
+
+#: includes/category_headlines_widget.php:26
+#@ wds-rss-post-aggregation
+msgid "Displays the title as the headline for imported RSS feed items."
+msgstr ""
+
+#: includes/category_headlines_widget.php:40
+#@ wds-rss-post-aggregation
+msgid "Category"
+msgstr ""
+
+#: includes/category_headlines_widget.php:48
+#@ wds-rss-post-aggregation
+msgid "Display Post Excerpt"
+msgstr ""
+
+#: includes/category_headlines_widget.php:52
+#@ wds-rss-post-aggregation
+msgid "Display Category Link"
+msgstr ""
+
+#: includes/category_headlines_widget.php:161
+#, php-format
+#@ wds-rss-post-aggregation
+msgid "More from %s"
+msgstr ""
+
+#: includes/cpt.php:23
+#@ wds-rss-post-aggregation
+msgid "RSS Post"
+msgstr ""
+
+#: includes/cpt.php:23
+#@ wds-rss-post-aggregation
+msgid "RSS Posts"
+msgstr ""
+
+#: includes/cpt.php:37
+#@ wds-rss-post-aggregation
+msgid "Find RSS Post"
+msgstr ""
+
+#: includes/cpt.php:70
+#@ wds-rss-post-aggregation
+msgid "Thumbnail"
+msgstr ""
+
+#: includes/cpt.php:73
+#: includes/modal-markup.php:24
+#@ wds-rss-post-aggregation
+msgid "Source"
+msgstr ""
+
+#: includes/cpt.php:108
+#@ wds-rss-post-aggregation
+msgid "RSS Item Info"
+msgstr ""
+
+#: includes/cpt.php:114
+#@ wds-rss-post-aggregation
+msgid "Original URL"
+msgstr ""
+
+#: includes/feeds.php:31
+#, php-format
+#@ wds-rss-post-aggregation
+msgid "RSS Error: %s"
+msgstr ""
+
+#: includes/feeds.php:40
+#@ wds-rss-post-aggregation
+msgid "An error has occurred, which probably means the feed is down. Try again later."
+msgstr ""
+
+#: includes/feeds.php:110
+#@ wds-rss-post-aggregation
+msgid "Untitled"
+msgstr ""
+
+#: includes/libraries/CPT_Core/CPT_Core.php:77
+#: includes/libraries/CPT_Core/CPT_Core.php:81
+#: includes/libraries/CPT_Core/CPT_Core.php:85
+#@ cpt-core
+msgid "It is required to pass a single, plural and slug string to CPT_Core"
+msgstr ""
+
+#: includes/libraries/CPT_Core/CPT_Core.php:134
+#: includes/libraries/CPT_Core/CPT_Core.php:135
+#: includes/libraries/Taxonomy_Core/Taxonomy_Core.php:100
+#, php-format
+#@ cpt-core
+#@ wds-rss-post-aggregation
+msgid "Add New %s"
+msgstr "新しく追加 %s"
+
+#: includes/libraries/CPT_Core/CPT_Core.php:136
+#: includes/libraries/Taxonomy_Core/Taxonomy_Core.php:98
+#, php-format
+#@ cpt-core
+#@ wds-rss-post-aggregation
+msgid "Edit %s"
+msgstr "編集 %s"
+
+#: includes/libraries/CPT_Core/CPT_Core.php:137
+#, php-format
+#@ cpt-core
+msgid "New %s"
+msgstr "新しい %s"
+
+#: includes/libraries/CPT_Core/CPT_Core.php:138
+#: includes/libraries/Taxonomy_Core/Taxonomy_Core.php:95
+#, php-format
+#@ cpt-core
+#@ wds-rss-post-aggregation
+msgid "All %s"
+msgstr "すべて %S"
+
+#: includes/libraries/CPT_Core/CPT_Core.php:139
+#, php-format
+#@ cpt-core
+msgid "View %s"
+msgstr "ビュー %s"
+
+#: includes/libraries/CPT_Core/CPT_Core.php:140
+#: includes/libraries/Taxonomy_Core/Taxonomy_Core.php:94
+#, php-format
+#@ cpt-core
+#@ wds-rss-post-aggregation
+msgid "Search %s"
+msgstr "検索 %s"
+
+#: includes/libraries/CPT_Core/CPT_Core.php:141
+#, php-format
+#@ cpt-core
+msgid "No %s"
+msgstr "いいえ %s"
+
+#: includes/libraries/CPT_Core/CPT_Core.php:142
+#, php-format
+#@ cpt-core
+msgid "No %s found in Trash"
+msgstr "ゴミ箱にありません"
+
+#: includes/libraries/CPT_Core/CPT_Core.php:143
+#: includes/libraries/Taxonomy_Core/Taxonomy_Core.php:97
+#, php-format
+#@ cpt-core
+#@ default
+msgid "Parent %s:"
+msgstr "ペアレント %s"
+
+#: includes/libraries/CPT_Core/CPT_Core.php:192
+#@ default
+msgid "Custom field updated."
+msgstr ""
+
+#: includes/libraries/CPT_Core/CPT_Core.php:193
+#@ default
+msgid "Custom field deleted."
+msgstr ""
+
+#: includes/libraries/CPT_Core/CPT_Core.php:194
+#: includes/libraries/CPT_Core/CPT_Core.php:211
+#, php-format
+#@ cpt-core
+msgid "%1$s updated."
+msgstr "%1$s 更新しました"
+
+#. translators: %s: date and time of the revision
+#: includes/libraries/CPT_Core/CPT_Core.php:196
+#, php-format
+#@ cpt-core
+msgid "%1$s restored to revision from %2$s"
+msgstr "%1$s ・・・から改訂版に復帰 %2$s"
+
+#: includes/libraries/CPT_Core/CPT_Core.php:197
+#, php-format
+#@ cpt-core
+msgid "%1$s saved."
+msgstr "%1$s 保存しました"
+
+#: includes/libraries/CPT_Core/CPT_Core.php:202
+#, php-format
+#@ cpt-core
+msgid "%1$s updated. <a href=\"%2$s\">View %1$s</a>"
+msgstr "%1$s updated. <a href=\"%2$s\">ビュー %1$s</a>"
+
+#: includes/libraries/CPT_Core/CPT_Core.php:203
+#, php-format
+#@ cpt-core
+msgid "%1$s published. <a href=\"%2$s\">View %1$s</a>"
+msgstr "%1$s 公開しました  <a href=\"%2$s\">ビュー</a>"
+
+#: includes/libraries/CPT_Core/CPT_Core.php:204
+#, php-format
+#@ cpt-core
+msgid "%1$s submitted. <a target=\"_blank\" href=\"%2$s\">Preview %1$s</a>"
+msgstr "%1$s  申請しました a target=\"_blank\" href=\"%2$s\">プレビュー</a>"
+
+#: includes/libraries/CPT_Core/CPT_Core.php:206
+#, php-format
+#@ cpt-core
+msgid "%1$s scheduled for: <strong>%2$s</strong>. <a target=\"_blank\" href=\"%3$s\">Preview %1$s</a>"
+msgstr ""
+
+#: includes/libraries/CPT_Core/CPT_Core.php:206
+#: includes/libraries/CPT_Core/CPT_Core.php:215
+#@ default
+msgid "M j, Y @ G:i"
+msgstr ""
+
+#: includes/libraries/CPT_Core/CPT_Core.php:207
+#, php-format
+#@ cpt-core
+msgid "%1$s draft updated. <a target=\"_blank\" href=\"%2$s\">Preview %1$s</a>"
+msgstr ""
+
+#: includes/libraries/CPT_Core/CPT_Core.php:212
+#, php-format
+#@ cpt-core
+msgid "%1$s published."
+msgstr ""
+
+#: includes/libraries/CPT_Core/CPT_Core.php:213
+#, php-format
+#@ cpt-core
+msgid "%1$s submitted."
+msgstr ""
+
+#: includes/libraries/CPT_Core/CPT_Core.php:215
+#, php-format
+#@ cpt-core
+msgid "%1$s scheduled for: <strong>%2$s</strong>."
+msgstr ""
+
+#: includes/libraries/CPT_Core/CPT_Core.php:216
+#, php-format
+#@ cpt-core
+msgid "%1$s draft updated."
+msgstr ""
+
+#: includes/libraries/CPT_Core/CPT_Core.php:265
+#, php-format
+#@ cpt-core
+msgid "%s Title"
+msgstr "%s タイトル"
+
+#: includes/libraries/Taxonomy_Core/Taxonomy_Core.php:96
+#, php-format
+#@ default
+msgid "Parent %s"
+msgstr ""
+
+#: includes/libraries/Taxonomy_Core/Taxonomy_Core.php:99
+#, php-format
+#@ wds-rss-post-aggregation
+msgid "Update %s"
+msgstr ""
+
+#: includes/libraries/Taxonomy_Core/Taxonomy_Core.php:101
+#, php-format
+#@ wds-rss-post-aggregation
+msgid "New %s Name"
+msgstr ""
+
+#: includes/libraries/Taxonomy_Core/Taxonomy_Core.php:107
+#, php-format
+#@ wds-rss-post-aggregation
+msgid "Popular %s"
+msgstr ""
+
+#: includes/libraries/Taxonomy_Core/Taxonomy_Core.php:108
+#, php-format
+#@ wds-rss-post-aggregation
+msgid "Separate %s with commas"
+msgstr ""
+
+#: includes/libraries/Taxonomy_Core/Taxonomy_Core.php:109
+#, php-format
+#@ wds-rss-post-aggregation
+msgid "Add or remove %s"
+msgstr ""
+
+#: includes/libraries/Taxonomy_Core/Taxonomy_Core.php:110
+#, php-format
+#@ wds-rss-post-aggregation
+msgid "Choose from the most used %s"
+msgstr ""
+
+#: includes/modal-markup.php:3
+#@ wds-rss-post-aggregation
+msgid "Select RSS Feed"
+msgstr ""
+
+#: includes/modal-markup.php:9
+#@ wds-rss-post-aggregation
+msgid "Add RSS Feed"
+msgstr ""
+
+#: includes/modal-markup.php:10
+#@ default
+msgid "enter feed url"
+msgstr ""
+
+#: includes/modal-markup.php:11
+#@ wds-rss-post-aggregation
+msgid "Add Feed"
+msgstr ""
+
+#: includes/modal-markup.php:19
+#@ default
+msgid "Search"
+msgstr ""
+
+#: includes/modal-markup.php:20
+#@ default
+msgid "start typing to filter results"
+msgstr ""
+
+#: includes/modal-markup.php:26
+#: includes/modal.php:108
+#@ wds-rss-post-aggregation
+msgid "No feed data found"
+msgstr ""
+
+#: includes/modal-markup.php:31
+#@ wds-rss-post-aggregation
+msgid "Manage RSS Feeds"
+msgstr ""
+
+#: includes/modal-markup.php:32
+#@ wds-rss-post-aggregation
+msgid "Add Post Manually"
+msgstr ""
+
+#: includes/modal-markup.php:34
+#@ wds-rss-post-aggregation
+msgid "Select to Import"
+msgstr ""
+
+#: includes/modal.php:69
+#@ wds-rss-post-aggregation
+msgid "There was an error with the RSS feed link creation."
+msgstr ""
+
+#: includes/modal.php:109
+#@ wds-rss-post-aggregation
+msgid "You didn't select any posts. Do you want to close the search?"
+msgstr ""
+
+#: includes/taxonomy.php:19
+#@ wds-rss-post-aggregation
+msgid "RSS Feed Link"
+msgstr ""
+
+#: includes/taxonomy.php:19
+#@ wds-rss-post-aggregation
+msgid "RSS Feed Links"
+msgstr ""
+
+#. translators: plugin header field 'Name'
+#: rss_post_aggregation.php:0
+#@ cpt-core
+msgid "RSS Post Aggregation"
+msgstr ""
+
+#. translators: plugin header field 'PluginURI'
+#. translators: plugin header field 'AuthorURI'
+#: rss_post_aggregation.php:0
+#@ cpt-core
+msgid "http://webdevstudios.com"
+msgstr ""
+
+#. translators: plugin header field 'Description'
+#: rss_post_aggregation.php:0
+#@ cpt-core
+msgid "Aggregate posts from RSS Feeds"
+msgstr "RSSフィードから投稿を集める"
+
+#. translators: plugin header field 'Author'
+#: rss_post_aggregation.php:0
+#@ cpt-core
+msgid "WebDevStudios, Justin Sternberg"
+msgstr ""
+
+#. translators: plugin header field 'Version'
+#: rss_post_aggregation.php:0
+#@ cpt-core
+msgid "0.1.0"
+msgstr ""
+
+#: rss_post_aggregation.php:73
+#@ wds-rss-post-aggregation
+msgid "RSS Category"
+msgstr ""
+
+#: rss_post_aggregation.php:74
+#@ wds-rss-post-aggregation
+msgid "RSS Categories"
+msgstr ""
+
