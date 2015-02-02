@@ -1,1 +1,1 @@
-# RSS-Post-Aggregator
+# RSS Post Aggregator
