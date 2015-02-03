@@ -109,7 +109,7 @@ class RSS_Post_Aggregation_Modal {
 			'nothing_checked' => __( "You didn't select any posts. Do you want to close the search?", 'wds-rss-post-aggregation' ),
 		) );
 
-		delete_option( 'msnc_saved_feed_urls' );
+		delete_option( 'wds_rss_aggregate_saved_feed_urls' );
 		// Needed to style the search modal
 		wp_register_style( 'rss-search-box', admin_url( "/css/media{$min}.css" ) );
 		wp_enqueue_style( 'rss-aggregator', RSS_Post_Aggregation::url( "assets/css/rss_post_aggregation{$min}.css" ), array( 'rss-search-box' ), RSS_Post_Aggregation::VERSION );

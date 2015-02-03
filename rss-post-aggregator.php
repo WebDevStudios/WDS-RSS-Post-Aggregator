@@ -95,7 +95,7 @@ class RSS_Post_Aggregation {
 	function _activate() {
 		// Make sure any rewrite functionality has been loaded
 		flush_rewrite_rules();
-		add_option( 'msnc_saved_feed_urls', array(), '', 'no' );
+		add_option( 'wds_rss_aggregate_saved_feed_urls', array(), '', 'no' );
 	}
 
 	/**
