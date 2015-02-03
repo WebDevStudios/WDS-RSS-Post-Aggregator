@@ -182,7 +182,7 @@ class RSS_Post_Aggregation_Category_Headlines_Widget extends WP_Widget {
 	}
 
 	/**
-	 * Creates a dropdown form element from the RSS Post Aggregation categories
+	 * Creates a dropdown form element from the RSS Post Aggregator categories
 	 *
 	 * $param string $name Form element name
 	 * @param string $term_slug Selected category

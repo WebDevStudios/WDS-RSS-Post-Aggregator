@@ -1,5 +1,5 @@
 /**
- * RSS Post Aggregation - v0.1.0 - 2014-09-08
+ * RSS Post Aggregator - v0.1.0 - 2014-09-08
  * http://webdevstudios.com
  *
  * Copyright (c) 2014;

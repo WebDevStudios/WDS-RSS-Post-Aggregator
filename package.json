@@ -1,6 +1,6 @@
 {
-  "name": "rss-post-aggregation",
-  "title": "RSS Post Aggregation",
+  "name": "rss-post-aggregator",
+  "title": "RSS Post Aggregator",
   "description": "Aggregate posts from RSS Feeds",
   "version": "0.1.0",
   "homepage": "http://webdevstudios.com",

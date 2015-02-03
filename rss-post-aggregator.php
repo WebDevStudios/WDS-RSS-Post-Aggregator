@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: RSS Post Aggregation
+ * Plugin Name: RSS Post Aggregator
  * Plugin URI:  http://webdevstudios.com
  * Description: Aggregate posts from RSS Feeds
  * Version:     0.1.0
@@ -113,7 +113,7 @@ class RSS_Post_Aggregation {
 	 */
 	public function init() {
 		$locale = apply_filters( 'plugin_locale', get_locale(), 'wds-rss-post-aggregation' );
-		load_textdomain( 'wds-rss-post-aggregation', WP_LANG_DIR . '/rss_post_aggregation/rss_post_aggregation-' . $locale . '.mo' );
+		load_textdomain( 'wds-rss-post-aggregation', WP_LANG_DIR . '/wds-rss-post-aggregation/wds-rss-post-aggregation-' . $locale . '.mo' );
 		load_plugin_textdomain( 'wds-rss-post-aggregation', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 	}
 
