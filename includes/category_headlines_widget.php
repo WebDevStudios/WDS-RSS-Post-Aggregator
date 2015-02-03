@@ -112,12 +112,7 @@ class RSS_Post_Aggregation_Category_Headlines_Widget extends WP_Widget {
 			? absint( $instance['excerpt_length'] )
 			: 10;
 
-		if ( function_exists( 'msft_cache_get_posts' ) ) {
-			$posts = msft_cache_get_posts( $query_args );
-			$posts = is_array( $posts ) ? $posts : array();
-		} else {
-			$posts = get_posts( $query_args );
-		}
+		$posts = get_posts( $query_args );
 
 		if ( ! empty( $posts ) ) {
 			echo '<ul>';
