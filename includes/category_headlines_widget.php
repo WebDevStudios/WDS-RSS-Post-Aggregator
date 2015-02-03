@@ -19,6 +19,9 @@ class RSS_Post_Aggregation_Category_Headlines_Widget extends WP_Widget {
 		'cat_link'       => '',
 	);
 
+	// Need to access this other places
+	private $instance_data = null;
+
 	public function __construct() {
 		parent::__construct(
 			'rss_post_aggregation_category_headlines',
@@ -45,11 +48,11 @@ class RSS_Post_Aggregation_Category_Headlines_Widget extends WP_Widget {
 		</p>
 		<p>
         	<input id="<?php echo $this->get_field_id( 'excerpt' ); ?>" name="<?php echo $this->get_field_name( 'excerpt' ); ?>" type="checkbox" value="1" <?php checked( '1', esc_attr( $instance['excerpt'] ) ); ?> />
-        	<label for="<?php echo $this->get_field_id( 'excerpt' )?>"><?php echo __( 'Display Post Excerpt', 'wds-rss-post-aggregation' ); ?></label>
+        	<label for="<?php echo $this->get_field_id( 'excerpt' ); ?>"><?php echo __( 'Display Post Excerpt', 'wds-rss-post-aggregation' ); ?></label>
         </p>
 		<p>
         	<input id="<?php echo $this->get_field_id( 'cat_link' ); ?>" name="<?php echo $this->get_field_name( 'cat_link' ); ?>" type="checkbox" value="1" <?php checked( '1', esc_attr( $instance['cat_link'] ) ); ?> />
-        	<label for="<?php echo $this->get_field_id( 'cat_link' )?>"><?php echo __( 'Display Category Link', 'wds-rss-post-aggregation' ); ?></label>
+        	<label for="<?php echo $this->get_field_id( 'cat_link' ); ?>"><?php echo __( 'Display Category Link', 'wds-rss-post-aggregation' ); ?></label>
         </p>
 		<p>
 			<label for="<?php echo $this->get_field_id( 'excerpt_length' )?>"><?php echo __( 'Excerpt Length', 'wds-rss-post-aggregation' ); ?></label>
@@ -88,6 +91,8 @@ class RSS_Post_Aggregation_Category_Headlines_Widget extends WP_Widget {
 	}
 
 	public function widget( $args, $instance ) {
+		// Set the class variable.
+		$this->instance_data = $instance;
 
 		echo isset( $args['before_widget'] ) ? $args['before_widget'] : '';
 
@@ -107,48 +112,33 @@ class RSS_Post_Aggregation_Category_Headlines_Widget extends WP_Widget {
 			),
 		);
 
-		$excerpt        = isset( $instance['excerpt'] ) ? strip_tags( $instance['excerpt'] ) : '';
-		$excerpt_length = isset( $instance['excerpt_length'] ) && absint( $instance['excerpt_length'] )
-			? absint( $instance['excerpt_length'] )
-			: 10;
-
-		$posts = get_posts( $query_args );
-
+		$excerpt	= strip_tags( $instance['excerpt'] );
+		$posts      = get_posts( $query_args );
 		if ( ! empty( $posts ) ) {
+			global $post;
+
 			echo '<ul>';
-			foreach ( $posts as $p ) {
+			foreach ( $posts as $post ) {
+				setup_postdata( $post );
 				echo '<li>';
 
 				// display the linked post title
-				echo '<a class="post-title" href="' . get_permalink( $p->ID ) . '" target="blank">';
-				echo $p->post_title;
+				echo '<a class="post-title" href="' . get_permalink() . '" target="blank">';
+				the_title();
 				echo '</a>';
 
 				// display the date
 				echo '<p class="date">';
-				echo date( _x( 'M j, Y', 'Headlines widget date format', 'wds-rss-post-aggregation' ), strtotime( $p->post_date ) );
+				echo get_the_date( get_option( 'date_format' ) );
 				echo '</p>';
 
-				// display the excerpt or post content
-				if ( $excerpt ) {
-					$content_excerpt = empty( $p->post_excerpt )
-						? $p->post_content
-						: $p->post_excerpt;
-
-					$content_excerpt = strip_shortcodes( wp_strip_all_tags( $content_excerpt ) );
-					$content_excerpt = preg_split( '/\b/', $content_excerpt, $excerpt_length * 2 + 1 );
-					$body_excerpt_waste = array_pop( $content_excerpt );
-					$content_excerpt = implode( $content_excerpt );
-					echo wpautop( $content_excerpt );
-				}
-
-				// display the custom read more text if it exists and link to post
-				if ( isset( $instance['read_more_text'] ) && trim( $instance['read_more_text'] ) ) {
-					echo ' <a class="read-more" href="'. get_permalink( $p->ID ) .'" target="blank">'. esc_html( $instance['read_more_text'] ) .'</a>';
+				if ( $excerpt ){
+					the_excerpt();
 				}
 				echo '</li>';
-			}
+			} // END foreach
 			echo '</ul>';
+			wp_reset_postdata();
 
 			if ( ! empty( $instance['cat_link'] ) ){
 				$cat_data = get_term_by( 'slug', $instance['category'], 'rss-category' );
@@ -156,12 +146,39 @@ class RSS_Post_Aggregation_Category_Headlines_Widget extends WP_Widget {
 					echo '<p><a href="' . get_term_link( $cat_data->term_id, 'rss-category' ) . '" title="' . sprintf( __( 'More from %s', 'wds-rss-post-aggregation' ), $cat_data->name ) . '" class="rss_cat_link">' . sprintf( __( 'More from %s', 'wds-rss-post-aggregation' ), $cat_data->name ) . ' &raquo;</a></p>';
 				}
 			}
-
 		} else {
 			echo __( 'Nothing yet! Check again later', 'wds-rss-post-aggregation' );
 		}
 
 		echo isset( $args['after_widget'] ) ? $args['after_widget'] : '';
+	}
+
+	/**
+	 * Filter Excerpt More
+	 * Will filter the more >> tag for this widget only.
+	 * @param string $more Default more tag
+	 * @return string
+	 */
+	function excerpt_more( $more ){
+		$output = ''; // Blank it out as default.
+		if ( isset( $this->instance_data['read_more_text'] ) && trim( $this->instance_data['read_more_text'] ) ) {
+			$output = ' <a class="read-more" href="'. get_permalink() .'" target="blank">'. esc_html( $this->instance_data['read_more_text'] ) .'</a>';
+		}
+		return $output;
+	}
+
+	/**
+	 * Excerpt Length Filter
+	 * @param  int $default_length Excerpt Length
+	 * @return int
+	 */
+	function excerpt_length( $default_length ){
+		// Old code caps this at 10, so I'm leaving this here.
+		$new_length = 10;
+		if ( isset( $this->instance_data['excerpt_length'] ) && $this->instance_data['excerpt_length'] > 0 ){
+			$new_length = absint( $this->instance_data['excerpt_length'] );
+		}
+		return $new_length;
 	}
 
 	/**

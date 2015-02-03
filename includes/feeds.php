@@ -15,13 +15,13 @@ class RSS_Post_Aggregation_Feeds {
 		}
 
 		$items = (int) $args['items'];
-		if ( $items < 1 || 20 < $items )
+		if ( 1 > $items || 20 < $items ) {
 			$items = 10;
+		}
 		$show_image    = (int) $args['show_image'];
 		$show_summary  = (int) $args['show_summary'];
 		$show_author   = (int) $args['show_author'];
 		$show_date     = (int) $args['show_date'];
-
 
 		$rss = fetch_feed( $this->rss_link );
 
@@ -31,7 +31,6 @@ class RSS_Post_Aggregation_Feeds {
 				'error' => sprintf( __( 'RSS Error: %s', 'wds-rss-post-aggregation' ), $rss->get_error_message() ),
 			);
 		}
-
 
 		if ( ! $rss->get_item_quantity() ) {
 			$rss->__destruct();
@@ -78,7 +77,7 @@ class RSS_Post_Aggregation_Feeds {
 		}
 
 		$rss->__destruct();
-		unset($rss);
+		unset( $rss );
 
 		if ( $this->cache_time ) {
 			set_transient( $this->transient_id, $rss_items, $this->cache_time );
@@ -163,7 +162,7 @@ class RSS_Post_Aggregation_Feeds {
 
 		$src = '';
 		foreach ( $this->dom()->getElementsByTagName( 'img' ) as $img ) {
-			if ( $src = $img->getAttribute('src') ) {
+			if ( $src = $img->getAttribute( 'src' ) ) {
 				break;
 			}
 		}
