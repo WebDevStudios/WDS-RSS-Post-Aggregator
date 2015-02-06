@@ -1,4 +1,4 @@
-=== RSS Post Aggregator ===
+=== WDS RSS Post Aggregator ===
 Contributors:      jtsternberg
 Donate link:
 Tags:
