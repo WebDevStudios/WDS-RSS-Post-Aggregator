@@ -33,8 +33,14 @@ Allows you to selectively import posts to your WordPress installation from RSS F
 ![RSS Feed Links](https://raw.githubusercontent.com/WebDevStudios/WDS-RSS-Post-Aggregator/master/screenshot-2.jpg)   
 "RSS Feed Links" page, very similar to tags/categories
 
-![RSS Feed Categories](https://raw.githubusercontent.com/WebDevStudios/WDS-RSS-Post-Aggregator/master/screenshot-3.jpg)   
+![RSS Feed Categories](https://raw.githubusercontent.com/WebDevStudios/WDS-RSS-Post-Aggregator/master/screenshot-3.jpg)      
 "RSS Feed Categories" page
+
+![Imported Posts](https://raw.githubusercontent.com/WebDevStudios/WDS-RSS-Post-Aggregator/master/screenshot-4.jpg)   
+Imported posts with imported featured image ( It's automatic!!! )
+
+![Post Edit Screen](https://raw.githubusercontent.com/WebDevStudios/WDS-RSS-Post-Aggregator/master/screenshot-5.jpg)      
+Post Edit Screen - Manually set RSS feed link.
 
 
 ## Changelog ##
