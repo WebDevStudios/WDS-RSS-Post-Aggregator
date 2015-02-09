@@ -15,7 +15,12 @@ Allows you to selectively import posts to your WordPress installation from RSS F
 
 ## Installation ##
 
-### Including Posts ###
+### Manual Installation ###
+
+1. Upload the entire `/rss-post-aggregation` directory to the `/wp-content/plugins/` directory.
+2. Activate RSS Post Aggregator through the 'Plugins' menu in WordPress.
+
+### Dev Documentation ###
 To include RSS Posts in a loop, you only need to add the post-type of `rss-posts` to the query, here's an example:
 ```
 // Add query to main loop on homepage.
@@ -26,11 +31,7 @@ function wds_get_my_posts( $query ){
 	}
 }
 ```
-
-### Manual Installation ###
-
-1. Upload the entire `/rss-post-aggregation` directory to the `/wp-content/plugins/` directory.
-2. Activate RSS Post Aggregator through the 'Plugins' menu in WordPress.
+You may also want to access the category information, which is housed in the `rss-category` taxonomy.  'Rss Feed Links' are housed in the `rss-feed-links` taxonomy as well.
 
 ## Frequently Asked Questions ##
 [Open A Ticket](https://github.com/WebDevStudios/WDS-RSS-Post-Aggregator/issues)
