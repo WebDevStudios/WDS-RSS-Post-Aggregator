@@ -1,5 +1,5 @@
 # WDS RSS Post Aggregator #
-**Contributors:**     [jtsternberg](https://github.com/jtsternberg), [JayWood](https://github.com/JayWood), [stacyk](https://github.com/stacyk), [blobaugh](https://github.com/blobaugh), [lswilson](https://github.com/lswilson), [imBigWill](https://github.com/ImBigWill), [coreymcollins](https://github.com/coreymcollins)
+**Contributors:**     [jtsternberg](https://github.com/jtsternberg), [JayWood](https://github.com/JayWood), [stacyk](https://github.com/stacyk), [blobaugh](https://github.com/blobaugh), [lswilson](https://github.com/lswilson), [imBigWill](https://github.com/ImBigWill), [coreymcollins](https://github.com/coreymcollins)   
 **Tags:**  
 **Requires at least:** 3.6.0  
 **Tested up to:**      3.6.0  
@@ -27,13 +27,13 @@ Allows you to selectively import posts to your WordPress installation from RSS F
 
 ## Screenshots ##
 
-![Importing RSS Posts](https://raw.githubusercontent.com/WebDevStudios/WDS-RSS-Post-Aggregator/master/screenshot-1.png)
+![Importing RSS Posts](https://raw.githubusercontent.com/WebDevStudios/WDS-RSS-Post-Aggregator/master/screenshot-1.jpg)   
 "Add New RSS Post" dialog
 
-![RSS Feed Links](https://raw.githubusercontent.com/WebDevStudios/WDS-RSS-Post-Aggregator/master/screenshot-2.png)
+![RSS Feed Links](https://raw.githubusercontent.com/WebDevStudios/WDS-RSS-Post-Aggregator/master/screenshot-2.jpg)   
 "RSS Feed Links" page, very similar to tags/categories
 
-![RSS Feed Links](https://raw.githubusercontent.com/WebDevStudios/WDS-RSS-Post-Aggregator/master/screenshot-3.png)
+![RSS Feed Links](https://raw.githubusercontent.com/WebDevStudios/WDS-RSS-Post-Aggregator/master/screenshot-3.jpg)   
 "RSS Feed Links" page, very similar to tags/categories
 
 
