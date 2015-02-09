@@ -15,6 +15,18 @@ Allows you to selectively import posts to your WordPress installation from RSS F
 
 ## Installation ##
 
+### Including Posts ###
+To include RSS Posts in a loop, you only need to add the post-type of `rss-posts` to the query, here's an example:
+```
+// Add query to main loop on homepage.
+add_action( 'pre_get_posts', 'wds_get_my_posts' );
+function wds_get_my_posts( $query ){
+	if( $query->is_home() && $query->is_main_query() ){
+		$query->set( 'post_type', array( 'post', 'rss-posts' ) );
+	}
+}
+```
+
 ### Manual Installation ###
 
 1. Upload the entire `/rss-post-aggregation` directory to the `/wp-content/plugins/` directory.
