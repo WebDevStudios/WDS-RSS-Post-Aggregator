@@ -2,7 +2,7 @@
 **Contributors:**      [jtsternberg](https://github.com/jtsternberg), [JayWood](https://github.com/JayWood), [stacyk](https://github.com/stacyk), [blobaugh](https://github.com/blobaugh), [lswilson](https://github.com/lswilson), [imBigWill](https://github.com/ImBigWill), [coreymcollins](https://github.com/coreymcollins)   
 **Tags:**              post import, feed import, rss import, rss aggregator   
 **Requires at least:** 3.6.0  
-**Tested up to:**      3.6.0  
+**Tested up to:**      4.1  
 **Stable tag:**        0.1.0  
 **License:**           GPLv2 or later  
 **License URI:**       http://www.gnu.org/licenses/gpl-2.0.html  
