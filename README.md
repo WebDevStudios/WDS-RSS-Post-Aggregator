@@ -13,6 +13,15 @@ Allows you to selectively import posts to your WordPress installation from RSS F
 
 **REQUIRES** [CMB2 WordPress Plugin](https://wordpress.org/plugins/cmb2/) to function properly.
 
+WDS RSS Post Aggregator provides site owners the ability to selectively import RSS posts to their blog using WordPress' built in post selection interface.  Once a feed is selected and a post is imported, the excerpt, title, and all the usual things you would expect are editable.  You can even categorize and tag the posts in their own taxonomies.
+
+With RSS Post Aggregator, the following is pulled in during the import process:
+
+* Post Title
+* Original Post URL
+* Post Content
+* Post Thumbnail
+
 ## Installation ##
 
 ### Manual Installation ###
