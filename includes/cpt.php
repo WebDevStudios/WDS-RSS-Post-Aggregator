@@ -188,7 +188,6 @@ class RSS_Post_Aggregation_CPT extends CPT_Core {
 
 	/**
 	 * @param string $url
-	 * @param int $feed_id
 	 *
 	 * @since 0.1.0
 	 *
