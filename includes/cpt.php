@@ -240,10 +240,16 @@ class RSS_Post_Aggregation_CPT extends CPT_Core {
 
 		return $src;
 	}
-
-
 }
 
+/**
+ * @param bool|WP_Post|int $post
+ *
+ * @since 0.1.0
+ *
+ * @author JayWood, Justin Sternberg
+ * @return string
+ */
 function rss_post_get_feed_object( $post = false ) {
 	global $RSS_Post_Aggregation;
 
@@ -265,14 +271,32 @@ function rss_post_get_feed_object( $post = false ) {
 	return $post->source_link;
 }
 
+/**
+ * @param bool|WP_Post|int $post
+ *
+ * @since 0.1.0
+ *
+ * @author JayWood, Justin Sternberg
+ * @return bool|string
+ */
 function rss_post_get_feed_url( $post = false ) {
 	$feed = rss_post_get_feed_object( $post );
 
 	if ( $feed && isset( $feed->name ) ) {
 		return $feed->name;
 	}
+
+	return false;
 }
 
+/**
+ * @param bool|WP_Post|int $post
+ *
+ * @since 0.1.0
+ *
+ * @author JayWood, Justin Sternberg
+ * @return bool|string
+ */
 function rss_post_get_feed_source( $post = false ) {
 	if ( $feed = rss_post_get_feed_object( $post ) ) {
 		if ( isset( $feed->description ) && $feed->description ) {
@@ -284,4 +308,6 @@ function rss_post_get_feed_source( $post = false ) {
 		$parts = parse_url( $url );
 		return isset( $parts['host'] ) ? $parts['host'] : '';
 	}
+
+	return false;
 }
