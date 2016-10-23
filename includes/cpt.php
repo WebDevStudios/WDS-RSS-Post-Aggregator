@@ -13,7 +13,15 @@ class RSS_Post_Aggregation_CPT extends CPT_Core {
 	public $slug_to_redirect = 'rss_search_modal';
 
 	/**
+	 * @var string $tax_slug
+	 */
+	public $tax_slug;
+
+	/**
 	 * Register Custom Post Types. See documentation in CPT_Core, and in wp-includes/post.php
+	 *
+	 * @param string $cpt_slug
+	 * @param string $tax_slug
 	 */
 	public function __construct( $cpt_slug, $tax_slug ) {
 		$this->tax_slug = $tax_slug;
@@ -49,7 +57,7 @@ class RSS_Post_Aggregation_CPT extends CPT_Core {
 
 
 	public function is_listing() {
-		if ( isset( $this->is_listing) ) {
+		if ( isset( $this->is_listing ) ) {
 			return $this->is_listing;
 		}
 
@@ -80,7 +88,9 @@ class RSS_Post_Aggregation_CPT extends CPT_Core {
 	/**
 	 * Handles admin column display. Hooked in via CPT_Core.
 	 * @since  0.1.0
-	 * @param  array  $column Array of registered column names
+	 *
+	 * @param  array $column Array of registered column names
+	 * @param int    $post_id
 	 */
 	public function columns_display( $column, $post_id ) {
 		global $post;
@@ -101,6 +111,14 @@ class RSS_Post_Aggregation_CPT extends CPT_Core {
 		}
 	}
 
+	/**
+	 * CMB2 Metaboxes
+	 * @param $meta_boxes
+	 *
+	 * @TODO: Remove this in favor a a single custom meta box. No need to use CMB for ONE text field.
+	 *
+	 * @return mixed
+	 */
 	public function meta_box( $meta_boxes ) {
 
 		$meta_boxes['rsslink_mb'] = array(
@@ -129,6 +147,7 @@ class RSS_Post_Aggregation_CPT extends CPT_Core {
 		return $meta_boxes;
 	}
 
+	
 	public function insert( $post, $feed_id ) {
 		$args = array(
 			'post_content'   => wp_kses_post( stripslashes( $post[ 'summary' ] ) ),

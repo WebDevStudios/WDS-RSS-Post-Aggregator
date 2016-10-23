@@ -4,6 +4,28 @@ class RSS_Post_Aggregation_Modal {
 
 	public $feed_links = array();
 
+	/**
+	 * @var RSS_Post_Aggregation_Feeds
+	 */
+	public $rss;
+
+	/**
+	 * @var RSS_Post_Aggregation_CPT
+	 */
+	public $cpt;
+
+	/**
+	 * @var RSS_Post_Aggregation_Taxonomy
+	 */
+	public $tax;
+
+	/**
+	 * RSS_Post_Aggregation_Modal constructor.
+	 *
+	 * @param RSS_Post_Aggregation_Feeds $rss
+	 * @param RSS_Post_Aggregation_CPT $cpt
+	 * @param RSS_Post_Aggregation_Taxonomy $tax
+	 */
 	public function __construct( $rss, $cpt, $tax ) {
 		$this->rss = $rss;
 		$this->cpt = $cpt;

@@ -100,6 +100,12 @@ class RSS_Post_Aggregation {
 		$this->plugin_classes();
 	}
 
+	/**
+	 * Retains all plugin cleasses for organization
+	 *
+	 * @since 0.1.1
+	 * @author JayWood
+	 */
 	public function plugin_classes() {
 		$this->rsscpt   = new RSS_Post_Aggregation_CPT( $this->cpt_slug, $this->tax_slug );
 		$this->taxonomy = new RSS_Post_Aggregation_Taxonomy( $this->tax_slug, $this->rsscpt );
