@@ -70,7 +70,9 @@ class RSS_Post_Aggregation_CPT extends CPT_Core {
 	/**
 	 * Registers admin columns to display. Hooked in via CPT_Core.
 	 * @since  0.1.0
-	 * @param  array  $columns Array of registered column names/labels
+	 *
+	 * @param  array $columns Array of registered column names/labels
+	 *
 	 * @return array           Modified array
 	 */
 	public function columns( $columns ) {
@@ -153,6 +155,8 @@ class RSS_Post_Aggregation_CPT extends CPT_Core {
 	 * @param array $post An array of post data, similar to WP_Post
 	 * @param int $feed_id
 	 *
+	 * @since 0.1.0
+	 *
 	 * @author JayWood, Justin Sternberg
 	 * @return array|string
 	 */
@@ -207,6 +211,13 @@ class RSS_Post_Aggregation_CPT extends CPT_Core {
 		return $posts && is_array( $posts ) ? $posts[0] : false;
 	}
 
+	/**
+	 * @param string $file_url
+	 * @param int $post_id
+	 *
+	 * @author JayWood, Justin Sternberg
+	 * @return string
+	 */
 	public function sideload_featured_image( $file_url, $post_id ) {
 		if ( empty( $file_url ) || empty( $post_id ) ) {
 			return false;
