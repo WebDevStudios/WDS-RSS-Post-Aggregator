@@ -158,15 +158,15 @@ class RSS_Post_Aggregation_CPT extends CPT_Core {
 	 */
 	public function insert( $post, $feed_id ) {
 		$args = array(
-			'post_content'   => wp_kses_post( stripslashes( $post[ 'summary' ] ) ),
-			'post_title'     => esc_html( stripslashes( $post['title'] ) ),
-			'post_status'    => 'draft',
-			'post_type'      => $this->post_type(),
-			'post_date'      => date( 'Y-m-d H:i:s', strtotime( $post['date'] ) ),
-			'post_date_gmt'  => gmdate( 'Y-m-d H:i:s', strtotime( $post['date'] ) ),
+			'post_content'  => wp_kses_post( stripslashes( $post['summary'] ) ),
+			'post_title'    => esc_html( stripslashes( $post['title'] ) ),
+			'post_status'   => 'draft',
+			'post_type'     => $this->post_type(),
+			'post_date'     => date( 'Y-m-d H:i:s', strtotime( $post['date'] ) ),
+			'post_date_gmt' => gmdate( 'Y-m-d H:i:s', strtotime( $post['date'] ) ),
 		);
 
-		if ( $existing_post = $this->post_exists( $post['link'], $feed_id ) ) {
+		if ( $existing_post = $this->post_exists( $post['link'] ) ) {
 			$args['ID'] = $existing_post->ID;
 			$args['post_status'] = $existing_post->post_status;
 		}
@@ -195,10 +195,10 @@ class RSS_Post_Aggregation_CPT extends CPT_Core {
 	 * @author JayWood, Justin Sternberg
 	 * @return bool|mixed
 	 */
-	public function post_exists( $url, $feed_id ) {
+	public function post_exists( $url ) {
 		$args = array(
 			'posts_per_page' => 1,
-			'post_status'    => array( 'publish', 'pending', 'draft', 'future'),
+			'post_status'    => array( 'publish', 'pending', 'draft', 'future' ),
 			'post_type'      => $this->post_type(),
 			'meta_key'       => $this->prefix . 'original_url',
 			'meta_value'     => esc_url_raw( $url ),
