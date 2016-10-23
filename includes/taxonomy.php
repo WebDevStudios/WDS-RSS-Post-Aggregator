@@ -11,6 +11,9 @@ class RSS_Post_Aggregation_Taxonomy extends Taxonomy_Core {
 
 	/**
 	 * Register Custom Post Types. See documentation in Taxonomy_Core, and in wp-includes/post.php
+	 * 
+	 * @param string $tax_slug
+	 * @param CPT_Core $cpt
 	 */
 	public function __construct( $tax_slug, $cpt ) {
 
