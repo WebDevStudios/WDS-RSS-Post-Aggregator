@@ -147,7 +147,15 @@ class RSS_Post_Aggregation_CPT extends CPT_Core {
 		return $meta_boxes;
 	}
 
-	
+	/**
+	 * Inserts the feed post items.
+	 *
+	 * @param array $post An array of post data, similar to WP_Post
+	 * @param int $feed_id
+	 *
+	 * @author JayWood, Justin Sternberg
+	 * @return array|string
+	 */
 	public function insert( $post, $feed_id ) {
 		$args = array(
 			'post_content'   => wp_kses_post( stripslashes( $post[ 'summary' ] ) ),
@@ -178,6 +186,15 @@ class RSS_Post_Aggregation_CPT extends CPT_Core {
 		return $report;
 	}
 
+	/**
+	 * @param string $url
+	 * @param int $feed_id
+	 *
+	 * @since 0.1.0
+	 *
+	 * @author JayWood, Justin Sternberg
+	 * @return bool|mixed
+	 */
 	public function post_exists( $url, $feed_id ) {
 		$args = array(
 			'posts_per_page' => 1,

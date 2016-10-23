@@ -48,6 +48,10 @@ spl_autoload_register( 'rss_post_aggregation_autoload_classes' );
 
 /**
  * Main initiation class
+ *
+ * @property string $tax_slug
+ * @property string $cpt_slug
+ * @property string $rss_category_slug
  */
 class RSS_Post_Aggregation {
 
@@ -175,13 +179,16 @@ class RSS_Post_Aggregation {
 	/**
 	 * Include a file from the includes directory
 	 * @since  0.1.0
-	 * @param  string $filename Name of the file to be included
+	 *
+	 * @param  string $filename Name of the file to be included.
 	 */
 	public static function include_file( $filename ) {
 		$file = self::dir( 'includes/'. $filename .'.php' );
 		if ( file_exists( $file ) ) {
 			return include_once( $file );
 		}
+
+		return false;
 	}
 
 	/**
@@ -227,7 +234,6 @@ class RSS_Post_Aggregation {
 				throw new Exception( 'Invalid '. __CLASS__ .' property: ' . $field );
 		}
 	}
-
 }
 
 // init our class
