@@ -53,8 +53,8 @@ class RSS_Post_Aggregation_Modal {
 	public function save_posts( $posts, $feed_id ) {
 
 		$updated = array();
-		foreach ( $posts as $post ) {
-			$updated[ $post['title'] ] = $this->cpt->insert( $post, $feed_id );
+		foreach ( $posts as $post_data ) {
+			$updated[ $post_data['title'] ] = $this->cpt->insert( $post_data, $feed_id );
 		}
 
 		return $updated;
