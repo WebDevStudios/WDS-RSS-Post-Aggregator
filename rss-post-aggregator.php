@@ -52,19 +52,55 @@ spl_autoload_register( 'rss_post_aggregation_autoload_classes' );
 class RSS_Post_Aggregation {
 
 	const VERSION = '0.1.0';
-	private $cpt_slug = 'rss-posts';
-	private $tax_slug = 'rss-feed-links';
+	private $cpt_slug          = 'rss-posts';
+	private $tax_slug          = 'rss-feed-links';
 	private $rss_category_slug = 'rss-category';
+
+	/**
+	 * @var RSS_Post_Aggregation_CPT
+	 */
+	public $rsscpt;
+
+	/**
+	 * @var RSS_Post_Aggregation_Taxonomy
+	 */
+	public $taxonomy;
+
+	/**
+	 * @var RSS_Post_Aggregation_Feeds
+	 */
+	public $rss;
+
+	/**
+	 * @var RSS_Post_Aggregation_Modal
+	 */
+	public $modal;
+
+	/**
+	 * @var RSS_Post_Aggregation_Frontend
+	 */
+	public $frontend;
+
+	/**
+	 * @var RSS_Post_Aggregation_Widgets
+	 */
+	public $widgets;
+
 
 	/**
 	 * Sets up our plugin
 	 * @since  0.1.0
 	 */
 	public function __construct() {
+		$this->plugin_classes();
+	}
+
+	public function plugin_classes() {
 		$this->rsscpt   = new RSS_Post_Aggregation_CPT( $this->cpt_slug, $this->tax_slug );
 		$this->taxonomy = new RSS_Post_Aggregation_Taxonomy( $this->tax_slug, $this->rsscpt );
 		$this->rss      = new RSS_Post_Aggregation_Feeds();
 		$this->modal    = new RSS_Post_Aggregation_Modal( $this->rss, $this->rsscpt, $this->taxonomy );
+
 		// Handles frontend modification for aggregate site
 		$this->frontend = new RSS_Post_Aggregation_Frontend( $this->rsscpt );
 		$this->widgets = new RSS_Post_Aggregation_Widgets();
