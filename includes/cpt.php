@@ -13,7 +13,15 @@ class RSS_Post_Aggregation_CPT extends CPT_Core {
 	public $slug_to_redirect = 'rss_search_modal';
 
 	/**
+	 * @var string $tax_slug
+	 */
+	public $tax_slug;
+
+	/**
 	 * Register Custom Post Types. See documentation in CPT_Core, and in wp-includes/post.php
+	 *
+	 * @param string $cpt_slug
+	 * @param string $tax_slug
 	 */
 	public function __construct( $cpt_slug, $tax_slug ) {
 		$this->tax_slug = $tax_slug;
@@ -29,8 +37,9 @@ class RSS_Post_Aggregation_CPT extends CPT_Core {
 	}
 
 	public function hooks() {
-		add_filter( 'cmb2_meta_boxes', array( $this, 'meta_box' ) );
 		add_action( 'admin_menu', array( $this, 'pseudo_menu_item' ) );
+		add_action( 'add_meta_boxes', array( $this, 'add_meta_box' ) );
+		add_action( 'save_post', array( $this, 'save_meta' ) );
 	}
 
 	public function pseudo_menu_item() {
@@ -49,7 +58,7 @@ class RSS_Post_Aggregation_CPT extends CPT_Core {
 
 
 	public function is_listing() {
-		if ( isset( $this->is_listing) ) {
+		if ( isset( $this->is_listing ) ) {
 			return $this->is_listing;
 		}
 
@@ -62,7 +71,9 @@ class RSS_Post_Aggregation_CPT extends CPT_Core {
 	/**
 	 * Registers admin columns to display. Hooked in via CPT_Core.
 	 * @since  0.1.0
-	 * @param  array  $columns Array of registered column names/labels
+	 *
+	 * @param  array $columns Array of registered column names/labels
+	 *
 	 * @return array           Modified array
 	 */
 	public function columns( $columns ) {
@@ -80,7 +91,9 @@ class RSS_Post_Aggregation_CPT extends CPT_Core {
 	/**
 	 * Handles admin column display. Hooked in via CPT_Core.
 	 * @since  0.1.0
-	 * @param  array  $column Array of registered column names
+	 *
+	 * @param  array $column Array of registered column names
+	 * @param int    $post_id
 	 */
 	public function columns_display( $column, $post_id ) {
 		global $post;
@@ -101,55 +114,92 @@ class RSS_Post_Aggregation_CPT extends CPT_Core {
 		}
 	}
 
-	public function meta_box( $meta_boxes ) {
-
-		$meta_boxes['rsslink_mb'] = array(
-			'id'           => 'rsslink_mb',
-			'title'        => __( 'RSS Item Info', 'wds-rss-post-aggregation' ),
-			'object_types' => array( $this->post_type() ),
-			// 'context'      => 'side',
-			'show_names'   => false,
-			'fields'       => array(
-				array(
-					'name'       => __( 'Original URL', 'wds-rss-post-aggregation' ),
-					'id'         => $this->prefix . 'original_url',
-					'type'       => 'text_url',
-					'attributes' => array(
-						'class' => 'large-text',
-					),
-				),
-				// array(
-				// 	'name' => __( 'Image', 'wds-rss-post-aggregation' ),
-				// 	'id'   => $this->prefix . 'img_src',
-				// 	'type' => 'file',
-				// ),
-			),
-		);
-
-		return $meta_boxes;
+	/**
+	 * Loads up metaboxes.
+	 *
+	 * @since 0.1.1
+	 * @author JayWood
+	 */
+	public function add_meta_box() {
+		add_meta_box( 'rsslink_mb', __( 'RSS Item Info', 'wds-rss-post-aggregation' ), array( $this, 'render_metabox' ), $this->post_type() );
 	}
 
-	public function insert( $post, $feed_id ) {
+	/**
+	 * Renders custom metabox output
+	 *
+	 * @since 0.1.1
+	 *
+	 * @author JayWood
+	 */
+	public function render_metabox( $object ) {
+		wp_nonce_field( 'rsslink_mb_metabox', 'rsslink_mb_nonce' );
+
+		$meta       = get_post_meta( $object->ID, $this->prefix . 'original_url', 1 );
+		$meta_value = empty( $meta ) ? '' : esc_url( $meta );
+
+		?>
+		<fieldset>
+			<label for="<?php echo $this->prefix; ?>original_url"><?php _e( 'Original URL', 'wds-rss-post-aggregation' ); ?></label><br />
+			<input name="<?php echo $this->prefix; ?>original_url" id="<?php echo $this->prefix; ?>original_url" value="<?php echo $meta_value; ?>" class="regular-text" />
+		</fieldset>
+		<?php
+	}
+
+	/**
+	 * Save the post meta
+	 *
+	 * @since 0.1.1
+	 *
+	 * @param $post_id
+	 *
+	 * @author JayWood
+	 * @return int|void
+	 */
+	public function save_meta( $post_id ) {
+		if ( ( ! isset( $_POST['rsslink_mb_nonce'] ) || ! wp_verify_nonce( $_POST['rsslink_mb_nonce'], 'rsslink_mb_metabox' ) )
+			|| ! current_user_can( 'edit_post', $post_id )
+			|| ( defined( "DOING_AUTOSAVE" ) && DOING_AUTOSAVE )
+			|| ! isset( $_POST[ $this->prefix.'original_url' ] )
+		) {
+			return $post_id;
+		}
+
+		$url = esc_url( $_POST[ $this->prefix . 'original_url' ] );
+
+		update_post_meta( $post_id, $this->prefix . 'original_url', $url );
+	}
+
+	/**
+	 * Inserts the feed post items.
+	 *
+	 * @param array $post_data An array of post data, similar to WP_Post
+	 * @param int   $feed_id
+	 *
+	 * @since 0.1.0
+	 *
+	 * @author JayWood, Justin Sternberg
+	 * @return array|string
+	 */
+	public function insert( $post_data, $feed_id ) {
 		$args = array(
-			'post_content'   => wp_kses_post( stripslashes( $post[ 'summary' ] ) ),
-			'post_title'     => esc_html( stripslashes( $post['title'] ) ),
-			'post_status'    => 'draft',
-			'post_type'      => $this->post_type(),
-			'post_date'      => date( 'Y-m-d H:i:s', strtotime( $post['date'] ) ),
-			'post_date_gmt'  => gmdate( 'Y-m-d H:i:s', strtotime( $post['date'] ) ),
+			'post_content'  => wp_kses_post( stripslashes( $post_data['summary'] ) ),
+			'post_title'    => esc_html( stripslashes( $post_data['title'] ) ),
+			'post_status'   => 'draft',
+			'post_type'     => $this->post_type(),
+			'post_date'     => date( 'Y-m-d H:i:s', strtotime( $post_data['date'] ) ),
+			'post_date_gmt' => gmdate( 'Y-m-d H:i:s', strtotime( $post_data['date'] ) ),
 		);
 
-		if ( $existing_post = $this->post_exists( $post['link'], $feed_id ) ) {
+		if ( $existing_post = $this->post_exists( $post_data['link'] ) ) {
 			$args['ID'] = $existing_post->ID;
 			$args['post_status'] = $existing_post->post_status;
 		}
 
 		if ( $post_id = wp_insert_post( $args ) ) {
-
 			$report = array(
 				'post_id'           => $post_id,
-				'original_url'      => update_post_meta( $post_id, $this->prefix . 'original_url', esc_url_raw( $post['link'] ) ),
-				'img_src'           => $this->sideload_featured_image( esc_url_raw( $post['image'] ), $post_id ),
+				'original_url'      => update_post_meta( $post_id, $this->prefix . 'original_url', esc_url_raw( $post_data['link'] ) ),
+				'img_src'           => $this->sideload_featured_image( esc_url_raw( $post_data['image'] ), $post_id ),
 				'wp_set_post_terms' => wp_set_post_terms( $post_id, array( $feed_id ), $this->tax_slug, true ),
 			);
 		} else {
@@ -159,10 +209,18 @@ class RSS_Post_Aggregation_CPT extends CPT_Core {
 		return $report;
 	}
 
-	public function post_exists( $url, $feed_id ) {
+	/**
+	 * @param string $url
+	 *
+	 * @since 0.1.0
+	 *
+	 * @author JayWood, Justin Sternberg
+	 * @return bool|mixed
+	 */
+	public function post_exists( $url ) {
 		$args = array(
 			'posts_per_page' => 1,
-			'post_status'    => array( 'publish', 'pending', 'draft', 'future'),
+			'post_status'    => array( 'publish', 'pending', 'draft', 'future' ),
 			'post_type'      => $this->post_type(),
 			'meta_key'       => $this->prefix . 'original_url',
 			'meta_value'     => esc_url_raw( $url ),
@@ -172,6 +230,13 @@ class RSS_Post_Aggregation_CPT extends CPT_Core {
 		return $posts && is_array( $posts ) ? $posts[0] : false;
 	}
 
+	/**
+	 * @param string $file_url
+	 * @param int $post_id
+	 *
+	 * @author JayWood, Justin Sternberg
+	 * @return string
+	 */
 	public function sideload_featured_image( $file_url, $post_id ) {
 		if ( empty( $file_url ) || empty( $post_id ) ) {
 			return false;
@@ -205,10 +270,16 @@ class RSS_Post_Aggregation_CPT extends CPT_Core {
 
 		return $src;
 	}
-
-
 }
 
+/**
+ * @param bool|WP_Post|int $post
+ *
+ * @since 0.1.0
+ *
+ * @author JayWood, Justin Sternberg
+ * @return string
+ */
 function rss_post_get_feed_object( $post = false ) {
 	global $RSS_Post_Aggregation;
 
@@ -230,14 +301,32 @@ function rss_post_get_feed_object( $post = false ) {
 	return $post->source_link;
 }
 
+/**
+ * @param bool|WP_Post|int $post
+ *
+ * @since 0.1.0
+ *
+ * @author JayWood, Justin Sternberg
+ * @return bool|string
+ */
 function rss_post_get_feed_url( $post = false ) {
 	$feed = rss_post_get_feed_object( $post );
 
 	if ( $feed && isset( $feed->name ) ) {
 		return $feed->name;
 	}
+
+	return false;
 }
 
+/**
+ * @param bool|WP_Post|int $post
+ *
+ * @since 0.1.0
+ *
+ * @author JayWood, Justin Sternberg
+ * @return bool|string
+ */
 function rss_post_get_feed_source( $post = false ) {
 	if ( $feed = rss_post_get_feed_object( $post ) ) {
 		if ( isset( $feed->description ) && $feed->description ) {
@@ -249,4 +338,6 @@ function rss_post_get_feed_source( $post = false ) {
 		$parts = parse_url( $url );
 		return isset( $parts['host'] ) ? $parts['host'] : '';
 	}
+
+	return false;
 }

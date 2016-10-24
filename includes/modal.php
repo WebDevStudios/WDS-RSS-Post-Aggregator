@@ -4,6 +4,28 @@ class RSS_Post_Aggregation_Modal {
 
 	public $feed_links = array();
 
+	/**
+	 * @var RSS_Post_Aggregation_Feeds
+	 */
+	public $rss;
+
+	/**
+	 * @var RSS_Post_Aggregation_CPT
+	 */
+	public $cpt;
+
+	/**
+	 * @var RSS_Post_Aggregation_Taxonomy
+	 */
+	public $tax;
+
+	/**
+	 * RSS_Post_Aggregation_Modal constructor.
+	 *
+	 * @param RSS_Post_Aggregation_Feeds $rss
+	 * @param RSS_Post_Aggregation_CPT $cpt
+	 * @param RSS_Post_Aggregation_Taxonomy $tax
+	 */
 	public function __construct( $rss, $cpt, $tax ) {
 		$this->rss = $rss;
 		$this->cpt = $cpt;
@@ -31,8 +53,8 @@ class RSS_Post_Aggregation_Modal {
 	public function save_posts( $posts, $feed_id ) {
 
 		$updated = array();
-		foreach ( $posts as $post ) {
-			$updated[ $post['title'] ] = $this->cpt->insert( $post, $feed_id );
+		foreach ( $posts as $post_data ) {
+			$updated[ $post_data['title'] ] = $this->cpt->insert( $post_data, $feed_id );
 		}
 
 		return $updated;
@@ -47,7 +69,6 @@ class RSS_Post_Aggregation_Modal {
 
 		$feed_url = esc_url( $_REQUEST['feed_url'] );
 		$feed_id  = absint( $_REQUEST['feed_id'] );
-
 
 		if ( ! $feed_id ) {
 
