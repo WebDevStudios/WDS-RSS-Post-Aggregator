@@ -70,7 +70,6 @@ class RSS_Post_Aggregation_Modal {
 		$feed_url = esc_url( $_REQUEST['feed_url'] );
 		$feed_id  = absint( $_REQUEST['feed_id'] );
 
-
 		if ( ! $feed_id ) {
 
 			$link = get_term_by( 'name', $feed_url, $this->tax->taxonomy() );

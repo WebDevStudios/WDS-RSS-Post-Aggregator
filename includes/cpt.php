@@ -37,8 +37,9 @@ class RSS_Post_Aggregation_CPT extends CPT_Core {
 	}
 
 	public function hooks() {
-		add_filter( 'cmb2_meta_boxes', array( $this, 'meta_box' ) );
 		add_action( 'admin_menu', array( $this, 'pseudo_menu_item' ) );
+		add_action( 'add_meta_boxes', array( $this, 'add_meta_box' ) );
+		add_action( 'save_post', array( $this, 'save_meta' ) );
 	}
 
 	public function pseudo_menu_item() {
@@ -114,39 +115,58 @@ class RSS_Post_Aggregation_CPT extends CPT_Core {
 	}
 
 	/**
-	 * CMB2 Metaboxes
-	 * @param $meta_boxes
+	 * Loads up metaboxes.
 	 *
-	 * @TODO: Remove this in favor a a single custom meta box. No need to use CMB for ONE text field.
-	 *
-	 * @return mixed
+	 * @since 0.1.1
+	 * @author JayWood
 	 */
-	public function meta_box( $meta_boxes ) {
+	public function add_meta_box() {
+		add_meta_box( 'rsslink_mb', __( 'RSS Item Info', 'wds-rss-post-aggregation' ), array( $this, 'render_metabox' ), $this->post_type() );
+	}
 
-		$meta_boxes['rsslink_mb'] = array(
-			'id'           => 'rsslink_mb',
-			'title'        => __( 'RSS Item Info', 'wds-rss-post-aggregation' ),
-			'object_types' => array( $this->post_type() ),
-			// 'context'      => 'side',
-			'show_names'   => false,
-			'fields'       => array(
-				array(
-					'name'       => __( 'Original URL', 'wds-rss-post-aggregation' ),
-					'id'         => $this->prefix . 'original_url',
-					'type'       => 'text_url',
-					'attributes' => array(
-						'class' => 'large-text',
-					),
-				),
-				// array(
-				// 	'name' => __( 'Image', 'wds-rss-post-aggregation' ),
-				// 	'id'   => $this->prefix . 'img_src',
-				// 	'type' => 'file',
-				// ),
-			),
-		);
+	/**
+	 * Renders custom metabox output
+	 *
+	 * @since 0.1.1
+	 *
+	 * @author JayWood
+	 */
+	public function render_metabox( $object ) {
+		wp_nonce_field( 'rsslink_mb_metabox', 'rsslink_mb_nonce' );
 
-		return $meta_boxes;
+		$meta       = get_post_meta( $object->ID, $this->prefix . 'original_url', 1 );
+		$meta_value = empty( $meta ) ? '' : esc_url( $meta );
+
+		?>
+		<fieldset>
+			<label for="<?php echo $this->prefix; ?>original_url"><?php _e( 'Original URL', 'wds-rss-post-aggregation' ); ?></label><br />
+			<input name="<?php echo $this->prefix; ?>original_url" id="<?php echo $this->prefix; ?>original_url" value="<?php echo $meta_value; ?>" class="regular-text" />
+		</fieldset>
+		<?php
+	}
+
+	/**
+	 * Save the post meta
+	 *
+	 * @since 0.1.1
+	 *
+	 * @param $post_id
+	 *
+	 * @author JayWood
+	 * @return int|void
+	 */
+	public function save_meta( $post_id ) {
+		if ( ( ! isset( $_POST['rsslink_mb_nonce'] ) || ! wp_verify_nonce( $_POST['rsslink_mb_nonce'], 'rsslink_mb_metabox' ) )
+			|| ! current_user_can( 'edit_post', $post_id )
+			|| ( defined( "DOING_AUTOSAVE" ) && DOING_AUTOSAVE )
+			|| ! isset( $_POST[ $this->prefix.'original_url' ] )
+		) {
+			return $post_id;
+		}
+
+		$url = esc_url( $_POST[ $this->prefix . 'original_url' ] );
+
+		update_post_meta( $post_id, $this->prefix . 'original_url', $url );
 	}
 
 	/**
