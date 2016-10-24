@@ -13,8 +13,6 @@ Aggregate posts from RSS Feeds
 
 This project is hosted on [GitHub](http://github.com) feel free to [fork it and contribute](https://github.com/WebDevStudios/WDS-RSS-Post-Aggregator).
 
-**REQUIRES** [CMB2 WordPress Plugin](https://wordpress.org/plugins/cmb2/) to function properly.
-
 WDS RSS Post Aggregator provides site owners the ability to selectively import RSS posts to their blog using WordPress' built in post selection interface.  Once a feed is selected and a post is imported, the excerpt, title, and all the usual things you would expect are editable.  You can even categorize and tag the posts in their own taxonomies.
 
 With RSS Post Aggregator, the following is pulled in during the import process:
@@ -57,6 +55,10 @@ function wds_get_my_posts( $query ){
 5. Post Edit Screen - Manually set RSS feed link
 
 == Changelog ==
+
+= 0.1.1 =
+* Removed CMB2 dependancy - [Fixes #2](https://github.com/WebDevStudios/WDS-RSS-Post-Aggregator/issues/2)
+* Code cleanup and docblocks
 
 = 0.1.0 =
 * First release
