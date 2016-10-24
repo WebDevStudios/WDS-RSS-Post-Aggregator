@@ -172,35 +172,34 @@ class RSS_Post_Aggregation_CPT extends CPT_Core {
 	/**
 	 * Inserts the feed post items.
 	 *
-	 * @param array $post An array of post data, similar to WP_Post
-	 * @param int $feed_id
+	 * @param array $post_data An array of post data, similar to WP_Post
+	 * @param int   $feed_id
 	 *
 	 * @since 0.1.0
 	 *
 	 * @author JayWood, Justin Sternberg
 	 * @return array|string
 	 */
-	public function insert( $post, $feed_id ) {
+	public function insert( $post_data, $feed_id ) {
 		$args = array(
-			'post_content'  => wp_kses_post( stripslashes( $post['summary'] ) ),
-			'post_title'    => esc_html( stripslashes( $post['title'] ) ),
+			'post_content'  => wp_kses_post( stripslashes( $post_data['summary'] ) ),
+			'post_title'    => esc_html( stripslashes( $post_data['title'] ) ),
 			'post_status'   => 'draft',
 			'post_type'     => $this->post_type(),
-			'post_date'     => date( 'Y-m-d H:i:s', strtotime( $post['date'] ) ),
-			'post_date_gmt' => gmdate( 'Y-m-d H:i:s', strtotime( $post['date'] ) ),
+			'post_date'     => date( 'Y-m-d H:i:s', strtotime( $post_data['date'] ) ),
+			'post_date_gmt' => gmdate( 'Y-m-d H:i:s', strtotime( $post_data['date'] ) ),
 		);
 
-		if ( $existing_post = $this->post_exists( $post['link'] ) ) {
+		if ( $existing_post = $this->post_exists( $post_data['link'] ) ) {
 			$args['ID'] = $existing_post->ID;
 			$args['post_status'] = $existing_post->post_status;
 		}
 
 		if ( $post_id = wp_insert_post( $args ) ) {
-
 			$report = array(
 				'post_id'           => $post_id,
-				'original_url'      => update_post_meta( $post_id, $this->prefix . 'original_url', esc_url_raw( $post['link'] ) ),
-				'img_src'           => $this->sideload_featured_image( esc_url_raw( $post['image'] ), $post_id ),
+				'original_url'      => update_post_meta( $post_id, $this->prefix . 'original_url', esc_url_raw( $post_data['link'] ) ),
+				'img_src'           => $this->sideload_featured_image( esc_url_raw( $post_data['image'] ), $post_id ),
 				'wp_set_post_terms' => wp_set_post_terms( $post_id, array( $feed_id ), $this->tax_slug, true ),
 			);
 		} else {
