@@ -10,7 +10,9 @@ class RSS_Post_Aggregation_Feeds {
 
 		$args = $this->process_args( $args );
 
-		if ( ! isset( $_GET['delete-trans'] ) && $this->cache_time && $rss_items = get_transient( $this->transient_id ) ) {
+		$rss_items = get_transient( $this->transient_id );
+
+		if ( ! isset( $_GET['delete-trans'] ) && $this->cache_time && $rss_items ) {
 			return $rss_items;
 		}
 
@@ -128,7 +130,8 @@ class RSS_Post_Aggregation_Feeds {
 	}
 
 	public function get_date() {
-		$date = ( $get_date = $this->item->get_date( 'U' ) )
+		$get_date = $this->item->get_date( 'U' );
+		$date = ( $get_date )
 			? date_i18n( get_option( 'date_format' ), $get_date )
 			: '';
 
@@ -136,7 +139,8 @@ class RSS_Post_Aggregation_Feeds {
 	}
 
 	public function get_author() {
-		$author = ( ( $author = $this->item->get_author() ) && is_object( $author ) )
+		$author = $this->item->get_author();
+		$author = ( ( $author ) && is_object( $author ) )
 			? esc_html( strip_tags( $author->get_name() ) )
 			: '';
 
@@ -165,7 +169,8 @@ class RSS_Post_Aggregation_Feeds {
 
 		$src = '';
 		foreach ( $this->dom()->getElementsByTagName( 'img' ) as $img ) {
-			if ( $src = $img->getAttribute( 'src' ) ) {
+			$src = $img->getAttribute( 'src' );
+			if ( $src ) {
 				break;
 			}
 		}
