@@ -183,7 +183,7 @@ class RSS_Post_Aggregation {
 	 * @param  string $filename Name of the file to be included.
 	 */
 	public static function include_file( $filename ) {
-		$file = self::dir( 'includes/'. $filename .'.php' );
+		$file = self::dir( 'includes/' . $filename . '.php' );
 		if ( file_exists( $file ) ) {
 			return include_once( $file );
 		}
@@ -231,7 +231,7 @@ class RSS_Post_Aggregation {
 			case 'rss_category_slug':
 				return $this->{$field};
 			default:
-				throw new Exception( 'Invalid '. __CLASS__ .' property: ' . $field );
+				throw new Exception( 'Invalid ' . __CLASS__ . ' property: ' . $field );
 		}
 	}
 }
@@ -239,4 +239,3 @@ class RSS_Post_Aggregation {
 // init our class
 $RSS_Post_Aggregation = new RSS_Post_Aggregation();
 $RSS_Post_Aggregation->hooks();
-

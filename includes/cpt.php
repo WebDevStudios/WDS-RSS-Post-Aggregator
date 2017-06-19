@@ -43,7 +43,7 @@ class RSS_Post_Aggregation_CPT extends CPT_Core {
 	}
 
 	public function pseudo_menu_item() {
-		add_submenu_page( 'edit.php?post_type='. $this->post_type(), '', __( 'Find RSS Post', 'wds-rss-post-aggregation' ), 'edit_posts', $this->slug_to_redirect, '__return_empty_string' );
+		add_submenu_page( 'edit.php?post_type=' . $this->post_type(), '', __( 'Find RSS Post', 'wds-rss-post-aggregation' ), 'edit_posts', $this->slug_to_redirect, '__return_empty_string' );
 
 		if ( ! isset( $_GET['page'] ) || $this->slug_to_redirect != $_GET['page'] ) {
 			return;
@@ -108,7 +108,7 @@ class RSS_Post_Aggregation_CPT extends CPT_Core {
 			case 'source':
 				$link = rss_post_get_feed_url( $post->ID );
 				if ( $link ) {
-					echo '<a target="_blank" href="'. esc_url( $link ) .'">'. $link .'</a>';
+					echo '<a target="_blank" href="' . esc_url( $link ) . '">' . $link . '</a>';
 				}
 				break;
 		}
@@ -158,8 +158,8 @@ class RSS_Post_Aggregation_CPT extends CPT_Core {
 	public function save_meta( $post_id ) {
 		if ( ( ! isset( $_POST['rsslink_mb_nonce'] ) || ! wp_verify_nonce( $_POST['rsslink_mb_nonce'], 'rsslink_mb_metabox' ) )
 			|| ! current_user_can( 'edit_post', $post_id )
-			|| ( defined( "DOING_AUTOSAVE" ) && DOING_AUTOSAVE )
-			|| ! isset( $_POST[ $this->prefix.'original_url' ] )
+			|| ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE )
+			|| ! isset( $_POST[ $this->prefix . 'original_url' ] )
 		) {
 			return $post_id;
 		}

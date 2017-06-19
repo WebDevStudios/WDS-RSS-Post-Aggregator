@@ -17,7 +17,12 @@ class RSS_Post_Aggregation_Category_Featured_Images_Widget extends WP_Widget {
 		'read_more_text' => '',
 	);
 
-	private $rss_args = array (
+	/**
+	 * RSS Args.
+	 *
+	 * @var array
+	 */
+	private $rss_args = array(
 		'show_author'	=> 0,
 		'show_date'		=> 0,
 		'show_summary'	=> 1,
@@ -26,19 +31,27 @@ class RSS_Post_Aggregation_Category_Featured_Images_Widget extends WP_Widget {
 		'cache_time'   => DAY_IN_SECONDS,
 	);
 
+	/**
+	 * Constructor.
+	 */
 	public function __construct() {
 		parent::__construct(
 			'rss_post_aggregation_category_featured_images',
 			__( 'RSS Feed with Images', 'wds-rss-post-aggregation' ),
-			array( 'description' => __( 'Reads and displays a supplied RSS feed with featured images.', 'wds-rss-post-aggregation' ) )
+			array(
+				'description' => __( 'Reads and displays a supplied RSS feed with featured images.', 'wds-rss-post-aggregation' ),
+			)
 		);
 	}
 
+	/**
+	 * Widget Form.
+	 *
+	 * @param  array $instance Widget Instance.
+	 * @since 0.1.1
+	 */
 	public function form( $instance ) {
-
 		$instance = wp_parse_args( $instance, $this->defaults );
-
-
 		?>
 		<p>
 			<?php echo __( 'Title', 'wds-rss-post-aggregation' ); ?>
@@ -59,9 +72,7 @@ class RSS_Post_Aggregation_Category_Featured_Images_Widget extends WP_Widget {
 			<?php echo __( '"Read More" text', 'wds-rss-post-aggregation' ); ?>
 			<input class="widefat" id="<?php echo $this->get_field_id( 'read_more_text' ); ?>" name="<?php echo $this->get_field_name( 'read_more_text' ); ?>" type="text" value="<?php echo esc_attr( $instance['read_more_text'] ); ?>" />
 		</p>
-
 		<?php
-
 	}
 
 	/**
@@ -95,10 +106,23 @@ class RSS_Post_Aggregation_Category_Featured_Images_Widget extends WP_Widget {
 		return $instance;
 	}
 
+	/**
+	 * Widget output.
+	 *
+	 * @param  array $args     Widget arguments.
+	 * @param  array $instance Widget instance.
+	 * @return false           Return false if rss_post_aggregation_images_widget_visibility is set to on.
+	 */
 	public function widget( $args, $instance ) {
 
 		$should_show = apply_filters( 'rss_post_aggregation_images_widget_visibility', 'on' );
-		if( 'on' != $should_show ) {
+		$length      = '';
+
+		// Check if excerpt length is empty.
+		if ( ! empty( $instance['excerpt_length'] ) ) {
+			$length = absint( $instance['excerpt_length'] );
+		}
+		if ( 'on' !== $should_show ) {
 			echo '';
 			return;
 		}
@@ -109,7 +133,7 @@ class RSS_Post_Aggregation_Category_Featured_Images_Widget extends WP_Widget {
 		echo apply_filters( 'widget_title', $instance['title'], $instance, $this->id_base );
 		echo $args['after_title'];
 
-		if ( isset( $instance['excerpt_length'] ) && ( $length = absint( $instance['excerpt_length'] ) ) ) {
+		if ( isset( $instance['excerpt_length'] ) && $length ) {
 			$this->excerpt_length = $length;
 			add_filter( 'rss_post_aggregation_feed_summary_length', array( $this, 'filter_excerpt_length' ), 10 );
 		}
@@ -126,16 +150,16 @@ class RSS_Post_Aggregation_Category_Featured_Images_Widget extends WP_Widget {
 			remove_filter( 'rss_post_aggregation_feed_summary_length', array( $this, 'filter_excerpt_length' ) );
 		}
 
-		if( ! empty( $posts ) ) {
+		if ( ! empty( $posts ) ) {
 			echo '<ul class="rss-feed-posts">';
-			foreach( $posts as $p ) {
+			foreach ( $posts as $p ) {
 				echo '<li>';
 
 				echo '<a class="post-title" href="' . esc_url( $p['link'] ) . '"/>';
 				echo $p['title'];
 				echo '</a>';
 
-				if( !empty( $p['image'] ) ) {
+				if ( ! empty( $p['image'] ) ) {
 					echo '<div class="rss-feed-post-image"><img class="featured-post-thumb alignleft" src="' . esc_attr( $p['image'] ) . '" /></div>';
 				}
 
@@ -148,7 +172,7 @@ class RSS_Post_Aggregation_Category_Featured_Images_Widget extends WP_Widget {
 				echo wpautop( $content );
 
 				if ( isset( $instance['read_more_text'] ) && trim( $instance['read_more_text'] ) ) {
-					echo ' <a class="read-more" href="'. esc_url( $p['link'] ) .'">'. esc_html( $instance['read_more_text'] ) .'</a>';
+					echo ' <a class="read-more" href="' . esc_url( $p['link'] ) . '">' . esc_html( $instance['read_more_text'] ) . '</a>';
 				}
 
 				echo '</li>';
@@ -161,12 +185,21 @@ class RSS_Post_Aggregation_Category_Featured_Images_Widget extends WP_Widget {
 		echo $args['after_widget'];
 	}
 
-	function feed_links_dropdown( $name, $term_name ) {
+	/**
+	 * Feed Links dropdown select.
+	 *
+	 * @param  string $name      Dropdown name attribute.
+	 * @param  string $term_name Name of Term.
+	 * @return string            Returns the dropdwn html.
+	 */
+	function feed_links_dropdown( $name = '', $term_name = '' ) {
 		$s = '<select name="' . esc_attr( $name ) . '" class="widefat">';
 
-		$terms = get_terms( 'rss-feed-links', array( 'hide_empty' => false ) );
-		if ( !empty( $terms ) && !is_wp_error( $terms ) ) {
-			foreach( $terms as $term ) {
+		$terms = get_terms( 'rss-feed-links', array(
+			'hide_empty' => false,
+		) );
+		if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
+			foreach ( $terms as $term ) {
 				$s .= '<option name="' . esc_attr( $term->slug ) . '"';
 				$s .= selected( $term_name, $term->slug, false );
 				$s .= '>';
@@ -181,7 +214,13 @@ class RSS_Post_Aggregation_Category_Featured_Images_Widget extends WP_Widget {
 
 	}
 
-	public function filter_excerpt_length( $length ) {
+	/**
+	 * Get the excerpt_length.
+	 *
+	 * @param  integer $length Length of excerpt.
+	 * @return integer         Return excerpt length.
+	 */
+	public function filter_excerpt_length( $length = 0 ) {
 		if ( isset( $this->excerpt_length ) ) {
 			$length = (int) $this->excerpt_length;
 		}
@@ -190,4 +229,3 @@ class RSS_Post_Aggregation_Category_Featured_Images_Widget extends WP_Widget {
 	}
 
 } // end class
-
