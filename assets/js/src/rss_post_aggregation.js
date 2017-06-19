@@ -408,7 +408,9 @@ window.RSS_Post_Aggregation = (function(window, document, $, undefined){
 
 	app.init = function() {
 		log( app );
-		app.$( '.add-new-h2, [href="post-new.php?post_type='+ l10n.cpt +'"]' ).on( 'click', app.openModal );
+		var hrefSelector = '[href="post-new.php?post_type='+ l10n.cpt +'"]';
+		app.$( '.add-new-h2, ' + hrefSelector ).on( 'click', app.openModal ); // @deprecated
+		app.$( '.page-title-action, ' + hrefSelector ).on( 'click', app.openModal );
 
 		log( 'l10n', l10n );
 		var feeds = _.toArray( l10n.feeds );
