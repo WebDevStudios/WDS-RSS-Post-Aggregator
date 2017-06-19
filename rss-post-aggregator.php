@@ -239,4 +239,3 @@ class RSS_Post_Aggregation {
 // init our class
 $RSS_Post_Aggregation = new RSS_Post_Aggregation();
 $RSS_Post_Aggregation->hooks();
-
