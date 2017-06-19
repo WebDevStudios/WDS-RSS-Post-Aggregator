@@ -2,6 +2,11 @@
 /*
  * Simple widget that displays the headline as a title
  */
+
+ // Our namespace.
+ namespace WebDevStudios\RSS_Post_Aggregator;
+ use WP_Widget;
+
 class RSS_Post_Aggregation_Category_Headlines_Widget extends WP_Widget {
 
 	/**
