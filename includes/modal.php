@@ -5,22 +5,30 @@ class RSS_Post_Aggregation_Modal {
 	public $feed_links = array();
 
 	/**
+	 * @since 0.1.1
+	 *
 	 * @var RSS_Post_Aggregation_Feeds
 	 */
 	public $rss;
 
 	/**
+	 * @since 0.1.1
+	 *
 	 * @var RSS_Post_Aggregation_CPT
 	 */
 	public $cpt;
 
 	/**
+	 * @since 0.1.1
+	 *
 	 * @var RSS_Post_Aggregation_Taxonomy
 	 */
 	public $tax;
 
 	/**
 	 * RSS_Post_Aggregation_Modal constructor.
+	 *
+	 * @since 0.1.1
 	 *
 	 * @param RSS_Post_Aggregation_Feeds $rss
 	 * @param RSS_Post_Aggregation_CPT $cpt
@@ -34,6 +42,8 @@ class RSS_Post_Aggregation_Modal {
 
 	/**
 	 * Initiate hooks.
+	 *
+	 * @since 0.1.1
 	 */
 	public function hooks() {
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue' ) );
@@ -43,6 +53,8 @@ class RSS_Post_Aggregation_Modal {
 
 	/**
 	 * Method for storing posts.
+	 *
+	 * @since 0.1.1
 	 *
 	 * Stores and returns JSON AJAX response.
 	 */
@@ -61,6 +73,8 @@ class RSS_Post_Aggregation_Modal {
 	/**
 	 * Store posts.
 	 *
+	 * @since 0.1.1
+	 *
 	 * @param  array $posts   Array of posts to store.
 	 * @param  integer $feed_id Feed ID.
 	 * @return array          Array of posts stored.
@@ -77,6 +91,8 @@ class RSS_Post_Aggregation_Modal {
 
 	/**
 	 * Get RSS data.
+	 *
+	 * @since 0.1.1
 	 *
 	 * @return string Return JSON object.
 	 */
@@ -127,6 +143,9 @@ class RSS_Post_Aggregation_Modal {
 
 	/**
 	 * Enqueue Assets.
+	 *
+	 * @since 0.1.1
+	 *
 	 */
 	public function enqueue() {
 		if ( ! $this->cpt->is_listing() ) {
@@ -165,6 +184,8 @@ class RSS_Post_Aggregation_Modal {
 	/**
 	 * Get feed links.
 	 *
+	 * @since 0.1.1
+	 *
 	 * @return array Return array of links.
 	 */
 	public function get_feed_links() {
@@ -187,6 +208,8 @@ class RSS_Post_Aggregation_Modal {
 
 	/**
 	 * Modal Template File.
+	 *
+	 * @since 0.1.1
 	 */
 	public function js_modal_template() {
 		include_once 'modal-markup.php';

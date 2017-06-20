@@ -8,6 +8,9 @@ class RSS_Post_Aggregation_Category_Headlines_Widget extends WP_Widget {
 	 * Default widget options
 	 *
 	 * @var array
+	 *
+	 *
+	 * @since 0.1.1
 	 **/
 	private $defaults = array(
 		'title'	 	     => '',
@@ -24,6 +27,8 @@ class RSS_Post_Aggregation_Category_Headlines_Widget extends WP_Widget {
 
 	/**
 	 * Constructor.
+	 *
+	 * @since 0.1.1
 	 */
 	public function __construct() {
 		parent::__construct(
@@ -44,7 +49,6 @@ class RSS_Post_Aggregation_Category_Headlines_Widget extends WP_Widget {
 	public function form( $instance = array() ) {
 		$instance = wp_parse_args( $instance, $this->defaults );
 		?>
-
 		<p>
 			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php echo __( 'Title', 'wds-rss-post-aggregation' ); ?></label>
 			<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $instance['title'] ); ?>" />
@@ -80,6 +84,8 @@ class RSS_Post_Aggregation_Category_Headlines_Widget extends WP_Widget {
 	 *
 	 * @see WP_Widget::update()
 	 *
+	 * @since 0.1.1
+	 *
 	 * @param array $new_instance Values just sent to be saved.
 	 * @param array $old_instance Previously saved values from database.
 	 *
@@ -101,6 +107,8 @@ class RSS_Post_Aggregation_Category_Headlines_Widget extends WP_Widget {
 
 	/**
 	 * Widget output.
+	 *
+	 * @since 0.1.1
 	 *
 	 * @param  array $args     Widget arguments.
 	 * @param  array $instance Widget instance.
@@ -172,6 +180,9 @@ class RSS_Post_Aggregation_Category_Headlines_Widget extends WP_Widget {
 	/**
 	 * Filter Excerpt More
 	 * Will filter the more >> tag for this widget only.
+	 *
+	 * @since 0.1.1
+	 *
 	 * @param string $more Default more tag
 	 * @return string
 	 */
@@ -185,6 +196,9 @@ class RSS_Post_Aggregation_Category_Headlines_Widget extends WP_Widget {
 
 	/**
 	 * Excerpt Length Filter
+	 *
+	 * @since 0.1.1
+	 *
 	 * @param  int $default_length Excerpt Length
 	 * @return int
 	 */
@@ -199,6 +213,8 @@ class RSS_Post_Aggregation_Category_Headlines_Widget extends WP_Widget {
 
 	/**
 	 * Creates a dropdown form element from the RSS Post Aggregator categories
+	 *
+	 * @since 0.1.1
 	 *
 	 * $param string $name Form element name
 	 * @param string $term_slug Selected category

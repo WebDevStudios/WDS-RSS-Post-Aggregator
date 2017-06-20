@@ -9,16 +9,37 @@ if ( ! class_exists( 'CPT_Core' ) ) {
  */
 class RSS_Post_Aggregation_CPT extends CPT_Core {
 
+	/**
+	 * Prefix.
+	 *
+	 * @since 0.1.1
+	 *
+	 * @var string
+	 */
 	public $prefix = '_rsspost_';
+
+	/**
+	 * Redirect slug.
+	 *
+	 * @since 0.1.1
+	 *
+	 * @var string
+	 */
 	public $slug_to_redirect = 'rss_search_modal';
 
 	/**
+	 * Tax slug.
+	 *
+	 * @since 0.1.1
+	 *
 	 * @var string $tax_slug
 	 */
 	public $tax_slug;
 
 	/**
 	 * Register Custom Post Types. See documentation in CPT_Core, and in wp-includes/post.php
+	 *
+	 * @since 0.1.1
 	 *
 	 * @param string $cpt_slug
 	 * @param string $tax_slug
@@ -38,6 +59,8 @@ class RSS_Post_Aggregation_CPT extends CPT_Core {
 
 	/**
 	 * Initiate hooks.
+	 *
+	 * @since 0.1.1
 	 */
 	public function hooks() {
 		add_action( 'admin_menu', array( $this, 'pseudo_menu_item' ) );
@@ -47,6 +70,8 @@ class RSS_Post_Aggregation_CPT extends CPT_Core {
 
 	/**
 	 * Redirect menu item.
+	 *
+	 * @since 0.1.1
 	 *
 	 * @return false Return false if page is not correct.
 	 */
@@ -66,6 +91,8 @@ class RSS_Post_Aggregation_CPT extends CPT_Core {
 
 	/**
 	 * Check if listing screen.
+	 *
+	 * @since 0.1.1
 	 *
 	 * @return boolean Returns boolean.
 	 */
@@ -137,7 +164,7 @@ class RSS_Post_Aggregation_CPT extends CPT_Core {
 	}
 
 	/**
-	 * Renders custom metabox output
+	 * Renders custom metabox output.
 	 *
 	 * @since 0.1.1
 	 *
@@ -158,7 +185,7 @@ class RSS_Post_Aggregation_CPT extends CPT_Core {
 	}
 
 	/**
-	 * Save the post meta
+	 * Save the post meta.
 	 *
 	 * @since 0.1.1
 	 *
@@ -224,6 +251,8 @@ class RSS_Post_Aggregation_CPT extends CPT_Core {
 	}
 
 	/**
+	 * Check if post exists via Url.
+	 *
 	 * @param string $url
 	 *
 	 * @since 0.1.0
@@ -245,6 +274,10 @@ class RSS_Post_Aggregation_CPT extends CPT_Core {
 	}
 
 	/**
+	 * Import image via url.
+	 *
+	 * @since 0.1.1
+	 *
 	 * @param string $file_url
 	 * @param int $post_id
 	 *
@@ -289,6 +322,8 @@ class RSS_Post_Aggregation_CPT extends CPT_Core {
 }
 
 /**
+ * Get RSS feed object.
+ *
  * @param bool|WP_Post|int $post
  *
  * @since 0.1.0
@@ -318,6 +353,8 @@ function rss_post_get_feed_object( $post = false ) {
 }
 
 /**
+ * Get RSS feed name.
+ *
  * @param bool|WP_Post|int $post
  *
  * @since 0.1.0
@@ -336,6 +373,8 @@ function rss_post_get_feed_url( $post = false ) {
 }
 
 /**
+ * Get RSS feed source.
+ *
  * @param bool|WP_Post|int $post
  *
  * @since 0.1.0

@@ -7,6 +7,8 @@ class RSS_Post_Aggregation_Category_Featured_Images_Widget extends WP_Widget {
 	/**
 	 * Default widget options
 	 *
+	 * @since 0.1.1
+	 *
 	 * @var array
 	 **/
 	private $defaults = array(
@@ -19,6 +21,8 @@ class RSS_Post_Aggregation_Category_Featured_Images_Widget extends WP_Widget {
 
 	/**
 	 * RSS Args.
+	 *
+	 * @since 0.1.1
 	 *
 	 * @var array
 	 */
@@ -33,6 +37,8 @@ class RSS_Post_Aggregation_Category_Featured_Images_Widget extends WP_Widget {
 
 	/**
 	 * Constructor.
+	 *
+	 * @since 0.1.1
 	 */
 	public function __construct() {
 		parent::__construct(
@@ -58,7 +64,6 @@ class RSS_Post_Aggregation_Category_Featured_Images_Widget extends WP_Widget {
 			<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $instance['title'] ); ?>" />
 			<?php echo __( 'Feed', 'wds-rss-post-aggregation' ); ?>
 			<?php echo $this->feed_links_dropdown( $this->get_field_name( 'feed_url' ), $instance['feed_url'] ); ?>
-
 		</p>
 		<p>
 			<?php echo __( 'Number to show', 'wds-rss-post-aggregation' ); ?>
@@ -79,6 +84,8 @@ class RSS_Post_Aggregation_Category_Featured_Images_Widget extends WP_Widget {
 	 * Update form values as they are saved.
 	 *
 	 * @see WP_Widget::update()
+	 *
+	 * @since 0.1.1
 	 *
 	 * @param array $new_instance Values just sent to be saved.
 	 * @param array $old_instance Previously saved values from database.
@@ -108,6 +115,8 @@ class RSS_Post_Aggregation_Category_Featured_Images_Widget extends WP_Widget {
 
 	/**
 	 * Widget output.
+	 *
+	 * @since 0.1.1
 	 *
 	 * @param  array $args     Widget arguments.
 	 * @param  array $instance Widget instance.
@@ -188,6 +197,8 @@ class RSS_Post_Aggregation_Category_Featured_Images_Widget extends WP_Widget {
 	/**
 	 * Feed Links dropdown select.
 	 *
+	 * @since 0.1.1
+	 *
 	 * @param  string $name      Dropdown name attribute.
 	 * @param  string $term_name Name of Term.
 	 * @return string            Returns the dropdwn html.
@@ -211,11 +222,12 @@ class RSS_Post_Aggregation_Category_Featured_Images_Widget extends WP_Widget {
 		$s .= '</select>';
 
 		return $s;
-
 	}
 
 	/**
 	 * Get the excerpt_length.
+	 *
+	 * @since 0.1.1
 	 *
 	 * @param  integer $length Length of excerpt.
 	 * @return integer         Return excerpt length.

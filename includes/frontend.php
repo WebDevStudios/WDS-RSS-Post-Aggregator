@@ -4,6 +4,9 @@ class RSS_Post_Aggregation_Frontend {
 
 	/**
 	 * Constructor
+	 *
+	 * @since 0.1.1
+	 *
 	 * @param Array $cpt Custom Post Type Object.
 	 */
 	public function __construct( $cpt ) {
@@ -12,6 +15,8 @@ class RSS_Post_Aggregation_Frontend {
 
 	/**
 	 * Initiate hooks.
+	 *
+	 * @since 0.1.1
 	 */
 	public function hooks() {
 		add_filter( 'post_link', array( $this, 'post_link' ), 10, 2 );
@@ -21,6 +26,8 @@ class RSS_Post_Aggregation_Frontend {
 
 	/**
 	 * Get Post Link.
+	 *
+	 * @since 0.1.1
 	 *
 	 * @param  string $link Link.
 	 * @return string       Post link.
@@ -36,6 +43,8 @@ class RSS_Post_Aggregation_Frontend {
 
 	/**
 	 * Return Post link via post.
+	 *
+	 * @since 0.1.1
 	 *
 	 * @param  string $link Link.
 	 * @param  array $post Post Class Object.

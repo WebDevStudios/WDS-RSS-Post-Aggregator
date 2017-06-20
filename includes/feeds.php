@@ -3,7 +3,13 @@
 class RSS_Post_Aggregation_Feeds {
 
 	/**
-	 * Replaces wp_widget_rss_output
+	 * Replaces wp_widget_rss_output.
+	 *
+	 * @since 0.1.1
+	 *
+	 * @param  string $rss_link RSS link.
+	 * @param  array $args     Array of arguments.
+	 * @return array           Returns an array with error message or RSS item results.
 	 */
 	function get_items( $rss_link, $args ) {
 		$this->rss_link = $rss_link;
@@ -89,6 +95,14 @@ class RSS_Post_Aggregation_Feeds {
 		return apply_filters( 'rss_post_aggregation_feed_items', $rss_items, $this->rss_link, $this );
 	}
 
+	/**
+	 * Process the arguments.
+	 *
+	 * @since 0.1.1
+	 *
+	 * @param  array $args Arguments to be processed.
+	 * @return array       Processed arguments.
+	 */
 	public function process_args( $args ) {
 		$args = apply_filters( 'rss_post_aggregation_feed_args', $args, $this->rss_link, $this );
 
@@ -108,6 +122,13 @@ class RSS_Post_Aggregation_Feeds {
 		return $args;
 	}
 
+	/**
+	 * Get feed title.
+	 *
+	 * @since 0.1.1
+	 *
+	 * @return string
+	 */
 	public function get_title() {
 		$title = esc_html( trim( strip_tags( $this->item->get_title() ) ) );
 		if ( empty( $title ) ) {
@@ -117,6 +138,13 @@ class RSS_Post_Aggregation_Feeds {
 		return apply_filters( 'rss_post_aggregation_feed_title', $title, $this->rss_link, $this );
 	}
 
+	/**
+	 * Get feed item link.
+	 *
+	 * @since 0.1.1
+	 *
+	 * @return string Link to RSS feed item.
+	 */
 	public function get_link() {
 		$link = $this->item->get_link();
 
@@ -129,6 +157,13 @@ class RSS_Post_Aggregation_Feeds {
 		return apply_filters( 'rss_post_aggregation_feed_link', $link, $this->rss_link, $this );
 	}
 
+	/**
+	 * Get RSS item date.
+	 *
+	 * @since 0.1.1
+	 *
+	 * @return string Feed item date.
+	 */
 	public function get_date() {
 		$get_date = $this->item->get_date( 'U' );
 		$date = ( $get_date )
@@ -138,6 +173,13 @@ class RSS_Post_Aggregation_Feeds {
 		return apply_filters( 'rss_post_aggregation_feed_date', $date, $this->rss_link, $this );
 	}
 
+	/**
+	 * Get feed item author.
+	 *
+	 * @since 0.1.1
+	 *
+	 * @return string Author.
+	 */
 	public function get_author() {
 		$author = $this->item->get_author();
 		$author = ( ( $author ) && is_object( $author ) )
@@ -147,6 +189,13 @@ class RSS_Post_Aggregation_Feeds {
 		return apply_filters( 'rss_post_aggregation_feed_author', $author, $this->rss_link, $this );
 	}
 
+	/**
+	 * Get feed item summary.
+	 *
+	 * @since 0.1.1
+	 *
+	 * @return string Feed item summary.
+	 */
 	public function get_summary() {
 		$summary = @html_entity_decode( $this->item->get_description(), ENT_QUOTES, get_option( 'blog_charset' ) );
 
@@ -162,6 +211,13 @@ class RSS_Post_Aggregation_Feeds {
 		return apply_filters( 'rss_post_aggregation_feed_summary', $summary, $this->rss_link, $this );
 	}
 
+	/**
+	 * Get feed image.
+	 *
+	 * @since 0.1.1
+	 *
+	 * @return string Feed image.
+	 */
 	public function get_image() {
 		$content = @html_entity_decode( $this->item->get_content(), ENT_QUOTES, get_option( 'blog_charset' ) );
 
@@ -178,6 +234,13 @@ class RSS_Post_Aggregation_Feeds {
 		return apply_filters( 'rss_post_aggregation_feed_image_src', $src, $this->rss_link, $this );
 	}
 
+	/**
+	 * Get Dom.
+	 *
+	 * @since 0.1.1
+	 *
+	 * @return array Returns an object.
+	 */
 	public function dom() {
 		if ( isset( $this->dom ) ) {
 			return $this->dom;
