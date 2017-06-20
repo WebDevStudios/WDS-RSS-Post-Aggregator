@@ -76,7 +76,7 @@ class RSS_Post_Aggregation_CPT extends CPT_Core {
 	 * @return false Return false if page is not correct.
 	 */
 	public function pseudo_menu_item() {
-		add_submenu_page( 'edit.php?post_type=' . $this->post_type(), '', __( 'Find RSS Post', 'wds-rss-post-aggregation' ), 'edit_posts', $this->slug_to_redirect, '__return_empty_string' );
+		add_submenu_page( 'edit.php?post_type=' . $this->post_type(), '', esc_html__( 'Find RSS Post', 'wds-rss-post-aggregation' ), 'edit_posts', $this->slug_to_redirect, '__return_empty_string' );
 
 		if ( ! isset( $_GET['page'] ) || $this->slug_to_redirect != $_GET['page'] ) {
 			return;
@@ -117,10 +117,10 @@ class RSS_Post_Aggregation_CPT extends CPT_Core {
 	 */
 	public function columns( $columns ) {
 		$columns = array(
-			'thumbnail'             => __( 'Thumbnail', 'wds-rss-post-aggregation' ),
+			'thumbnail'             => esc_html__( 'Thumbnail', 'wds-rss-post-aggregation' ),
 			'cb'                    => $columns['cb'],
 			'title'                 => $columns['title'],
-			'source'                => __( 'Source', 'wds-rss-post-aggregation' ),
+			'source'                => esc_html__( 'Source', 'wds-rss-post-aggregation' ),
 			'taxonomy-rss-category' => $columns['taxonomy-rss-category'],
 			'date'                  => $columns['date'],
 		);
@@ -160,7 +160,7 @@ class RSS_Post_Aggregation_CPT extends CPT_Core {
 	 * @author JayWood
 	 */
 	public function add_meta_box() {
-		add_meta_box( 'rsslink_mb', __( 'RSS Item Info', 'wds-rss-post-aggregation' ), array( $this, 'render_metabox' ), $this->post_type() );
+		add_meta_box( 'rsslink_mb', esc_html__( 'RSS Item Info', 'wds-rss-post-aggregation' ), array( $this, 'render_metabox' ), $this->post_type() );
 	}
 
 	/**
@@ -178,7 +178,7 @@ class RSS_Post_Aggregation_CPT extends CPT_Core {
 
 		?>
 		<fieldset>
-			<label for="<?php echo $this->prefix; ?>original_url"><?php _e( 'Original URL', 'wds-rss-post-aggregation' ); ?></label><br />
+			<label for="<?php echo $this->prefix; ?>original_url"><?php esc_html_e( 'Original URL', 'wds-rss-post-aggregation' ); ?></label><br />
 			<input name="<?php echo $this->prefix; ?>original_url" id="<?php echo $this->prefix; ?>original_url" value="<?php echo $meta_value; ?>" class="regular-text" />
 		</fieldset>
 		<?php
