@@ -182,8 +182,6 @@ class RSS_Post_Aggregation_Feeds {
 		// Load DOM object for our content.
 		@$this->dom()->loadHTML( $content_body );
 
-		$meta_img_src = '';
-
 		// Get og:image meta tag value from our content.
 		foreach ( $this->dom()->getElementsByTagName( 'meta' ) as $meta ) {
 
