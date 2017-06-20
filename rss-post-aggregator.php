@@ -30,8 +30,8 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
- // Our namespace.
- namespace WebDevStudios\RSS_Post_Aggregator;
+// Our namespace.
+namespace WebDevStudios\RSS_Post_Aggregator;
 
 /**
  * Autoloads files with classes when needed
