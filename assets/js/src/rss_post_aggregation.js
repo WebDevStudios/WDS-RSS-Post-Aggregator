@@ -409,7 +409,7 @@ window.RSS_Post_Aggregation = (function(window, document, $, undefined){
 	app.init = function() {
 		log( app );
 		var hrefSelector = '[href="post-new.php?post_type='+ l10n.cpt +'"]';
-		app.$( '.add-new-h2, ' + hrefSelector ).on( 'click', app.openModal ); // @deprecated
+		app.$( '.add-new-h2, ' + hrefSelector ).on( 'click', app.openModal ); // @deprecated Class add-new-h2 removed in WP 4.3
 		app.$( '.page-title-action, ' + hrefSelector ).on( 'click', app.openModal );
 
 		log( 'l10n', l10n );
