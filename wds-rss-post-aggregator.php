@@ -52,7 +52,6 @@ function rss_post_aggregator_autoload_classes( $class_name ) {
 	$parts = explode( '\\', $class_name );
 
 	$filename = strtolower( str_ireplace( 'RSS_Post_Aggregator_', '', end( $parts ) ) );
-	//var_dump($filename);
 
 	RSS_Post_Aggregator::include_file( $filename );
 }
