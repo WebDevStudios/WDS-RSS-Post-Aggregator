@@ -24,7 +24,7 @@ With RSS Post Aggregator, the following is pulled in during the import process:
 
 ### Manual Installation ###
 
-1. Upload the entire `/rss-post-aggregation` directory to the `/wp-content/plugins/` directory.
+1. Upload the entire `/rss-post-aggregator` directory to the `/wp-content/plugins/` directory.
 2. Activate RSS Post Aggregator through the 'Plugins' menu in WordPress.
 
 ### Dev Documentation ###

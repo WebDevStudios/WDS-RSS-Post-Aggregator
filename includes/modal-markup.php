@@ -1,14 +1,14 @@
 <div id="find-posts" class="find-box rss-search-modal" style="display:none;">
 	<div id="find-posts-head" class="find-box-head">
-		<?php _e( 'Select RSS Feed', 'wds-rss-post-aggregation' ); ?>
+		<?php _e( 'Select RSS Feed', 'wds-rss-post-aggregator' ); ?>
 		<div id="find-posts-close"></div>
 	</div>
 	<div class="find-box-inside">
 		<div class="find-box-search add-feed-form">
 			<?php wp_nonce_field( 'rss_save', 'rss_save', false ); ?>
-			<label class="screen-reader-text" for="find-posts-input"><?php _e( 'Add RSS Feed', 'wds-rss-post-aggregation' ); ?></label>
+			<label class="screen-reader-text" for="find-posts-input"><?php _e( 'Add RSS Feed', 'wds-rss-post-aggregator' ); ?></label>
 			<input type="text" id="rss-save-feed-input" name="rss_save_feed" value="" placeholder="<?php _e( 'enter feed url' ); ?>" />
-			<input type="button" id="rss-save-feed" value="<?php esc_attr_e( 'Add Feed', 'wds-rss-post-aggregation' ); ?>" class="button" />
+			<input type="button" id="rss-save-feed" value="<?php esc_attr_e( 'Add Feed', 'wds-rss-post-aggregator' ); ?>" class="button" />
 			<div class="clear"></div>
 		</div>
 		<hr>
@@ -21,17 +21,17 @@
 			<div class="clear"></div>
 		</div>
 		<div id="find-posts-response">
-			<table class="widefat"><thead><tr><th class="found-radio"><br></th><th><?php _e( 'Title', 'wds-rss-post-aggregation' ); ?></th><th class="no-break"><?php _e( 'Source', 'wds-rss-post-aggregation' ); ?></th><th class="no-break">Date</th></tr></thead><tbody>
+			<table class="widefat"><thead><tr><th class="found-radio"><br></th><th><?php _e( 'Title', 'wds-rss-post-aggregator' ); ?></th><th class="no-break"><?php _e( 'Source', 'wds-rss-post-aggregator' ); ?></th><th class="no-break">Date</th></tr></thead><tbody>
 
-			<tr class="spinner-row error"><td colspan="4"><p><?php _e( 'No feed data found', 'wds-rss-post-aggregation' ); ?></p></td></tr>
+			<tr class="spinner-row error"><td colspan="4"><p><?php _e( 'No feed data found', 'wds-rss-post-aggregator' ); ?></p></td></tr>
 			</tbody></table>
 		</div>
 	</div>
 	<div class="find-box-buttons">
-		<a href="<?php echo esc_url( admin_url( '/edit-tags.php?taxonomy='. $this->tax->taxonomy() .'&post_type='. $this->cpt->post_type() ) ); ?>" class="button-secondary manage-feed-links"><?php _e( 'Manage RSS Feeds', 'wds-rss-post-aggregation' ); ?></a>
-		<a href="<?php echo esc_url( admin_url( '/post-new.php?post_type='. $this->cpt->post_type() ) ); ?>" class="button-secondary manage-feed-links"><?php _e( 'Add Post Manually', 'wds-rss-post-aggregation' ); ?></a>
+		<a href="<?php echo esc_url( admin_url( '/edit-tags.php?taxonomy='. $this->tax->taxonomy() .'&post_type='. $this->cpt->post_type() ) ); ?>" class="button-secondary manage-feed-links"><?php _e( 'Manage RSS Feeds', 'wds-rss-post-aggregator' ); ?></a>
+		<a href="<?php echo esc_url( admin_url( '/post-new.php?post_type='. $this->cpt->post_type() ) ); ?>" class="button-secondary manage-feed-links"><?php _e( 'Add Post Manually', 'wds-rss-post-aggregator' ); ?></a>
 		<div class="spinner" style="display:none;"></div>
-		<?php submit_button( __( 'Select to Import', 'wds-rss-post-aggregation' ), 'button-primary alignright', 'find-posts-submit', false ); ?>
+		<?php submit_button( __( 'Select to Import', 'wds-rss-post-aggregator' ), 'button-primary alignright', 'find-posts-submit', false ); ?>
 		<div class="clear"></div>
 	</div>
 </div>

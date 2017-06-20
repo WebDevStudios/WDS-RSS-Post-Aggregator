@@ -8,7 +8,7 @@
  * Author URI:  http://webdevstudios.com
  * Donate link: http://webdevstudios.com
  * License:     GPLv2+
- * Text Domain: wds-rss-post-aggregation
+ * Text Domain: wds-rss-post-aggregator
  * Domain Path: /languages
  */
 
@@ -35,16 +35,16 @@
  * @since  0.1.0
  * @param  string $class_name Name of the class being requested
  */
-function rss_post_aggregation_autoload_classes( $class_name ) {
-	if ( class_exists( $class_name, false ) || false === stripos( $class_name, 'RSS_Post_Aggregation_' ) ) {
+function rss_post_Aggregator_autoload_classes( $class_name ) {
+	if ( class_exists( $class_name, false ) || false === stripos( $class_name, 'RSS_Post_Aggregator_' ) ) {
 		return;
 	}
 
-	$filename = strtolower( str_ireplace( 'RSS_Post_Aggregation_', '', $class_name ) );
+	$filename = strtolower( str_ireplace( 'RSS_Post_Aggregator_', '', $class_name ) );
 
-	RSS_Post_Aggregation::include_file( $filename );
+	RSS_Post_Aggregator::include_file( $filename );
 }
-spl_autoload_register( 'rss_post_aggregation_autoload_classes' );
+spl_autoload_register( 'rss_post_Aggregator_autoload_classes' );
 
 /**
  * Main initiation class
@@ -53,7 +53,7 @@ spl_autoload_register( 'rss_post_aggregation_autoload_classes' );
  * @property string $cpt_slug
  * @property string $rss_category_slug
  */
-class RSS_Post_Aggregation {
+class RSS_Post_Aggregator {
 
 	const VERSION = '0.1.1';
 	private $cpt_slug          = 'rss-posts';
@@ -61,32 +61,32 @@ class RSS_Post_Aggregation {
 	private $rss_category_slug = 'rss-category';
 
 	/**
-	 * @var RSS_Post_Aggregation_CPT
+	 * @var RSS_Post_Aggregator_CPT
 	 */
 	public $rsscpt;
 
 	/**
-	 * @var RSS_Post_Aggregation_Taxonomy
+	 * @var RSS_Post_Aggregator_Taxonomy
 	 */
 	public $taxonomy;
 
 	/**
-	 * @var RSS_Post_Aggregation_Feeds
+	 * @var RSS_Post_Aggregator_Feeds
 	 */
 	public $rss;
 
 	/**
-	 * @var RSS_Post_Aggregation_Modal
+	 * @var RSS_Post_Aggregator_Modal
 	 */
 	public $modal;
 
 	/**
-	 * @var RSS_Post_Aggregation_Frontend
+	 * @var RSS_Post_Aggregator_Frontend
 	 */
 	public $frontend;
 
 	/**
-	 * @var RSS_Post_Aggregation_Widgets
+	 * @var RSS_Post_Aggregator_Widgets
 	 */
 	public $widgets;
 
@@ -111,18 +111,18 @@ class RSS_Post_Aggregation {
 	 * @author JayWood
 	 */
 	public function plugin_classes() {
-		$this->rsscpt   = new RSS_Post_Aggregation_CPT( $this->cpt_slug, $this->tax_slug );
-		$this->taxonomy = new RSS_Post_Aggregation_Taxonomy( $this->tax_slug, $this->rsscpt );
-		$this->rss      = new RSS_Post_Aggregation_Feeds();
-		$this->modal    = new RSS_Post_Aggregation_Modal( $this->rss, $this->rsscpt, $this->taxonomy );
+		$this->rsscpt   = new RSS_Post_Aggregator_CPT( $this->cpt_slug, $this->tax_slug );
+		$this->taxonomy = new RSS_Post_Aggregator_Taxonomy( $this->tax_slug, $this->rsscpt );
+		$this->rss      = new RSS_Post_Aggregator_Feeds();
+		$this->modal    = new RSS_Post_Aggregator_Modal( $this->rss, $this->rsscpt, $this->taxonomy );
 
 		// Handles frontend modification for aggregate site
-		$this->frontend = new RSS_Post_Aggregation_Frontend( $this->rsscpt );
-		$this->widgets = new RSS_Post_Aggregation_Widgets();
+		$this->frontend = new RSS_Post_Aggregator_Frontend( $this->rsscpt );
+		$this->widgets = new RSS_Post_Aggregator_Widgets();
 
 		$this->rss_category = register_via_taxonomy_core( array(
-			__( 'RSS Category', 'wds-rss-post-aggregation' ),
-			__( 'RSS Categories', 'wds-rss-post-aggregation' ),
+			__( 'RSS Category', 'wds-rss-post-aggregator' ),
+			__( 'RSS Categories', 'wds-rss-post-aggregator' ),
 			$this->rss_category_slug,
 		), array(), array( $this->cpt_slug ) );
 	}
@@ -163,9 +163,9 @@ class RSS_Post_Aggregation {
 	 * @return null
 	 */
 	public function init() {
-		$locale = apply_filters( 'plugin_locale', get_locale(), 'wds-rss-post-aggregation' );
-		load_textdomain( 'wds-rss-post-aggregation', WP_LANG_DIR . '/wds-rss-post-aggregation/wds-rss-post-aggregation-' . $locale . '.mo' );
-		load_plugin_textdomain( 'wds-rss-post-aggregation', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+		$locale = apply_filters( 'plugin_locale', get_locale(), 'wds-rss-post-aggregator' );
+		load_textdomain( 'wds-rss-post-aggregator', WP_LANG_DIR . '/wds-rss-post-aggregator/wds-rss-post-aggregator-' . $locale . '.mo' );
+		load_plugin_textdomain( 'wds-rss-post-aggregator', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 	}
 
 	/**
@@ -237,6 +237,5 @@ class RSS_Post_Aggregation {
 }
 
 // init our class
-$RSS_Post_Aggregation = new RSS_Post_Aggregation();
-$RSS_Post_Aggregation->hooks();
-
+$RSS_Post_Aggregator = new RSS_Post_Aggregator();
+$RSS_Post_Aggregator->hooks();

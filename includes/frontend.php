@@ -1,6 +1,6 @@
 <?php
 
-class RSS_Post_Aggregation_Frontend {
+class RSS_Post_Aggregator_Frontend {
 
 	public function __construct( $cpt ) {
 		$this->cpt = $cpt;

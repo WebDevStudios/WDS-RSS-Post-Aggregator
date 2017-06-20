@@ -1,6 +1,6 @@
 <?php
 
-class RSS_Post_Aggregation_Feeds {
+class RSS_Post_Aggregator_Feeds {
 
 	/**
 	 * Replaces wp_widget_rss_output
@@ -28,7 +28,7 @@ class RSS_Post_Aggregation_Feeds {
 		if ( is_wp_error( $rss ) ) {
 			// if ( is_admin() || current_user_can( 'manage_options' ) )
 			return array(
-				'error' => sprintf( __( 'RSS Error: %s', 'wds-rss-post-aggregation' ), $rss->get_error_message() ),
+				'error' => sprintf( __( 'RSS Error: %s', 'wds-rss-post-aggregator' ), $rss->get_error_message() ),
 			);
 		}
 
@@ -36,7 +36,7 @@ class RSS_Post_Aggregation_Feeds {
 			$rss->__destruct();
 			unset( $rss );
 			return array(
-				'error' => __( 'An error has occurred, which probably means the feed is down. Try again later.', 'wds-rss-post-aggregation' ),
+				'error' => __( 'An error has occurred, which probably means the feed is down. Try again later.', 'wds-rss-post-aggregator' ),
 			);
 		}
 
@@ -83,11 +83,11 @@ class RSS_Post_Aggregation_Feeds {
 			set_transient( $this->transient_id, $rss_items, $this->cache_time );
 		}
 
-		return apply_filters( 'rss_post_aggregation_feed_items', $rss_items, $this->rss_link, $this );
+		return apply_filters( 'rss_post_aggregator_feed_items', $rss_items, $this->rss_link, $this );
 	}
 
 	public function process_args( $args ) {
-		$args = apply_filters( 'rss_post_aggregation_feed_args', $args, $this->rss_link, $this );
+		$args = apply_filters( 'rss_post_aggregator_feed_args', $args, $this->rss_link, $this );
 
 		$args = wp_parse_args( $args, array(
 			'show_author'  => 0,
@@ -106,10 +106,10 @@ class RSS_Post_Aggregation_Feeds {
 	public function get_title() {
 		$title = esc_html( trim( strip_tags( $this->item->get_title() ) ) );
 		if ( empty( $title ) ) {
-			$title = __( 'Untitled', 'wds-rss-post-aggregation' );
+			$title = __( 'Untitled', 'wds-rss-post-aggregator' );
 		}
 
-		return apply_filters( 'rss_post_aggregation_feed_title', $title, $this->rss_link, $this );
+		return apply_filters( 'rss_post_aggregator_feed_title', $title, $this->rss_link, $this );
 	}
 
 	public function get_link() {
@@ -121,7 +121,7 @@ class RSS_Post_Aggregation_Feeds {
 
 		$link = esc_url( strip_tags( trim( $link ) ) );
 
-		return apply_filters( 'rss_post_aggregation_feed_link', $link, $this->rss_link, $this );
+		return apply_filters( 'rss_post_aggregator_feed_link', $link, $this->rss_link, $this );
 	}
 
 	public function get_date() {
@@ -129,7 +129,7 @@ class RSS_Post_Aggregation_Feeds {
 			? date_i18n( get_option( 'date_format' ), $get_date )
 			: '';
 
-		return apply_filters( 'rss_post_aggregation_feed_date', $date, $this->rss_link, $this );
+		return apply_filters( 'rss_post_aggregator_feed_date', $date, $this->rss_link, $this );
 	}
 
 	public function get_author() {
@@ -137,13 +137,13 @@ class RSS_Post_Aggregation_Feeds {
 			? esc_html( strip_tags( $author->get_name() ) )
 			: '';
 
-		return apply_filters( 'rss_post_aggregation_feed_author', $author, $this->rss_link, $this );
+		return apply_filters( 'rss_post_aggregator_feed_author', $author, $this->rss_link, $this );
 	}
 
 	public function get_summary() {
 		$summary = @html_entity_decode( $this->item->get_description(), ENT_QUOTES, get_option( 'blog_charset' ) );
 
-		$length = (int) apply_filters( 'rss_post_aggregation_feed_summary_length', 100, $this->rss_link, $this );
+		$length = (int) apply_filters( 'rss_post_aggregator_feed_summary_length', 100, $this->rss_link, $this );
 
 		$summary = esc_attr( wp_trim_words( $summary, $length, ' [&hellip;]' ) );
 
@@ -152,7 +152,7 @@ class RSS_Post_Aggregation_Feeds {
 			$summary = substr( $summary, 0, -5 ) . '[&hellip;]';
 		}
 
-		return apply_filters( 'rss_post_aggregation_feed_summary', $summary, $this->rss_link, $this );
+		return apply_filters( 'rss_post_aggregator_feed_summary', $summary, $this->rss_link, $this );
 	}
 
 	public function get_image() {
@@ -167,7 +167,7 @@ class RSS_Post_Aggregation_Feeds {
 			}
 		}
 
-		return apply_filters( 'rss_post_aggregation_feed_image_src', $src, $this->rss_link, $this );
+		return apply_filters( 'rss_post_aggregator_feed_image_src', $src, $this->rss_link, $this );
 	}
 
 	public function dom() {

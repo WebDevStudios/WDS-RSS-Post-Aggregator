@@ -1,5 +1,5 @@
 /**
- * RSS Post Aggregation
+ * RSS Post Aggregator
  * http://webdevstudios.com
  *
  * Copyright (c) 2014 WebDevStudios, Justin Sternberg

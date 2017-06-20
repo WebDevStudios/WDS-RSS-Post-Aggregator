@@ -1,30 +1,30 @@
 <?php
 
-class RSS_Post_Aggregation_Modal {
+class RSS_Post_Aggregator_Modal {
 
 	public $feed_links = array();
 
 	/**
-	 * @var RSS_Post_Aggregation_Feeds
+	 * @var RSS_Post_Aggregator_Feeds
 	 */
 	public $rss;
 
 	/**
-	 * @var RSS_Post_Aggregation_CPT
+	 * @var RSS_Post_Aggregator_CPT
 	 */
 	public $cpt;
 
 	/**
-	 * @var RSS_Post_Aggregation_Taxonomy
+	 * @var RSS_Post_Aggregator_Taxonomy
 	 */
 	public $tax;
 
 	/**
-	 * RSS_Post_Aggregation_Modal constructor.
+	 * RSS_Post_Aggregator_Modal constructor.
 	 *
-	 * @param RSS_Post_Aggregation_Feeds $rss
-	 * @param RSS_Post_Aggregation_CPT $cpt
-	 * @param RSS_Post_Aggregation_Taxonomy $tax
+	 * @param RSS_Post_Aggregator_Feeds $rss
+	 * @param RSS_Post_Aggregator_CPT $cpt
+	 * @param RSS_Post_Aggregator_Taxonomy $tax
 	 */
 	public function __construct( $rss, $cpt, $tax ) {
 		$this->rss = $rss;
@@ -87,7 +87,7 @@ class RSS_Post_Aggregation_Modal {
 		}
 
 		if ( ! $feed_id ) {
-			wp_send_json_error( __( 'There was an error with the RSS feed link creation.', 'wds-rss-post-aggregation' ) );
+			wp_send_json_error( __( 'There was an error with the RSS feed link creation.', 'wds-rss-post-aggregator' ) );
 		}
 
 		$feed_items = $this->rss->get_items( esc_url( $_REQUEST['feed_url'] ), array(
@@ -117,7 +117,7 @@ class RSS_Post_Aggregation_Modal {
 			'wp-backbone', // Needed for backbone and `wp.template`
 		);
 
-		wp_enqueue_script( 'rss-aggregator', RSS_Post_Aggregation::url( "assets/js/rss_post_aggregation{$min}.js" ), $dependencies, RSS_Post_Aggregation::VERSION );
+		wp_enqueue_script( 'rss-aggregator', RSS_Post_Aggregator::url( "assets/js/rss_post_aggregator{$min}.js" ), $dependencies, RSS_Post_Aggregator::VERSION );
 
 		// wp_die( '<xmp>: '. print_r( $this->cpt->slug_to_redirect, true ) .'</xmp>' );
 		wp_localize_script( 'rss-aggregator', 'RSSPost_l10n', array(
@@ -126,14 +126,14 @@ class RSS_Post_Aggregation_Modal {
 			'feeds'           => $this->get_feed_links(),
 			'cpt'             => $this->cpt->post_type(),
 			'show_modal'      => isset( $_GET[ $this->cpt->slug_to_redirect ] ),
-			'no_data'         => __( 'No feed data found', 'wds-rss-post-aggregation' ),
-			'nothing_checked' => __( "You didn't select any posts. Do you want to close the search?", 'wds-rss-post-aggregation' ),
+			'no_data'         => __( 'No feed data found', 'wds-rss-post-aggregator' ),
+			'nothing_checked' => __( "You didn't select any posts. Do you want to close the search?", 'wds-rss-post-aggregator' ),
 		) );
 
 		delete_option( 'wds_rss_aggregate_saved_feed_urls' );
 		// Needed to style the search modal
 		wp_register_style( 'rss-search-box', admin_url( "/css/media{$min}.css" ) );
-		wp_enqueue_style( 'rss-aggregator', RSS_Post_Aggregation::url( "assets/css/rss_post_aggregation{$min}.css" ), array( 'rss-search-box' ), RSS_Post_Aggregation::VERSION );
+		wp_enqueue_style( 'rss-aggregator', RSS_Post_Aggregator::url( "assets/css/rss_post_aggregator{$min}.css" ), array( 'rss-search-box' ), RSS_Post_Aggregator::VERSION );
 
 		add_action( 'admin_footer', array( $this, 'js_modal_template' ) );
 

@@ -2,7 +2,7 @@
 /*
  * Simple widget that displays the headline as a title
  */
-class RSS_Post_Aggregation_Category_Headlines_Widget extends WP_Widget {
+class RSS_Post_Aggregator_Category_Headlines_Widget extends WP_Widget {
 
 	/**
 	 * Default widget options
@@ -24,9 +24,9 @@ class RSS_Post_Aggregation_Category_Headlines_Widget extends WP_Widget {
 
 	public function __construct() {
 		parent::__construct(
-			'rss_post_aggregation_category_headlines',
-			__( 'RSS Category Headlines', 'wds-rss-post-aggregation' ),
-			array( 'description' => __( 'Displays the title as the headline for imported RSS feed items.', 'wds-rss-post-aggregation' ) )
+			'rss_post_aggregator_category_headlines',
+			__( 'RSS Category Headlines', 'wds-rss-post-aggregator' ),
+			array( 'description' => __( 'Displays the title as the headline for imported RSS feed items.', 'wds-rss-post-aggregator' ) )
 		);
 	}
 
@@ -36,30 +36,30 @@ class RSS_Post_Aggregation_Category_Headlines_Widget extends WP_Widget {
 		?>
 
 		<p>
-			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php echo __( 'Title', 'wds-rss-post-aggregation' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php echo __( 'Title', 'wds-rss-post-aggregator' ); ?></label>
 			<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $instance['title'] ); ?>" />
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'category' )?>"><?php echo __( 'Category', 'wds-rss-post-aggregation' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'category' )?>"><?php echo __( 'Category', 'wds-rss-post-aggregator' ); ?></label>
 			<?php echo $this->category_dropdown( $this->get_field_name( 'category' ), $instance['category'] ); ?>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'count' )?>"><?php echo __( 'Number to show', 'wds-rss-post-aggregation' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'count' )?>"><?php echo __( 'Number to show', 'wds-rss-post-aggregator' ); ?></label>
 			<input class="widefat" id="<?php echo $this->get_field_id( 'count' ); ?>" name="<?php echo $this->get_field_name( 'count' ); ?>" type="text" value="<?php echo esc_attr( $instance['count'] ); ?>" />
 		</p>
 		<p>
         	<input id="<?php echo $this->get_field_id( 'excerpt' ); ?>" name="<?php echo $this->get_field_name( 'excerpt' ); ?>" type="checkbox" value="1" <?php checked( '1', esc_attr( $instance['excerpt'] ) ); ?> />
-        	<label for="<?php echo $this->get_field_id( 'excerpt' ); ?>"><?php echo __( 'Display Post Excerpt', 'wds-rss-post-aggregation' ); ?></label>
+        	<label for="<?php echo $this->get_field_id( 'excerpt' ); ?>"><?php echo __( 'Display Post Excerpt', 'wds-rss-post-aggregator' ); ?></label>
         </p>
 		<p>
         	<input id="<?php echo $this->get_field_id( 'cat_link' ); ?>" name="<?php echo $this->get_field_name( 'cat_link' ); ?>" type="checkbox" value="1" <?php checked( '1', esc_attr( $instance['cat_link'] ) ); ?> />
-        	<label for="<?php echo $this->get_field_id( 'cat_link' ); ?>"><?php echo __( 'Display Category Link', 'wds-rss-post-aggregation' ); ?></label>
+        	<label for="<?php echo $this->get_field_id( 'cat_link' ); ?>"><?php echo __( 'Display Category Link', 'wds-rss-post-aggregator' ); ?></label>
         </p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'excerpt_length' )?>"><?php echo __( 'Excerpt Length', 'wds-rss-post-aggregation' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'excerpt_length' )?>"><?php echo __( 'Excerpt Length', 'wds-rss-post-aggregator' ); ?></label>
 			<input class="widefat" id="<?php echo $this->get_field_id( 'excerpt_length' ); ?>" name="<?php echo $this->get_field_name( 'excerpt_length' ); ?>" type="text" value="<?php echo esc_attr( $instance['excerpt_length'] ); ?>" />
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'read_more_text' )?>"><?php echo __( '"Read More" text', 'wds-rss-post-aggregation' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'read_more_text' )?>"><?php echo __( '"Read More" text', 'wds-rss-post-aggregator' ); ?></label>
 			<input class="widefat" id="<?php echo $this->get_field_id( 'read_more_text' ); ?>" name="<?php echo $this->get_field_name( 'read_more_text' ); ?>" type="text" value="<?php echo esc_attr( $instance['read_more_text'] ); ?>" />
 		</p>
 		<?php
@@ -143,11 +143,11 @@ class RSS_Post_Aggregation_Category_Headlines_Widget extends WP_Widget {
 			if ( ! empty( $instance['cat_link'] ) ){
 				$cat_data = get_term_by( 'slug', $instance['category'], 'rss-category' );
 				if ( ! empty( $cat_data ) ) {
-					echo '<p><a href="' . get_term_link( $cat_data->term_id, 'rss-category' ) . '" title="' . sprintf( __( 'More from %s', 'wds-rss-post-aggregation' ), $cat_data->name ) . '" class="rss_cat_link">' . sprintf( __( 'More from %s', 'wds-rss-post-aggregation' ), $cat_data->name ) . ' &raquo;</a></p>';
+					echo '<p><a href="' . get_term_link( $cat_data->term_id, 'rss-category' ) . '" title="' . sprintf( __( 'More from %s', 'wds-rss-post-aggregator' ), $cat_data->name ) . '" class="rss_cat_link">' . sprintf( __( 'More from %s', 'wds-rss-post-aggregator' ), $cat_data->name ) . ' &raquo;</a></p>';
 				}
 			}
 		} else {
-			echo __( 'Nothing yet! Check again later', 'wds-rss-post-aggregation' );
+			echo __( 'Nothing yet! Check again later', 'wds-rss-post-aggregator' );
 		}
 
 		echo isset( $args['after_widget'] ) ? $args['after_widget'] : '';

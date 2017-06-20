@@ -1,15 +1,14 @@
 /**
- * RSS Post Aggregator
+ * RSS Post Aggregator - v0.1.0 - 2014-09-08
  * http://webdevstudios.com
  *
- * Copyright (c) 2014 WebDevStudios, Justin Sternberg
- * Licensed under the GPLv2+ license.
+ * Copyright (c) 2014;
+ * Licensed GPLv2+
  */
-
 /*jslint browser: true */
 /*global jQuery:false */
 
-window.RSS_Post_Aggregation = (function(window, document, $, undefined){
+window.RSS_Post_Aggregator = (function(window, document, $, undefined){
 	'use strict';
 
 	function Selector_Cache() {

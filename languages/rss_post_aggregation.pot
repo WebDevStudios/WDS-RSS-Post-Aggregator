@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: RSS Post Aggregation\n"
+"Project-Id-Version: RSS Post Aggregator\n"
 "POT-Creation-Date: 2014-08-28 14:58-0400\n"
 "PO-Revision-Date: 2014-08-28 14:58-0400\n"
 "Last-Translator: WebDevStudios, Justin Sternberg <contact@webdevstudios.com>\n"
@@ -13,4 +13,3 @@ msgstr ""
 "esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: ..\n"
-

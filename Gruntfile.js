@@ -22,11 +22,11 @@ module.exports = function( grunt ) {
 				stripBanners: true,
 				banner: bannerTemplate
 			},
-			rss_post_aggregation: {
+			rss_post_aggregator: {
 				src: [
-					'assets/js/src/rss_post_aggregation.js'
+					'assets/js/src/rss_post_aggregator.js'
 				],
-				dest: 'assets/js/rss_post_aggregation.js'
+				dest: 'assets/js/rss_post_aggregator.js'
 			}
 		},
 
@@ -59,7 +59,7 @@ module.exports = function( grunt ) {
 		uglify: {
 			all: {
 				files: {
-					'assets/js/rss_post_aggregation.min.js': ['assets/js/rss_post_aggregation.js']
+					'assets/js/rss_post_aggregator.min.js': ['assets/js/rss_post_aggregator.js']
 				},
 				options: {
 					banner: compactBannerTemplate,
@@ -78,7 +78,7 @@ module.exports = function( grunt ) {
 		sass:   {
 			all: {
 				files: {
-					'assets/css/rss_post_aggregation.css': 'assets/css/sass/rss_post_aggregation.scss'
+					'assets/css/rss_post_aggregator.css': 'assets/css/sass/rss_post_aggregator.scss'
 				}
 			}
 		},
@@ -92,7 +92,7 @@ module.exports = function( grunt ) {
 				expand: true,
 
 				cwd: 'assets/css/',
-				src: ['rss_post_aggregation.css'],
+				src: ['rss_post_aggregator.css'],
 
 				dest: 'assets/css/',
 				ext: '.min.css'

@@ -2,7 +2,7 @@
 /**
  * Widget that shows the RSS feed with a featured image
  */
-class RSS_Post_Aggregation_Category_Featured_Images_Widget extends WP_Widget {
+class RSS_Post_Aggregator_Category_Featured_Images_Widget extends WP_Widget {
 
 	/**
 	 * Default widget options
@@ -28,9 +28,9 @@ class RSS_Post_Aggregation_Category_Featured_Images_Widget extends WP_Widget {
 
 	public function __construct() {
 		parent::__construct(
-			'rss_post_aggregation_category_featured_images',
-			__( 'RSS Feed with Images', 'wds-rss-post-aggregation' ),
-			array( 'description' => __( 'Reads and displays a supplied RSS feed with featured images.', 'wds-rss-post-aggregation' ) )
+			'rss_post_aggregator_category_featured_images',
+			__( 'RSS Feed with Images', 'wds-rss-post-Aggregator' ),
+			array( 'description' => __( 'Reads and displays a supplied RSS feed with featured images.', 'wds-rss-post-Aggregator' ) )
 		);
 	}
 
@@ -41,22 +41,22 @@ class RSS_Post_Aggregation_Category_Featured_Images_Widget extends WP_Widget {
 
 		?>
 		<p>
-			<?php echo __( 'Title', 'wds-rss-post-aggregation' ); ?>
+			<?php echo __( 'Title', 'wds-rss-post-aggregator' ); ?>
 			<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $instance['title'] ); ?>" />
-			<?php echo __( 'Feed', 'wds-rss-post-aggregation' ); ?>
+			<?php echo __( 'Feed', 'wds-rss-post-Aggregator' ); ?>
 			<?php echo $this->feed_links_dropdown( $this->get_field_name( 'feed_url' ), $instance['feed_url'] ); ?>
 
 		</p>
 		<p>
-			<?php echo __( 'Number to show', 'wds-rss-post-aggregation' ); ?>
+			<?php echo __( 'Number to show', 'wds-rss-post-aggregator' ); ?>
 			<input class="widefat" id="<?php echo $this->get_field_id( 'items' ); ?>" name="<?php echo $this->get_field_name( 'items' ); ?>" type="text" value="<?php echo esc_attr( $instance['items'] ); ?>" />
 		</p>
 		<p>
-			<?php echo __( 'Excerpt Length', 'wds-rss-post-aggregation' ); ?>
+			<?php echo __( 'Excerpt Length', 'wds-rss-post-aggregator' ); ?>
 			<input class="widefat" id="<?php echo $this->get_field_id( 'excerpt_length' ); ?>" name="<?php echo $this->get_field_name( 'excerpt_length' ); ?>" type="text" value="<?php echo esc_attr( $instance['excerpt_length'] ); ?>" />
 		</p>
 		<p>
-			<?php echo __( '"Read More" text', 'wds-rss-post-aggregation' ); ?>
+			<?php echo __( '"Read More" text', 'wds-rss-post-aggregator' ); ?>
 			<input class="widefat" id="<?php echo $this->get_field_id( 'read_more_text' ); ?>" name="<?php echo $this->get_field_name( 'read_more_text' ); ?>" type="text" value="<?php echo esc_attr( $instance['read_more_text'] ); ?>" />
 		</p>
 
@@ -86,7 +86,7 @@ class RSS_Post_Aggregation_Category_Featured_Images_Widget extends WP_Widget {
 		$rss_args = $this->rss_args;
 		$rss_args['items'] = isset( $instance['items'] ) ? absint( $instance['items'] ) : $rss_args['items'];
 
-		$rss = new RSS_Post_Aggregation_Feeds();
+		$rss = new RSS_Post_Aggregator_Feeds();
 		$rss->rss_link = $instance['feed_url'];
 		$rss->process_args( $rss_args );
 
@@ -97,7 +97,7 @@ class RSS_Post_Aggregation_Category_Featured_Images_Widget extends WP_Widget {
 
 	public function widget( $args, $instance ) {
 
-		$should_show = apply_filters( 'rss_post_aggregation_images_widget_visibility', 'on' );
+		$should_show = apply_filters( 'rss_post_aggregator_images_widget_visibility', 'on' );
 		if( 'on' != $should_show ) {
 			echo '';
 			return;
@@ -111,19 +111,19 @@ class RSS_Post_Aggregation_Category_Featured_Images_Widget extends WP_Widget {
 
 		if ( isset( $instance['excerpt_length'] ) && ( $length = absint( $instance['excerpt_length'] ) ) ) {
 			$this->excerpt_length = $length;
-			add_filter( 'rss_post_aggregation_feed_summary_length', array( $this, 'filter_excerpt_length' ), 10 );
+			add_filter( 'rss_post_aggregator_feed_summary_length', array( $this, 'filter_excerpt_length' ), 10 );
 		}
 
-		$rss = new RSS_Post_Aggregation_Feeds();
+		$rss = new RSS_Post_Aggregator_Feeds();
 		$rss_args = $this->rss_args;
 		$rss_args['items'] = isset( $instance['items'] ) ? absint( $instance['items'] ) : $rss_args['items'];
 
-		$feed_url = apply_filters( 'rss_post_aggregation_feed_location', $instance['feed_url'], $rss_args, $this->id_base );
+		$feed_url = apply_filters( 'rss_post_aggregator_feed_location', $instance['feed_url'], $rss_args, $this->id_base );
 
 		$posts = $rss->get_items( $feed_url, $rss_args );
 
 		if ( isset( $this->excerpt_length ) ) {
-			remove_filter( 'rss_post_aggregation_feed_summary_length', array( $this, 'filter_excerpt_length' ) );
+			remove_filter( 'rss_post_aggregator_feed_summary_length', array( $this, 'filter_excerpt_length' ) );
 		}
 
 		if( ! empty( $posts ) ) {
@@ -155,7 +155,7 @@ class RSS_Post_Aggregation_Category_Featured_Images_Widget extends WP_Widget {
 			}
 			echo '</ul>';
 		} else {
-			echo __( 'Nothing yet! Check again later', 'wds-rss-post-aggregation' );
+			echo __( 'Nothing yet! Check again later', 'wds-rss-post-aggregator' );
 		}
 
 		echo $args['after_widget'];
@@ -190,4 +190,3 @@ class RSS_Post_Aggregation_Category_Featured_Images_Widget extends WP_Widget {
 	}
 
 } // end class
-

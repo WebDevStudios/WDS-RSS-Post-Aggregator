@@ -1,6 +1,6 @@
-msgid ""
+Aggregatormsgid ""
 msgstr ""
-"Project-Id-Version: RSS Post Aggregation v0.1.0\n"
+"Project-Id-Version: RSS Post Aggregator v0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2015-01-21 05:23:12+0000\n"
@@ -21,137 +21,137 @@ msgstr ""
 "X-Textdomain-Support: yes"
 
 #: includes/category_featured_images_widget.php:32
-#@ wds-rss-post-aggregation
+#@ wds-rss-post-aggregator
 msgid "RSS Feed with Images"
 msgstr ""
 
 #: includes/category_featured_images_widget.php:33
-#@ wds-rss-post-aggregation
+#@ wds-rss-post-aggregator
 msgid "Reads and displays a supplied RSS feed with featured images."
 msgstr ""
 
 #: includes/category_featured_images_widget.php:44
 #: includes/category_headlines_widget.php:39
 #: includes/modal-markup.php:24
-#@ wds-rss-post-aggregation
+#@ wds-rss-post-aggregator
 msgid "Title"
 msgstr ""
 
 #: includes/category_featured_images_widget.php:46
-#@ wds-rss-post-aggregation
+#@ wds-rss-post-aggregator
 msgid "Feed"
 msgstr ""
 
 #: includes/category_featured_images_widget.php:51
 #: includes/category_headlines_widget.php:46
-#@ wds-rss-post-aggregation
+#@ wds-rss-post-aggregator
 msgid "Number to show"
 msgstr ""
 
 #: includes/category_featured_images_widget.php:55
 #: includes/category_headlines_widget.php:58
-#@ wds-rss-post-aggregation
+#@ wds-rss-post-aggregator
 msgid "Excerpt Length"
 msgstr ""
 
 #: includes/category_featured_images_widget.php:59
 #: includes/category_headlines_widget.php:62
-#@ wds-rss-post-aggregation
+#@ wds-rss-post-aggregator
 msgid "\"Read More\" text"
 msgstr ""
 
 #: includes/category_featured_images_widget.php:158
 #: includes/category_headlines_widget.php:162
-#@ wds-rss-post-aggregation
+#@ wds-rss-post-aggregator
 msgid "Nothing yet! Check again later"
 msgstr ""
 
 #: includes/category_headlines_widget.php:28
-#@ wds-rss-post-aggregation
+#@ wds-rss-post-aggregator
 msgid "RSS Category Headlines"
 msgstr ""
 
 #: includes/category_headlines_widget.php:29
-#@ wds-rss-post-aggregation
+#@ wds-rss-post-aggregator
 msgid "Displays the title as the headline for imported RSS feed items."
 msgstr ""
 
 #: includes/category_headlines_widget.php:43
-#@ wds-rss-post-aggregation
+#@ wds-rss-post-aggregator
 msgid "Category"
 msgstr ""
 
 #: includes/category_headlines_widget.php:51
-#@ wds-rss-post-aggregation
+#@ wds-rss-post-aggregator
 msgid "Display Post Excerpt"
 msgstr ""
 
 #: includes/category_headlines_widget.php:55
-#@ wds-rss-post-aggregation
+#@ wds-rss-post-aggregator
 msgid "Display Category Link"
 msgstr ""
 
 #: includes/category_headlines_widget.php:140
-#@ wds-rss-post-aggregation
+#@ wds-rss-post-aggregator
 msgctxt "Headlines widget date format"
 msgid "M j, Y"
 msgstr ""
 
 #: includes/category_headlines_widget.php:157
 #, php-format
-#@ wds-rss-post-aggregation
+#@ wds-rss-post-aggregator
 msgid "More from %s"
 msgstr ""
 
 #: includes/cpt.php:23
-#@ wds-rss-post-aggregation
+#@ wds-rss-post-aggregator
 msgid "RSS Post"
 msgstr ""
 
 #: includes/cpt.php:23
-#@ wds-rss-post-aggregation
+#@ wds-rss-post-aggregator
 msgid "RSS Posts"
 msgstr ""
 
 #: includes/cpt.php:37
-#@ wds-rss-post-aggregation
+#@ wds-rss-post-aggregator
 msgid "Find RSS Post"
 msgstr ""
 
 #: includes/cpt.php:70
-#@ wds-rss-post-aggregation
+#@ wds-rss-post-aggregator
 msgid "Thumbnail"
 msgstr ""
 
 #: includes/cpt.php:73
 #: includes/modal-markup.php:24
-#@ wds-rss-post-aggregation
+#@ wds-rss-post-aggregator
 msgid "Source"
 msgstr ""
 
 #: includes/cpt.php:108
-#@ wds-rss-post-aggregation
+#@ wds-rss-post-aggregator
 msgid "RSS Item Info"
 msgstr ""
 
 #: includes/cpt.php:114
-#@ wds-rss-post-aggregation
+#@ wds-rss-post-aggregator
 msgid "Original URL"
 msgstr ""
 
 #: includes/feeds.php:31
 #, php-format
-#@ wds-rss-post-aggregation
+#@ wds-rss-post-aggregator
 msgid "RSS Error: %s"
 msgstr ""
 
 #: includes/feeds.php:40
-#@ wds-rss-post-aggregation
+#@ wds-rss-post-aggregator
 msgid "An error has occurred, which probably means the feed is down. Try again later."
 msgstr ""
 
 #: includes/feeds.php:110
-#@ wds-rss-post-aggregation
+#@ wds-rss-post-aggregator
 msgid "Untitled"
 msgstr ""
 
@@ -167,7 +167,7 @@ msgstr ""
 #: includes/libraries/Taxonomy_Core/Taxonomy_Core.php:100
 #, php-format
 #@ cpt-core
-#@ wds-rss-post-aggregation
+#@ wds-rss-post-aggregator
 msgid "Add New %s"
 msgstr "Tambahkan yang baru %s"
 
@@ -175,7 +175,7 @@ msgstr "Tambahkan yang baru %s"
 #: includes/libraries/Taxonomy_Core/Taxonomy_Core.php:98
 #, php-format
 #@ cpt-core
-#@ wds-rss-post-aggregation
+#@ wds-rss-post-aggregator
 msgid "Edit %s"
 msgstr "Ubah %s"
 
@@ -189,7 +189,7 @@ msgstr "Baru %s"
 #: includes/libraries/Taxonomy_Core/Taxonomy_Core.php:95
 #, php-format
 #@ cpt-core
-#@ wds-rss-post-aggregation
+#@ wds-rss-post-aggregator
 msgid "All %s"
 msgstr "Seluruh %s"
 
@@ -203,7 +203,7 @@ msgstr "Lihat %s"
 #: includes/libraries/Taxonomy_Core/Taxonomy_Core.php:94
 #, php-format
 #@ cpt-core
-#@ wds-rss-post-aggregation
+#@ wds-rss-post-aggregator
 msgid "Search %s"
 msgstr "Pencarian/cari %s"
 
@@ -331,47 +331,47 @@ msgstr ""
 
 #: includes/libraries/Taxonomy_Core/Taxonomy_Core.php:99
 #, php-format
-#@ wds-rss-post-aggregation
+#@ wds-rss-post-aggregator
 msgid "Update %s"
 msgstr ""
 
 #: includes/libraries/Taxonomy_Core/Taxonomy_Core.php:101
 #, php-format
-#@ wds-rss-post-aggregation
+#@ wds-rss-post-aggregator
 msgid "New %s Name"
 msgstr ""
 
 #: includes/libraries/Taxonomy_Core/Taxonomy_Core.php:107
 #, php-format
-#@ wds-rss-post-aggregation
+#@ wds-rss-post-aggregator
 msgid "Popular %s"
 msgstr ""
 
 #: includes/libraries/Taxonomy_Core/Taxonomy_Core.php:108
 #, php-format
-#@ wds-rss-post-aggregation
+#@ wds-rss-post-aggregator
 msgid "Separate %s with commas"
 msgstr ""
 
 #: includes/libraries/Taxonomy_Core/Taxonomy_Core.php:109
 #, php-format
-#@ wds-rss-post-aggregation
+#@ wds-rss-post-aggregator
 msgid "Add or remove %s"
 msgstr ""
 
 #: includes/libraries/Taxonomy_Core/Taxonomy_Core.php:110
 #, php-format
-#@ wds-rss-post-aggregation
+#@ wds-rss-post-aggregator
 msgid "Choose from the most used %s"
 msgstr ""
 
 #: includes/modal-markup.php:3
-#@ wds-rss-post-aggregation
+#@ wds-rss-post-aggregator
 msgid "Select RSS Feed"
 msgstr ""
 
 #: includes/modal-markup.php:9
-#@ wds-rss-post-aggregation
+#@ wds-rss-post-aggregator
 msgid "Add RSS Feed"
 msgstr ""
 
@@ -381,7 +381,7 @@ msgid "enter feed url"
 msgstr ""
 
 #: includes/modal-markup.php:11
-#@ wds-rss-post-aggregation
+#@ wds-rss-post-aggregator
 msgid "Add Feed"
 msgstr ""
 
@@ -397,83 +397,82 @@ msgstr ""
 
 #: includes/modal-markup.php:26
 #: includes/modal.php:108
-#@ wds-rss-post-aggregation
+#@ wds-rss-post-aggregator
 msgid "No feed data found"
 msgstr ""
 
 #: includes/modal-markup.php:31
-#@ wds-rss-post-aggregation
+#@ wds-rss-post-aggregator
 msgid "Manage RSS Feeds"
 msgstr ""
 
 #: includes/modal-markup.php:32
-#@ wds-rss-post-aggregation
+#@ wds-rss-post-aggregator
 msgid "Add Post Manually"
 msgstr ""
 
 #: includes/modal-markup.php:34
-#@ wds-rss-post-aggregation
+#@ wds-rss-post-aggregator
 msgid "Select to Import"
 msgstr ""
 
 #: includes/modal.php:69
-#@ wds-rss-post-aggregation
+#@ wds-rss-post-aggregator
 msgid "There was an error with the RSS feed link creation."
 msgstr ""
 
 #: includes/modal.php:109
-#@ wds-rss-post-aggregation
+#@ wds-rss-post-aggregator
 msgid "You didn't select any posts. Do you want to close the search?"
 msgstr ""
 
 #: includes/taxonomy.php:19
-#@ wds-rss-post-aggregation
+#@ wds-rss-post-aggregator
 msgid "RSS Feed Link"
 msgstr ""
 
 #: includes/taxonomy.php:19
-#@ wds-rss-post-aggregation
+#@ wds-rss-post-aggregator
 msgid "RSS Feed Links"
 msgstr ""
 
 #. translators: plugin header field 'Name'
-#: rss_post_aggregation.php:0
+#: rss_post_aggregator.php:0
 #@ cpt-core
-msgid "RSS Post Aggregation"
+msgid "RSS Post Aggregator"
 msgstr "kumpulan postingan RSS"
 
 #. translators: plugin header field 'PluginURI'
 #. translators: plugin header field 'AuthorURI'
-#: rss_post_aggregation.php:0
+#: rss_post_aggregator.php:0
 #@ cpt-core
 msgid "http://webdevstudios.com"
 msgstr ""
 
 #. translators: plugin header field 'Description'
-#: rss_post_aggregation.php:0
+#: rss_post_aggregator.php:0
 #@ cpt-core
 msgid "Aggregate posts from RSS Feeds"
 msgstr "kumpulkan posting dari tampilan RSS Feed"
 
 #. translators: plugin header field 'Author'
-#: rss_post_aggregation.php:0
+#: rss_post_aggregator.php:0
 #@ cpt-core
 msgid "WebDevStudios, Justin Sternberg"
 msgstr ""
 
 #. translators: plugin header field 'Version'
-#: rss_post_aggregation.php:0
+#: rss_post_aggregator.php:0
 #@ cpt-core
 msgid "0.1.0"
 msgstr ""
 
-#: rss_post_aggregation.php:73
-#@ wds-rss-post-aggregation
+#: rss_post_aggregator.php:73
+#@ wds-rss-post-aggregator
 msgid "RSS Category"
 msgstr ""
 
-#: rss_post_aggregation.php:74
-#@ wds-rss-post-aggregation
+#: rss_post_aggregator.php:74
+#@ wds-rss-post-aggregator
 msgid "RSS Categories"
 msgstr ""
-
