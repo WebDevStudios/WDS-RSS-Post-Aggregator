@@ -36,20 +36,12 @@ class RSS_Post_Aggregation_CPT extends CPT_Core {
 		);
 	}
 
-	/**
-	 * Initiate hooks.
-	 */
 	public function hooks() {
 		add_action( 'admin_menu', array( $this, 'pseudo_menu_item' ) );
 		add_action( 'add_meta_boxes', array( $this, 'add_meta_box' ) );
 		add_action( 'save_post', array( $this, 'save_meta' ) );
 	}
 
-	/**
-	 * Redirect menu item.
-	 *
-	 * @return false Return false if page is not correct.
-	 */
 	public function pseudo_menu_item() {
 		add_submenu_page( 'edit.php?post_type=' . $this->post_type(), '', __( 'Find RSS Post', 'wds-rss-post-aggregation' ), 'edit_posts', $this->slug_to_redirect, '__return_empty_string' );
 
@@ -64,11 +56,7 @@ class RSS_Post_Aggregation_CPT extends CPT_Core {
 		exit();
 	}
 
-	/**
-	 * Check if listing screen.
-	 *
-	 * @return boolean Returns boolean.
-	 */
+
 	public function is_listing() {
 		if ( isset( $this->is_listing ) ) {
 			return $this->is_listing;
@@ -202,14 +190,12 @@ class RSS_Post_Aggregation_CPT extends CPT_Core {
 			'post_date_gmt' => gmdate( 'Y-m-d H:i:s', strtotime( $post_data['date'] ) ),
 		);
 
-		$existing_post = $this->post_exists( $post_data['link'] );
-		if ( $existing_post ) {
+		if ( $existing_post = $this->post_exists( $post_data['link'] ) ) {
 			$args['ID'] = $existing_post->ID;
 			$args['post_status'] = $existing_post->post_status;
 		}
 
-		$post_id = wp_insert_post( $args );
-		if ( $post_id ) {
+		if ( $post_id = wp_insert_post( $args ) ) {
 			$report = array(
 				'post_id'           => $post_id,
 				'original_url'      => update_post_meta( $post_id, $this->prefix . 'original_url', esc_url_raw( $post_data['link'] ) ),
@@ -278,9 +264,7 @@ class RSS_Post_Aggregation_CPT extends CPT_Core {
 			return $id;
 		}
 
-		$src = wp_get_attachment_url( $id );
-
-		if ( $src ) {
+		if ( $src = wp_get_attachment_url( $id ) ) {
 			set_post_thumbnail( $post_id, $id );
 		}
 
@@ -344,16 +328,13 @@ function rss_post_get_feed_url( $post = false ) {
  * @return bool|string
  */
 function rss_post_get_feed_source( $post = false ) {
-
-	$feed = rss_post_get_feed_object( $post );
-	if ( $feed ) {
+	if ( $feed = rss_post_get_feed_object( $post ) ) {
 		if ( isset( $feed->description ) && $feed->description ) {
 			return esc_html( $feed->description );
 		}
 	}
 
-	$url = rss_post_get_feed_url( $post );
-	if ( $url ) {
+	if ( $url = rss_post_get_feed_url( $post ) ) {
 		$parts = parse_url( $url );
 		return isset( $parts['host'] ) ? $parts['host'] : '';
 	}

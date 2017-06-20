@@ -32,20 +32,12 @@ class RSS_Post_Aggregation_Modal {
 		$this->tax = $tax;
 	}
 
-	/**
-	 * Initiate hooks.
-	 */
 	public function hooks() {
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue' ) );
 		add_action( 'wp_ajax_rss_get_data', array( $this, 'rss_get_data' ) );
 		add_action( 'wp_ajax_rss_save_posts', array( $this, 'rss_save_posts' ) );
 	}
 
-	/**
-	 * Method for storing posts.
-	 *
-	 * Stores and returns JSON AJAX response.
-	 */
 	public function rss_save_posts() {
 		foreach ( array( 'to_add', 'feed_url', 'feed_id' ) as $required ) {
 			if ( ! isset( $_REQUEST[ $required ] ) ) {
@@ -58,13 +50,6 @@ class RSS_Post_Aggregation_Modal {
 
 	}
 
-	/**
-	 * Store posts.
-	 *
-	 * @param  array $posts   Array of posts to store.
-	 * @param  integer $feed_id Feed ID.
-	 * @return array          Array of posts stored.
-	 */
 	public function save_posts( $posts, $feed_id ) {
 
 		$updated = array();
@@ -75,11 +60,6 @@ class RSS_Post_Aggregation_Modal {
 		return $updated;
 	}
 
-	/**
-	 * Get RSS data.
-	 *
-	 * @return string Return JSON object.
-	 */
 	public function rss_get_data() {
 		foreach ( array( 'feed_url', 'feed_id' ) as $required ) {
 			if ( ! isset( $_REQUEST[ $required ] ) ) {
@@ -125,9 +105,6 @@ class RSS_Post_Aggregation_Modal {
 		wp_send_json_success( compact( 'feed_url', 'feed_id', 'feed_items' ) );
 	}
 
-	/**
-	 * Enqueue Assets.
-	 */
 	public function enqueue() {
 		if ( ! $this->cpt->is_listing() ) {
 			return;
@@ -162,11 +139,6 @@ class RSS_Post_Aggregation_Modal {
 
 	}
 
-	/**
-	 * Get feed links.
-	 *
-	 * @return array Return array of links.
-	 */
 	public function get_feed_links() {
 		if ( ! empty( $this->feed_links ) ) {
 			return $this->feed_links;
@@ -185,9 +157,6 @@ class RSS_Post_Aggregation_Modal {
 		return $this->feed_links;
 	}
 
-	/**
-	 * Modal Template File.
-	 */
 	public function js_modal_template() {
 		include_once 'modal-markup.php';
 	}
