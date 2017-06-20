@@ -28,8 +28,8 @@
 		</div>
 	</div>
 	<div class="find-box-buttons">
-		<a href="<?php echo esc_url( admin_url( '/edit-tags.php?taxonomy='. $this->tax->taxonomy() .'&post_type='. $this->cpt->post_type() ) ); ?>" class="button-secondary manage-feed-links"><?php _e( 'Manage RSS Feeds', 'wds-rss-post-aggregation' ); ?></a>
-		<a href="<?php echo esc_url( admin_url( '/post-new.php?post_type='. $this->cpt->post_type() ) ); ?>" class="button-secondary manage-feed-links"><?php _e( 'Add Post Manually', 'wds-rss-post-aggregation' ); ?></a>
+		<a href="<?php echo esc_url( admin_url( '/edit-tags.php?taxonomy=' . $this->tax->taxonomy() . '&post_type=' . $this->cpt->post_type() ) ); ?>" class="button-secondary manage-feed-links"><?php _e( 'Manage RSS Feeds', 'wds-rss-post-aggregation' ); ?></a>
+		<a href="<?php echo esc_url( admin_url( '/post-new.php?post_type=' . $this->cpt->post_type() ) ); ?>" class="button-secondary manage-feed-links"><?php _e( 'Add Post Manually', 'wds-rss-post-aggregation' ); ?></a>
 		<div class="spinner" style="display:none;"></div>
 		<?php submit_button( __( 'Select to Import', 'wds-rss-post-aggregation' ), 'button-primary alignright', 'find-posts-submit', false ); ?>
 		<div class="clear"></div>
