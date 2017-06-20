@@ -30,6 +30,9 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
+// Our namespace.
+namespace WebDevStudios\RSS_Post_Aggregator;
+
 /**
  * Autoloads files with classes when needed
  * @since  0.1.0
@@ -40,11 +43,18 @@ function rss_post_aggregation_autoload_classes( $class_name ) {
 		return;
 	}
 
-	$filename = strtolower( str_ireplace( 'RSS_Post_Aggregation_', '', $class_name ) );
+	// If our class doesn't have our namespace, don't load it.
+	if ( 0 !== strpos( $class_name, 'WebDevStudios\\RSS_Post_Aggregator\\' ) ) {
+		return;
+	}
+
+	$parts = explode( '\\', $class_name );
+
+	$filename = strtolower( str_ireplace( 'RSS_Post_Aggregation_', '', end( $parts ) ) );
 
 	RSS_Post_Aggregation::include_file( $filename );
 }
-spl_autoload_register( 'rss_post_aggregation_autoload_classes' );
+spl_autoload_register( __NAMESPACE__ . '\rss_post_aggregation_autoload_classes' );
 
 /**
  * Main initiation class
@@ -239,4 +249,3 @@ class RSS_Post_Aggregation {
 // init our class
 $RSS_Post_Aggregation = new RSS_Post_Aggregation();
 $RSS_Post_Aggregation->hooks();
-

@@ -2,6 +2,11 @@
 /**
  * Widget that shows the RSS feed with a featured image
  */
+
+// Our namespace.
+namespace WebDevStudios\RSS_Post_Aggregator;
+use WP_Widget;
+
 class RSS_Post_Aggregation_Category_Featured_Images_Widget extends WP_Widget {
 
 	/**
@@ -190,4 +195,3 @@ class RSS_Post_Aggregation_Category_Featured_Images_Widget extends WP_Widget {
 	}
 
 } // end class
-
