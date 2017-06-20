@@ -1,5 +1,9 @@
 <?php
 
+// Our namespace.
+namespace WebDevStudios\RSS_Post_Aggregator;
+
+
 class RSS_Post_Aggregator_Frontend {
 
 	public function __construct( $cpt ) {

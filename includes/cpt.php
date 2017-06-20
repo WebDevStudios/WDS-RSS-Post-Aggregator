@@ -1,5 +1,9 @@
 <?php
 
+// Our namespace.
+namespace WebDevStudios\RSS_Post_Aggregator;
+use CPT_Core;
+
 if ( ! class_exists( 'CPT_Core' ) ) {
 	RSS_Post_Aggregator::include_file( 'libraries/CPT_Core/CPT_Core' );
 }
