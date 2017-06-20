@@ -160,13 +160,37 @@ class RSS_Post_Aggregator_Feeds {
 	}
 
 	public function get_image() {
-		$content = @html_entity_decode( $this->item->get_content(), ENT_QUOTES, get_option( 'blog_charset' ) );
 
-		@$this->dom()->loadHTML( $content );
-
+		// Set image src to an empty string temporarily.
 		$src = '';
-		foreach ( $this->dom()->getElementsByTagName( 'img' ) as $img ) {
-			if ( $src = $img->getAttribute( 'src' ) ) {
+
+		// Get link to the parent item.
+		$link = $this->item->get_link();
+
+		// Get HTTP request response.
+		$data = wp_remote_get( $link );
+
+		// If response isn't 200, bail.
+		if ( 200 != wp_remote_retrieve_response_code( $data ) ) {
+			return $src;
+		}
+
+		// Retrieve only the body from the raw response.
+		$content_body = wp_remote_retrieve_body( $data );
+
+		// Bail if content isn't valid.
+		if ( empty( $content_body ) ) {
+			return $src;
+		}
+
+		// Load DOM object for our content.
+		@$this->dom()->loadHTML( $content_body );
+
+		// Get og:image meta tag value from our content.
+		foreach ( $this->dom()->getElementsByTagName( 'meta' ) as $meta ) {
+
+			if ( 'og:image' == $meta->getAttribute( 'property' ) ) {
+				$src = $meta->getAttribute( 'content' );
 				break;
 			}
 		}
