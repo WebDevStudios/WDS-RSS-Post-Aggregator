@@ -28,7 +28,6 @@ class RSS_Post_Aggregation_Feeds {
 		if ( is_wp_error( $rss ) ) {
 			// if ( is_admin() || current_user_can( 'manage_options' ) )
 			return array(
-				// translators: RSS Error: %s
 				'error' => sprintf( __( 'RSS Error: %s', 'wds-rss-post-aggregation' ), $rss->get_error_message() ),
 			);
 		}
@@ -96,13 +95,11 @@ class RSS_Post_Aggregation_Feeds {
 			'show_summary' => 0,
 			'show_image'   => 0,
 			'items'        => 0,
-			'cache_time'   => DAY_IN_SECONDS,
+			'cache_time'   => DAY_IN_SECONDS
 		) );
 		$this->cache_time = (int) $args['cache_time'];
 
-		$this->transient_id = md5( serialize( array_merge( array(
-			'rss_link'  => $this->rss_link,
-		), $args ) ) );
+		$this->transient_id = md5( serialize( array_merge( array( 'rss_link'  => $this->rss_link ), $args ) ) );
 		return $args;
 	}
 

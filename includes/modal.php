@@ -41,7 +41,7 @@ class RSS_Post_Aggregation_Modal {
 	public function rss_save_posts() {
 		foreach ( array( 'to_add', 'feed_url', 'feed_id' ) as $required ) {
 			if ( ! isset( $_REQUEST[ $required ] ) ) {
-				wp_send_json_error( $required . ' missing.' );
+				wp_send_json_error( $required .' missing.' );
 			}
 		}
 
@@ -63,7 +63,7 @@ class RSS_Post_Aggregation_Modal {
 	public function rss_get_data() {
 		foreach ( array( 'feed_url', 'feed_id' ) as $required ) {
 			if ( ! isset( $_REQUEST[ $required ] ) ) {
-				wp_send_json_error( $required . ' missing.' );
+				wp_send_json_error( $required .' missing.' );
 			}
 		}
 
@@ -144,9 +144,7 @@ class RSS_Post_Aggregation_Modal {
 			return $this->feed_links;
 		}
 
-		$feed_links = get_terms( $this->tax->taxonomy(), array(
-			'hide_empty' => false,
-		) );
+		$feed_links = get_terms( $this->tax->taxonomy(), array( 'hide_empty' => false ) );
 
 		if ( $feed_links && is_array( $feed_links ) ) {
 			foreach ( $feed_links as $link ) {

@@ -38,8 +38,9 @@ class RSS_Post_Aggregation_Frontend {
 		}
 
 		$original_url = is_numeric( $post )
-			 ? get_post_meta( $post, $this->cpt->prefix . 'original_url', true )
-			 : get_post_meta( $post->ID, $this->cpt->prefix . 'original_url', true );
+			 ? get_post_meta( $post, $this->cpt->prefix .'original_url', true )
+			 : get_post_meta( $post->ID, $this->cpt->prefix .'original_url', true );
+
 
 		// cache to the post object
 		$post->original_url = $original_url ? $original_url : $link;
