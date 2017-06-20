@@ -39,7 +39,6 @@ namespace WebDevStudios\RSS_Post_Aggregator;
  * @param  string $class_name Name of the class being requested
  */
 function rss_post_aggregator_autoload_classes( $class_name ) {
-	var_dump($class_name);
 	if ( class_exists( $class_name, false ) || false === stripos( $class_name, 'RSS_Post_Aggregator_' ) ) {
 		return;
 	}
