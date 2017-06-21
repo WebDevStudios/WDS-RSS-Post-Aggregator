@@ -9,7 +9,7 @@
 /*jslint browser: true */
 /*global jQuery:false */
 
-window.RSS_Post_Aggregation = (function(window, document, $, undefined){
+window.RSS_Post_Aggregator = (function(window, document, $, undefined){
 	'use strict';
 
 	function Selector_Cache() {

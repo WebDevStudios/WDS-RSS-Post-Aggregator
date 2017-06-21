@@ -5,13 +5,13 @@ namespace WebDevStudios\RSS_Post_Aggregator;
 use CPT_Core;
 
 if ( ! class_exists( 'CPT_Core' ) ) {
-	RSS_Post_Aggregation::include_file( 'libraries/CPT_Core/CPT_Core' );
+	RSS_Post_Aggregator::include_file( 'libraries/CPT_Core/CPT_Core' );
 }
 
 /**
  * CPT child class
  */
-class RSS_Post_Aggregation_CPT extends CPT_Core {
+class RSS_Post_Aggregator_CPT extends CPT_Core {
 
 	/**
 	 * Prefix.
@@ -53,7 +53,7 @@ class RSS_Post_Aggregation_CPT extends CPT_Core {
 
 		// Register this cpt
 		parent::__construct(
-			array( __( 'RSS Post', 'wds-rss-post-aggregation' ), __( 'RSS Posts', 'wds-rss-post-aggregation' ), $cpt_slug ),
+			array( __( 'RSS Post', 'wds-rss-post-aggregator' ), __( 'RSS Posts', 'wds-rss-post-aggregator' ), $cpt_slug ),
 			array(
 				'supports'  => array( 'title', 'editor', 'excerpt', 'thumbnail', 'page-attributes' ),
 				'menu_icon' => 'dashicons-rss',
@@ -80,7 +80,7 @@ class RSS_Post_Aggregation_CPT extends CPT_Core {
 	 * @return false Return false if page is not correct.
 	 */
 	public function pseudo_menu_item() {
-		add_submenu_page( 'edit.php?post_type=' . $this->post_type(), '', esc_html__( 'Find RSS Post', 'wds-rss-post-aggregation' ), 'edit_posts', $this->slug_to_redirect, '__return_empty_string' );
+		add_submenu_page( 'edit.php?post_type=' . $this->post_type(), '', esc_html__( 'Find RSS Post', 'wds-rss-post-aggregator' ), 'edit_posts', $this->slug_to_redirect, '__return_empty_string' );
 
 		if ( ! isset( $_GET['page'] ) || $this->slug_to_redirect != $_GET['page'] ) {
 			return;
@@ -121,10 +121,10 @@ class RSS_Post_Aggregation_CPT extends CPT_Core {
 	 */
 	public function columns( $columns ) {
 		$columns = array(
-			'thumbnail'             => esc_html__( 'Thumbnail', 'wds-rss-post-aggregation' ),
+			'thumbnail'             => esc_html__( 'Thumbnail', 'wds-rss-post-aggregator' ),
 			'cb'                    => $columns['cb'],
 			'title'                 => $columns['title'],
-			'source'                => esc_html__( 'Source', 'wds-rss-post-aggregation' ),
+			'source'                => esc_html__( 'Source', 'wds-rss-post-aggregator' ),
 			'taxonomy-rss-category' => $columns['taxonomy-rss-category'],
 			'date'                  => $columns['date'],
 		);
@@ -164,7 +164,7 @@ class RSS_Post_Aggregation_CPT extends CPT_Core {
 	 * @author JayWood
 	 */
 	public function add_meta_box() {
-		add_meta_box( 'rsslink_mb', esc_html__( 'RSS Item Info', 'wds-rss-post-aggregation' ), array( $this, 'render_metabox' ), $this->post_type() );
+		add_meta_box( 'rsslink_mb', esc_html__( 'RSS Item Info', 'wds-rss-post-aggregator' ), array( $this, 'render_metabox' ), $this->post_type() );
 	}
 
 	/**
@@ -182,7 +182,7 @@ class RSS_Post_Aggregation_CPT extends CPT_Core {
 
 		?>
 		<fieldset>
-			<label for="<?php echo $this->prefix; ?>original_url"><?php esc_html_e( 'Original URL', 'wds-rss-post-aggregation' ); ?></label><br />
+			<label for="<?php echo $this->prefix; ?>original_url"><?php esc_html_e( 'Original URL', 'wds-rss-post-aggregator' ); ?></label><br />
 			<input name="<?php echo $this->prefix; ?>original_url" id="<?php echo $this->prefix; ?>original_url" value="<?php echo $meta_value; ?>" class="regular-text" />
 		</fieldset>
 		<?php
@@ -336,7 +336,7 @@ class RSS_Post_Aggregation_CPT extends CPT_Core {
  * @return string
  */
 function rss_post_get_feed_object( $post = false ) {
-	global $RSS_Post_Aggregation;
+	global $RSS_Post_Aggregator;
 
 	if ( ! $post ) {
 		$post = get_post( get_the_ID() );
@@ -348,7 +348,7 @@ function rss_post_get_feed_object( $post = false ) {
 		return $post->source_link;
 	}
 
-	$links = get_the_terms( $post->ID, $RSS_Post_Aggregation->tax_slug );
+	$links = get_the_terms( $post->ID, $RSS_Post_Aggregator->tax_slug );
 	$post->source_link = ( $links && is_array( $links ) )
 		? array_shift( $links )
 		: '';

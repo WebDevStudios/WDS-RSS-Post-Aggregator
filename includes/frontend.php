@@ -3,7 +3,8 @@
 // Our namespace.
 namespace WebDevStudios\RSS_Post_Aggregator;
 
-class RSS_Post_Aggregation_Frontend {
+
+class RSS_Post_Aggregator_Frontend {
 
 	/**
 	 * Constructor
