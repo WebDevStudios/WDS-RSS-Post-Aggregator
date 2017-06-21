@@ -13,16 +13,37 @@ if ( ! class_exists( 'CPT_Core' ) ) {
  */
 class RSS_Post_Aggregation_CPT extends CPT_Core {
 
+	/**
+	 * Prefix.
+	 *
+	 * @since 0.1.1
+	 *
+	 * @var string
+	 */
 	public $prefix = '_rsspost_';
+
+	/**
+	 * Redirect slug.
+	 *
+	 * @since 0.1.1
+	 *
+	 * @var string
+	 */
 	public $slug_to_redirect = 'rss_search_modal';
 
 	/**
+	 * Tax slug.
+	 *
+	 * @since 0.1.1
+	 *
 	 * @var string $tax_slug
 	 */
 	public $tax_slug;
 
 	/**
 	 * Register Custom Post Types. See documentation in CPT_Core, and in wp-includes/post.php
+	 *
+	 * @since 0.1.1
 	 *
 	 * @param string $cpt_slug
 	 * @param string $tax_slug
@@ -40,14 +61,26 @@ class RSS_Post_Aggregation_CPT extends CPT_Core {
 		);
 	}
 
+	/**
+	 * Initiate hooks.
+	 *
+	 * @since 0.1.1
+	 */
 	public function hooks() {
 		add_action( 'admin_menu', array( $this, 'pseudo_menu_item' ) );
 		add_action( 'add_meta_boxes', array( $this, 'add_meta_box' ) );
 		add_action( 'save_post', array( $this, 'save_meta' ) );
 	}
 
+	/**
+	 * Redirect menu item.
+	 *
+	 * @since 0.1.1
+	 *
+	 * @return false Return false if page is not correct.
+	 */
 	public function pseudo_menu_item() {
-		add_submenu_page( 'edit.php?post_type='. $this->post_type(), '', __( 'Find RSS Post', 'wds-rss-post-aggregation' ), 'edit_posts', $this->slug_to_redirect, '__return_empty_string' );
+		add_submenu_page( 'edit.php?post_type=' . $this->post_type(), '', esc_html__( 'Find RSS Post', 'wds-rss-post-aggregation' ), 'edit_posts', $this->slug_to_redirect, '__return_empty_string' );
 
 		if ( ! isset( $_GET['page'] ) || $this->slug_to_redirect != $_GET['page'] ) {
 			return;
@@ -60,7 +93,13 @@ class RSS_Post_Aggregation_CPT extends CPT_Core {
 		exit();
 	}
 
-
+	/**
+	 * Check if listing screen.
+	 *
+	 * @since 0.1.1
+	 *
+	 * @return boolean Returns boolean.
+	 */
 	public function is_listing() {
 		if ( isset( $this->is_listing ) ) {
 			return $this->is_listing;
@@ -82,10 +121,10 @@ class RSS_Post_Aggregation_CPT extends CPT_Core {
 	 */
 	public function columns( $columns ) {
 		$columns = array(
-			'thumbnail'             => __( 'Thumbnail', 'wds-rss-post-aggregation' ),
+			'thumbnail'             => esc_html__( 'Thumbnail', 'wds-rss-post-aggregation' ),
 			'cb'                    => $columns['cb'],
 			'title'                 => $columns['title'],
-			'source'                => __( 'Source', 'wds-rss-post-aggregation' ),
+			'source'                => esc_html__( 'Source', 'wds-rss-post-aggregation' ),
 			'taxonomy-rss-category' => $columns['taxonomy-rss-category'],
 			'date'                  => $columns['date'],
 		);
@@ -112,7 +151,7 @@ class RSS_Post_Aggregation_CPT extends CPT_Core {
 			case 'source':
 				$link = rss_post_get_feed_url( $post->ID );
 				if ( $link ) {
-					echo '<a target="_blank" href="'. esc_url( $link ) .'">'. $link .'</a>';
+					echo '<a target="_blank" href="' . esc_url( $link ) . '">' . $link . '</a>';
 				}
 				break;
 		}
@@ -125,11 +164,11 @@ class RSS_Post_Aggregation_CPT extends CPT_Core {
 	 * @author JayWood
 	 */
 	public function add_meta_box() {
-		add_meta_box( 'rsslink_mb', __( 'RSS Item Info', 'wds-rss-post-aggregation' ), array( $this, 'render_metabox' ), $this->post_type() );
+		add_meta_box( 'rsslink_mb', esc_html__( 'RSS Item Info', 'wds-rss-post-aggregation' ), array( $this, 'render_metabox' ), $this->post_type() );
 	}
 
 	/**
-	 * Renders custom metabox output
+	 * Renders custom metabox output.
 	 *
 	 * @since 0.1.1
 	 *
@@ -143,14 +182,14 @@ class RSS_Post_Aggregation_CPT extends CPT_Core {
 
 		?>
 		<fieldset>
-			<label for="<?php echo $this->prefix; ?>original_url"><?php _e( 'Original URL', 'wds-rss-post-aggregation' ); ?></label><br />
+			<label for="<?php echo $this->prefix; ?>original_url"><?php esc_html_e( 'Original URL', 'wds-rss-post-aggregation' ); ?></label><br />
 			<input name="<?php echo $this->prefix; ?>original_url" id="<?php echo $this->prefix; ?>original_url" value="<?php echo $meta_value; ?>" class="regular-text" />
 		</fieldset>
 		<?php
 	}
 
 	/**
-	 * Save the post meta
+	 * Save the post meta.
 	 *
 	 * @since 0.1.1
 	 *
@@ -162,8 +201,8 @@ class RSS_Post_Aggregation_CPT extends CPT_Core {
 	public function save_meta( $post_id ) {
 		if ( ( ! isset( $_POST['rsslink_mb_nonce'] ) || ! wp_verify_nonce( $_POST['rsslink_mb_nonce'], 'rsslink_mb_metabox' ) )
 			|| ! current_user_can( 'edit_post', $post_id )
-			|| ( defined( "DOING_AUTOSAVE" ) && DOING_AUTOSAVE )
-			|| ! isset( $_POST[ $this->prefix.'original_url' ] )
+			|| ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE )
+			|| ! isset( $_POST[ $this->prefix . 'original_url' ] )
 		) {
 			return $post_id;
 		}
@@ -194,12 +233,14 @@ class RSS_Post_Aggregation_CPT extends CPT_Core {
 			'post_date_gmt' => gmdate( 'Y-m-d H:i:s', strtotime( $post_data['date'] ) ),
 		);
 
-		if ( $existing_post = $this->post_exists( $post_data['link'] ) ) {
+		$existing_post = $this->post_exists( $post_data['link'] );
+		if ( $existing_post ) {
 			$args['ID'] = $existing_post->ID;
 			$args['post_status'] = $existing_post->post_status;
 		}
 
-		if ( $post_id = wp_insert_post( $args ) ) {
+		$post_id = wp_insert_post( $args );
+		if ( $post_id ) {
 			$report = array(
 				'post_id'           => $post_id,
 				'original_url'      => update_post_meta( $post_id, $this->prefix . 'original_url', esc_url_raw( $post_data['link'] ) ),
@@ -214,6 +255,8 @@ class RSS_Post_Aggregation_CPT extends CPT_Core {
 	}
 
 	/**
+	 * Check if post exists via Url.
+	 *
 	 * @param string $url
 	 *
 	 * @since 0.1.0
@@ -235,6 +278,10 @@ class RSS_Post_Aggregation_CPT extends CPT_Core {
 	}
 
 	/**
+	 * Import image via url.
+	 *
+	 * @since 0.1.1
+	 *
 	 * @param string $file_url
 	 * @param int $post_id
 	 *
@@ -268,7 +315,9 @@ class RSS_Post_Aggregation_CPT extends CPT_Core {
 			return $id;
 		}
 
-		if ( $src = wp_get_attachment_url( $id ) ) {
+		$src = wp_get_attachment_url( $id );
+
+		if ( $src ) {
 			set_post_thumbnail( $post_id, $id );
 		}
 
@@ -277,6 +326,8 @@ class RSS_Post_Aggregation_CPT extends CPT_Core {
 }
 
 /**
+ * Get RSS feed object.
+ *
  * @param bool|WP_Post|int $post
  *
  * @since 0.1.0
@@ -306,6 +357,8 @@ function rss_post_get_feed_object( $post = false ) {
 }
 
 /**
+ * Get RSS feed name.
+ *
  * @param bool|WP_Post|int $post
  *
  * @since 0.1.0
@@ -324,6 +377,8 @@ function rss_post_get_feed_url( $post = false ) {
 }
 
 /**
+ * Get RSS feed source.
+ *
  * @param bool|WP_Post|int $post
  *
  * @since 0.1.0
@@ -332,13 +387,16 @@ function rss_post_get_feed_url( $post = false ) {
  * @return bool|string
  */
 function rss_post_get_feed_source( $post = false ) {
-	if ( $feed = rss_post_get_feed_object( $post ) ) {
+
+	$feed = rss_post_get_feed_object( $post );
+	if ( $feed ) {
 		if ( isset( $feed->description ) && $feed->description ) {
 			return esc_html( $feed->description );
 		}
 	}
 
-	if ( $url = rss_post_get_feed_url( $post ) ) {
+	$url = rss_post_get_feed_url( $post );
+	if ( $url ) {
 		$parts = parse_url( $url );
 		return isset( $parts['host'] ) ? $parts['host'] : '';
 	}

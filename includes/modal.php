@@ -8,22 +8,30 @@ class RSS_Post_Aggregation_Modal {
 	public $feed_links = array();
 
 	/**
+	 * @since 0.1.1
+	 *
 	 * @var RSS_Post_Aggregation_Feeds
 	 */
 	public $rss;
 
 	/**
+	 * @since 0.1.1
+	 *
 	 * @var RSS_Post_Aggregation_CPT
 	 */
 	public $cpt;
 
 	/**
+	 * @since 0.1.1
+	 *
 	 * @var RSS_Post_Aggregation_Taxonomy
 	 */
 	public $tax;
 
 	/**
 	 * RSS_Post_Aggregation_Modal constructor.
+	 *
+	 * @since 0.1.1
 	 *
 	 * @param RSS_Post_Aggregation_Feeds $rss
 	 * @param RSS_Post_Aggregation_CPT $cpt
@@ -35,16 +43,28 @@ class RSS_Post_Aggregation_Modal {
 		$this->tax = $tax;
 	}
 
+	/**
+	 * Initiate hooks.
+	 *
+	 * @since 0.1.1
+	 */
 	public function hooks() {
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue' ) );
 		add_action( 'wp_ajax_rss_get_data', array( $this, 'rss_get_data' ) );
 		add_action( 'wp_ajax_rss_save_posts', array( $this, 'rss_save_posts' ) );
 	}
 
+	/**
+	 * Method for storing posts.
+	 *
+	 * @since 0.1.1
+	 *
+	 * Stores and returns JSON AJAX response.
+	 */
 	public function rss_save_posts() {
 		foreach ( array( 'to_add', 'feed_url', 'feed_id' ) as $required ) {
 			if ( ! isset( $_REQUEST[ $required ] ) ) {
-				wp_send_json_error( $required .' missing.' );
+				wp_send_json_error( $required . ' missing.' );
 			}
 		}
 
@@ -53,6 +73,15 @@ class RSS_Post_Aggregation_Modal {
 
 	}
 
+	/**
+	 * Store posts.
+	 *
+	 * @since 0.1.1
+	 *
+	 * @param  array $posts   Array of posts to store.
+	 * @param  integer $feed_id Feed ID.
+	 * @return array          Array of posts stored.
+	 */
 	public function save_posts( $posts, $feed_id ) {
 
 		$updated = array();
@@ -63,10 +92,17 @@ class RSS_Post_Aggregation_Modal {
 		return $updated;
 	}
 
+	/**
+	 * Get RSS data.
+	 *
+	 * @since 0.1.1
+	 *
+	 * @return string Return JSON object.
+	 */
 	public function rss_get_data() {
 		foreach ( array( 'feed_url', 'feed_id' ) as $required ) {
 			if ( ! isset( $_REQUEST[ $required ] ) ) {
-				wp_send_json_error( $required .' missing.' );
+				wp_send_json_error( $required . ' missing.' );
 			}
 		}
 
@@ -108,6 +144,12 @@ class RSS_Post_Aggregation_Modal {
 		wp_send_json_success( compact( 'feed_url', 'feed_id', 'feed_items' ) );
 	}
 
+	/**
+	 * Enqueue Assets.
+	 *
+	 * @since 0.1.1
+	 *
+	 */
 	public function enqueue() {
 		if ( ! $this->cpt->is_listing() ) {
 			return;
@@ -142,12 +184,21 @@ class RSS_Post_Aggregation_Modal {
 
 	}
 
+	/**
+	 * Get feed links.
+	 *
+	 * @since 0.1.1
+	 *
+	 * @return array Return array of links.
+	 */
 	public function get_feed_links() {
 		if ( ! empty( $this->feed_links ) ) {
 			return $this->feed_links;
 		}
 
-		$feed_links = get_terms( $this->tax->taxonomy(), array( 'hide_empty' => false ) );
+		$feed_links = get_terms( $this->tax->taxonomy(), array(
+			'hide_empty' => false,
+		) );
 
 		if ( $feed_links && is_array( $feed_links ) ) {
 			foreach ( $feed_links as $link ) {
@@ -158,6 +209,11 @@ class RSS_Post_Aggregation_Modal {
 		return $this->feed_links;
 	}
 
+	/**
+	 * Modal Template File.
+	 *
+	 * @since 0.1.1
+	 */
 	public function js_modal_template() {
 		include_once 'modal-markup.php';
 	}
