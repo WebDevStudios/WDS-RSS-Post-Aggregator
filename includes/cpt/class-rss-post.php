@@ -180,14 +180,15 @@ class RSS_Post extends CPT_Core {
 	/**
 	 * Renders custom metabox output.
 	 *
-	 * @since 0.1.1
+	 * @param \WP_Post $wp_post The post the metabox is being rendered on.
 	 *
+	 * @since 0.1.1
 	 * @author JayWood
 	 */
-	public function render_metabox( $object ) {
+	public function render_metabox( $wp_post ) {
 		wp_nonce_field( 'rsslink_mb_metabox', 'rsslink_mb_nonce' );
 
-		$meta       = get_post_meta( $object->ID, $this->prefix . 'original_url', 1 );
+		$meta       = get_post_meta( $wp_post->ID, $this->prefix . 'original_url', 1 );
 		$meta_value = empty( $meta ) ? '' : esc_url( $meta );
 
 		?>
