@@ -227,7 +227,7 @@ class RSS_Post extends CPT_Core {
 	 * Inserts the feed post items.
 	 *
 	 * @param array $post_data An array of post data, similar to WP_Post
-	 * @param int   $feed_id
+	 * @param int   $feed_id   A term ID from the links taxonomy.
 	 *
 	 * @since 0.1.0
 	 *
@@ -256,6 +256,7 @@ class RSS_Post extends CPT_Core {
 				'post_id'           => $post_id,
 				'original_url'      => update_post_meta( $post_id, $this->prefix . 'original_url', esc_url_raw( $post_data['link'] ) ),
 				'img_src'           => $this->sideload_featured_image( esc_url_raw( $post_data['image'] ), $post_id ),
+				// TODO Update the $this->tax_slug reference once taxonomy is loaded propertly.
 				'wp_set_post_terms' => wp_set_post_terms( $post_id, array( $feed_id ), $this->tax_slug, true ),
 			);
 		} else {
