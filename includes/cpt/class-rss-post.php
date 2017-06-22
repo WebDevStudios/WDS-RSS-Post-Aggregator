@@ -294,11 +294,11 @@ class RSS_Post extends CPT_Core {
 	 *
 	 * @since 0.1.1
 	 *
-	 * @param string $file_url
-	 * @param int $post_id
+	 * @param string $file_url A full HTTP url address to an image.
+	 * @param int    $post_id  The post ID to assign the image.
 	 *
 	 * @author JayWood, Justin Sternberg
-	 * @return string
+	 * @return \WP_Error|string A full attachment URL once imported, WP_Error otherwise.
 	 */
 	public function sideload_featured_image( $file_url, $post_id ) {
 		if ( empty( $file_url ) || empty( $post_id ) ) {
@@ -323,7 +323,7 @@ class RSS_Post extends CPT_Core {
 
 		// If error storing permanently, unlink.
 		if ( is_wp_error( $id ) ) {
-			@unlink( $file_array['tmp_name'] );
+			@unlink( $file_array['tmp_name'] );  // @codingStandardsIgnoreLine
 			return $id;
 		}
 
