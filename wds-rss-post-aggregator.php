@@ -59,30 +59,6 @@ function autoload_classes( $class_name ) {
 spl_autoload_register( '\WebDevStudios\RSS_Post_Aggregator\autoload_classes' );
 
 /**
- * Autoloads files with classes when needed
- * @since  0.1.0
- * @param  string $class_name Name of the class being requested
- */
-function rss_post_aggregator_autoload_classes( $class_name ) {
-	if ( class_exists( $class_name, false ) || false === stripos( $class_name, 'RSS_Post_Aggregator_' ) ) {
-		return;
-	}
-
-	// If our class doesn't have our namespace, don't load it.
-	if ( 0 !== strpos( $class_name, 'WebDevStudios\\RSS_Post_Aggregator\\' ) ) {
-		return;
-	}
-
-	$parts = explode( '\\', $class_name );
-
-	$filename = strtolower( str_ireplace( 'RSS_Post_Aggregator_', '', end( $parts ) ) );
-
-	RSS_Post_Aggregator::include_file( $filename );
-}
-
-spl_autoload_register( __NAMESPACE__ . '\rss_post_aggregator_autoload_classes' );
-
-/**
  * Main initiation class
  *
  * @property string $tax_slug
