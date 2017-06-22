@@ -3,7 +3,7 @@
  * Plugin Name: RSS Post Aggregator
  * Plugin URI:  http://webdevstudios.com
  * Description: Aggregate posts from RSS Feeds
- * Version:     0.1.1
+ * Version:     1.0.0
  * Author:      WebDevStudios, Justin Sternberg
  * Author URI:  http://webdevstudios.com
  * Donate link: http://webdevstudios.com
@@ -32,6 +32,31 @@
 
 // Our namespace.
 namespace WebDevStudios\RSS_Post_Aggregator;
+
+function autoload_classes( $class_name ) {
+
+	if ( false === strpos( $class_name, 'WebDevStudios\RSS_Post_Aggregator' ) ) {
+		return;
+	}
+
+	// Break everything into parts.
+	$class_array = explode( '\\', $class_name );
+
+	// Build the filename from the last item in the array.
+	$filename = strtolower( str_ireplace( '_', '-', end( $class_array ) ) );
+
+	// Cut off the first, and last item from the array
+	$new_dir = array_slice( $class_array, 1, count( $class_array ) - 2 );
+
+	// Glue the pieces back together.
+	$new_dir = implode( '/', array_map( 'strtolower', $new_dir ) );
+
+	// Build the directory.
+	$new_dir = trailingslashit( $new_dir ) . $filename;
+
+	RSS_Post_Aggregator::include_file( $new_dir );
+}
+spl_autoload_register( '\WebDevStudios\RSS_Post_Aggregator\autoload_classes' );
 
 /**
  * Autoloads files with classes when needed
@@ -66,7 +91,7 @@ spl_autoload_register( __NAMESPACE__ . '\rss_post_aggregator_autoload_classes' )
  */
 class RSS_Post_Aggregator {
 
-	const VERSION = '0.1.1';
+	const VERSION = '1.0.0';
 	private $cpt_slug          = 'rss-posts';
 	private $tax_slug          = 'rss-feed-links';
 	private $rss_category_slug = 'rss-category';
