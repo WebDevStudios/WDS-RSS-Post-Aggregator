@@ -6,7 +6,7 @@ use CPT_Core;
 use WebDevStudios\RSS_Post_Aggregator\RSS_Post_Aggregator;
 
 if ( ! class_exists( 'CPT_Core' ) ) {
-	RSS_Post_Aggregator::include_file( 'libraries/CPT_Core/CPT_Core' );
+	require_once RSS_Post_Aggregator::dir( 'includes/libraries/CPT_Core/CPT_Core.php' );
 }
 
 /**
@@ -50,6 +50,7 @@ class RSS_Post extends CPT_Core {
 	 * @param string $tax_slug
 	 */
 	public function __construct( $cpt_slug, $tax_slug ) {
+		return;
 		$this->tax_slug = $tax_slug;
 
 		// Register this cpt

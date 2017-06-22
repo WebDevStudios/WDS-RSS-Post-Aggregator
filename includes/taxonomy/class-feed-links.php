@@ -6,7 +6,7 @@ use Taxonomy_Core;
 use WebDevStudios\RSS_Post_Aggregator\RSS_Post_Aggregator;
 
 if ( ! class_exists( 'Taxonomy_Core' ) ) {
-	RSS_Post_Aggregator::include_file( 'libraries/Taxonomy_Core/Taxonomy_Core' );
+	RSS_Post_Aggregator::load_class( 'libraries/Taxonomy_Core/Taxonomy_Core' );
 }
 
 /**

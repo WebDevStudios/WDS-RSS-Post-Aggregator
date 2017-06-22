@@ -46,19 +46,19 @@ function autoload_classes( $class_name ) {
 	$filename = strtolower( str_ireplace( '_', '-', end( $class_array ) ) );
 
 	// Cut off the first, and last item from the array
-	$new_dir = array_slice( $class_array, 1, count( $class_array ) - 2 );
+	$new_dir = array_slice( $class_array, 2, count( $class_array ) - 3 );
 
 	// Glue the pieces back together.
 	$new_dir = implode( '/', array_map( 'strtolower', $new_dir ) );
 
 	// Build the directory.
-	$new_dir = trailingslashit( $new_dir ) . $filename;
+	// $new_dir = trailingslashit( $new_dir ) . $filename;
 
-	RSS_Post_Aggregator::include_file( $new_dir );
+	RSS_Post_Aggregator::load_class( $filename, trailingslashit( 'includes/' . $new_dir ) );
 }
 spl_autoload_register( '\WebDevStudios\RSS_Post_Aggregator\autoload_classes' );
 
-class RSS_Aggregator {
+class RSS_Post_Aggregator {
 
 	/**
 	 * URL of plugin directory
@@ -93,11 +93,14 @@ class RSS_Aggregator {
 		$this->basename = plugin_basename( __FILE__ );
 		$this->url      = plugin_dir_url( __FILE__ );
 		$this->path     = plugin_dir_path( __FILE__ );
+
+		$this->plugin_classes();
 	}
 
 	/**
 	 * Instance of RSS_Aggregator
-	 * @var RSS_Aggregator
+	 *
+	 * @var RSS_Post_Aggregator
 	 */
 	public static $instance = null;
 
@@ -120,22 +123,22 @@ class RSS_Aggregator {
 
 
 	/**
-	 * Include a file from the includes directory
+	 * Require a file from the includes directory
 	 *
 	 * @param string $filename Name of the file to be included.
 	 * @param string $dir      Directory of the include, defaults to includes/
 	 *
 	 * @return bool   Result of include call.
 	 */
-	public static function include_file( $filename, $dir = 'includes' ) {
+	public static function load_class( $filename, $dir = 'includes' ) {
 
 		if ( ! empty( $dir ) ) {
 			$dir = trailingslashit( $dir );
 		}
 
-		$file = self::dir( sprintf( '%1$sclass-%2$s', $dir, $filename ) );
+		$file = self::dir( sprintf( '%1$sclass-%2$s.php', $dir, $filename ) );
 		if ( file_exists( $file ) ) {
-			return include_once( $file );
+			return require_once( $file );
 		}
 		return false;
 	}
@@ -177,10 +180,22 @@ class RSS_Aggregator {
 			include_once $dir . $file;
 		}
 	}
+
+	/**
+	 * Loads required classes into the singleton.
+	 *
+	 * @return void
+	 *
+	 * @author JayWood
+	 * @since  NEXT
+	 */
+	private function plugin_classes() {
+		$this->cpt = new CPT\RSS_Post( $this );
+	}
 }
 
 function load() {
-	return RSS_Aggregator::init();
+	return RSS_Post_Aggregator::init();
 }
 add_action( 'plugins_loaded', array( load(), 'hooks' ) );
 
