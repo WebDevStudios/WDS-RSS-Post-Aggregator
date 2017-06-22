@@ -121,8 +121,10 @@ class RSS_Post extends CPT_Core {
 
 	/**
 	 * Registers admin columns to display. Hooked in via CPT_Core.
+	 *
 	 * @since  0.1.0
 	 *
+	 * @todo Source column currently pulls nothing, and taxonomy-rss-category is always empty.
 	 * @param  array $columns Array of registered column names/labels
 	 *
 	 * @return array           Modified array
