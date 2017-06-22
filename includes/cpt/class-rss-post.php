@@ -1,8 +1,9 @@
 <?php
 
 // Our namespace.
-namespace WebDevStudios\RSS_Post_Aggregator;
+namespace WebDevStudios\RSS_Post_Aggregator\CPT;
 use CPT_Core;
+use WebDevStudios\RSS_Post_Aggregator\RSS_Post_Aggregator;
 
 if ( ! class_exists( 'CPT_Core' ) ) {
 	RSS_Post_Aggregator::include_file( 'libraries/CPT_Core/CPT_Core' );
@@ -11,7 +12,7 @@ if ( ! class_exists( 'CPT_Core' ) ) {
 /**
  * CPT child class
  */
-class RSS_Post_Aggregator_CPT extends CPT_Core {
+class RSS_Post extends CPT_Core {
 
 	/**
 	 * Prefix.
