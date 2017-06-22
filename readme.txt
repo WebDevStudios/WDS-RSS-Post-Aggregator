@@ -2,8 +2,8 @@
 Contributors:      jtsternberg
 Tags:              post import, feed import, rss import, rss aggregator
 Requires at least: 3.6.0
-Tested up to:      4.1
-Stable tag:        0.1.0
+Tested up to:      4.8
+Stable tag:        1.0.0
 License:           GPLv2 or later
 License URI:       http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -55,6 +55,12 @@ function wds_get_my_posts( $query ){
 5. Post Edit Screen - Manually set RSS feed link
 
 == Changelog ==
+
+= 1.0.0 =
+* Updated CPT Core
+* Updated Taxonomy Core
+* Refactored core code significantly.
+* Fixed an issue where clicking "New RSS Post" wouldn't fire the dialog from post list page.
 
 = 0.1.1 =
 * Removed CMB2 dependancy - [Fixes #2](https://github.com/WebDevStudios/WDS-RSS-Post-Aggregator/issues/2)
