@@ -274,7 +274,7 @@ class RSS_Post extends CPT_Core {
 	 * @since 0.1.0
 	 *
 	 * @author JayWood, Justin Sternberg
-	 * @return array|false An array of post data if found, false otherwise.
+	 * @return \WP_Post|false An array of post data if found, false otherwise.
 	 */
 	public function post_exists( $url ) {
 		$args = array(
