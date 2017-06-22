@@ -1,10 +1,9 @@
 <?php
 
 // Our namespace.
-namespace WebDevStudios\RSS_Post_Aggregator;
+namespace WebDevStudios\RSS_Post_Aggregator\Modal;
 
-
-class RSS_Post_Aggregator_Modal {
+class Modal {
 
 	public $feed_links = array();
 
