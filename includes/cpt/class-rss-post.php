@@ -92,10 +92,12 @@ class RSS_Post extends CPT_Core {
 			return;
 		}
 
-		wp_redirect( add_query_arg( array(
+		$redirect = add_query_arg( array(
 			'post_type'             => $this->post_type(),
 			$this->slug_to_redirect => true,
-		), admin_url( '/edit.php' ) ) );
+		), admin_url( '/edit.php' ) );
+
+		wp_redirect( esc_url( $redirect ) );
 		exit();
 	}
 
