@@ -1,8 +1,9 @@
 <?php
 
 // Our namespace.
-namespace WebDevStudios\RSS_Post_Aggregator;
+namespace WebDevStudios\RSS_Post_Aggregator\Taxonomy;
 use Taxonomy_Core;
+use WebDevStudios\RSS_Post_Aggregator\RSS_Post_Aggregator;
 
 if ( ! class_exists( 'Taxonomy_Core' ) ) {
 	RSS_Post_Aggregator::include_file( 'libraries/Taxonomy_Core/Taxonomy_Core' );
@@ -11,7 +12,7 @@ if ( ! class_exists( 'Taxonomy_Core' ) ) {
 /**
  * CPT child class
  */
-class RSS_Post_Aggregator_Taxonomy extends Taxonomy_Core {
+class Feed_Links extends Taxonomy_Core {
 
 	/**
 	 * Register Custom Post Types. See documentation in Taxonomy_Core, and in wp-includes/post.php
