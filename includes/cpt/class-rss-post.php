@@ -93,7 +93,7 @@ class RSS_Post extends CPT_Core {
 		}
 
 		$redirect = add_query_arg( array(
-			'post_type'             => $this->post_type(),
+			'post_type'             => $this->post_type,
 			$this->slug_to_redirect => true,
 		), admin_url( '/edit.php' ) );
 
