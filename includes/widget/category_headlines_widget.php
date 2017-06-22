@@ -4,11 +4,11 @@
  */
 
  // Our namespace.
- namespace WebDevStudios\RSS_Post_Aggregator;
+ namespace WebDevStudios\RSS_Post_Aggregator\Widget;
  use WP_Widget;
 
 
-class RSS_Post_Aggregator_Category_Headlines_Widget extends WP_Widget {
+class Category_Headlines_Widget extends WP_Widget {
 
 	/**
 	 * Default widget options

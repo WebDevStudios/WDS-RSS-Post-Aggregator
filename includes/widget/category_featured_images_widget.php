@@ -4,10 +4,11 @@
  */
 
  // Our namespace.
- namespace WebDevStudios\RSS_Post_Aggregator;
+ namespace WebDevStudios\RSS_Post_Aggregator\Widget;
+ use WebDevStudios\RSS_Post_Aggregator\RSS_Post_Aggregator_Feeds;
  use WP_Widget;
 
-class RSS_Post_Aggregator_Category_Featured_Images_Widget extends WP_Widget {
+class Category_Featured_Images_Widget extends WP_Widget {
 
 	/**
 	 * Default widget options
