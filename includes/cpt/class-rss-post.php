@@ -269,12 +269,12 @@ class RSS_Post extends CPT_Core {
 	/**
 	 * Check if post exists via Url.
 	 *
-	 * @param string $url
+	 * @param string $url The full URL to check against.
 	 *
 	 * @since 0.1.0
 	 *
 	 * @author JayWood, Justin Sternberg
-	 * @return bool|mixed
+	 * @return array|false An array of post data if found, false otherwise.
 	 */
 	public function post_exists( $url ) {
 		$args = array(
