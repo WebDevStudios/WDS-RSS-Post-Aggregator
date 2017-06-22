@@ -204,10 +204,10 @@ class RSS_Post extends CPT_Core {
 	 *
 	 * @since 0.1.1
 	 *
-	 * @param $post_id
+	 * @param integer $post_id The post ID being saved.
 	 *
 	 * @author JayWood
-	 * @return int|void
+	 * @return void Bail early if requirements aren't met.
 	 */
 	public function save_meta( $post_id ) {
 		if ( ( ! isset( $_POST['rsslink_mb_nonce'] ) || ! wp_verify_nonce( $_POST['rsslink_mb_nonce'], 'rsslink_mb_metabox' ) )
@@ -215,7 +215,7 @@ class RSS_Post extends CPT_Core {
 			|| ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE )
 			|| ! isset( $_POST[ $this->prefix . 'original_url' ] )
 		) {
-			return $post_id;
+			return;
 		}
 
 		$url = esc_url( $_POST[ $this->prefix . 'original_url' ] );
