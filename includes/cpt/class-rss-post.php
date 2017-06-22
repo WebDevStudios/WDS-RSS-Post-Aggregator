@@ -32,35 +32,39 @@ class RSS_Post extends CPT_Core {
 	 */
 	public $slug_to_redirect = 'rss_search_modal';
 
+	protected $post_type = 'rss-posts';
+
 	/**
-	 * Tax slug.
+	 * Instance of the parent plugin class.
 	 *
-	 * @since 0.1.1
+	 * @since NEXT
 	 *
-	 * @var string $tax_slug
+	 * @var RSS_Post_Aggregator
 	 */
-	public $tax_slug;
+	private $plugin;
 
 	/**
 	 * Register Custom Post Types. See documentation in CPT_Core, and in wp-includes/post.php
 	 *
 	 * @since 0.1.1
 	 *
-	 * @param string $cpt_slug
-	 * @param string $tax_slug
+	 * @param RSS_Post_Aggregator $plugin
 	 */
-	public function __construct( $cpt_slug, $tax_slug ) {
-		return;
-		$this->tax_slug = $tax_slug;
+	public function __construct( $plugin ) {
+
+		// Bring over the instance of the parent.
+		$this->plugin = $plugin;
 
 		// Register this cpt
 		parent::__construct(
-			array( __( 'RSS Post', 'wds-rss-post-aggregator' ), __( 'RSS Posts', 'wds-rss-post-aggregator' ), $cpt_slug ),
+			array( __( 'RSS Post', 'wds-rss-post-aggregator' ), __( 'RSS Posts', 'wds-rss-post-aggregator' ), $this->post_type ),
 			array(
 				'supports'  => array( 'title', 'editor', 'excerpt', 'thumbnail', 'page-attributes' ),
 				'menu_icon' => 'dashicons-rss',
 			)
 		);
+
+		$this->hooks();
 	}
 
 	/**
@@ -79,7 +83,7 @@ class RSS_Post extends CPT_Core {
 	 *
 	 * @since 0.1.1
 	 *
-	 * @return false Return false if page is not correct.
+	 * @return void Return early if requirements are not met.
 	 */
 	public function pseudo_menu_item() {
 		add_submenu_page( 'edit.php?post_type=' . $this->post_type(), '', esc_html__( 'Find RSS Post', 'wds-rss-post-aggregator' ), 'edit_posts', $this->slug_to_redirect, '__return_empty_string' );

@@ -33,6 +33,16 @@
 // Our namespace.
 namespace WebDevStudios\RSS_Post_Aggregator;
 
+/**
+ * Autolaods namespaced classes.
+ *
+ * @param $class_name
+ *
+ * @return void
+ *
+ * @author JayWood
+ * @since  NEXT
+ */
 function autoload_classes( $class_name ) {
 
 	if ( false === strpos( $class_name, 'WebDevStudios\RSS_Post_Aggregator' ) ) {
@@ -45,14 +55,14 @@ function autoload_classes( $class_name ) {
 	// Build the filename from the last item in the array.
 	$filename = strtolower( str_ireplace( '_', '-', end( $class_array ) ) );
 
-	// Cut off the first, and last item from the array
+	/*
+	 * Cut off the first two, and last item from the array, this gives us the folder(s)
+	 * where the namespaced file will live.
+	*/
 	$new_dir = array_slice( $class_array, 2, count( $class_array ) - 3 );
 
 	// Glue the pieces back together.
 	$new_dir = implode( '/', array_map( 'strtolower', $new_dir ) );
-
-	// Build the directory.
-	// $new_dir = trailingslashit( $new_dir ) . $filename;
 
 	RSS_Post_Aggregator::load_class( $filename, trailingslashit( 'includes/' . $new_dir ) );
 }
